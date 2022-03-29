@@ -43,16 +43,13 @@ easypackages::packages ("sf", "sp", "spdep", "spatialreg", "spgwr", "tmap", "map
                         "cowplot", "leafsync", "leaflet.extras2", "mapview")
 library(readxl)
 library(sqldf)
+library(ISOweek)
 #clean your environment
 rm(list=ls())
 ```
 
 ```{r}
-munic <- st_read("data/municipalities_onshore.gpkg", layer = "gemeenten_onshore")
-```
-```{r}
-munic_map <- mapview::mapview(munic, col.regions=brewer.pal(12, "RdYlGn"))
-munic_map
+munic <- st_read("data/gemeente_onshore.gpkg", layer = "gemeente_onshore")
 ```
 
 ## Reading the data
@@ -70,9 +67,9 @@ citizens_servingarea$einddatum <- as.Date(citizens_servingarea$einddatum)
 sewage$Date_measurement <- as.Date(sewage$Date_measurement)
 ```
 
-Then we need to join the sewage data with citizens per sewage serving area and contribution per municipality to convert our numbers to per municipality.
+Then we need to join the sewage data with citizens per sewage serving area and contribution per municipality to convert our sewage numbers to per municipality.
 
-```{r}
+```{r joins and aggregation}
 
 # joining sewage data and citizens of serving area
 sewage_per_munic <- sqldf(
@@ -88,7 +85,7 @@ sewage_per_munic <- sqldf(
     (
       CASE
       WHEN C.einddatum IS NULL THEN S.Date_measurement >= C.startdatum
-      ELSE S.Date_measurement >= C.startdatum AND S.Date_measurement <= C.einddatum
+      ELSE S.Date_measurement <= C.einddatum
       END
     )
     AND C.toelichting = 'definitief';
@@ -100,8 +97,8 @@ sewage_per_munic$RNA_flow_per_person <- sewage_per_munic$RNA_flow_per_100000 / 1
 
 
 # 
-sewage_per_munic$week <- lubridate::week(sewage_per_munic$Date_measurement)
-sewage_per_munic$year <- lubridate::year(sewage_per_munic$Date_measurement)
+sewage_per_munic$week <- lubridate::isoweek(sewage_per_munic$Date_measurement)
+sewage_per_munic$year <- lubridate::isoyear(sewage_per_munic$Date_measurement)
 
 
 average_sewage_per_week <- sewage_per_munic %>% 
@@ -119,18 +116,15 @@ RNA_per_munic_per_week <- average_sewage_per_week %>%
                                    year,
                                    week) %>%
                           summarise(RNA_load = 100000*sum(week_load*X)/sum(X)) %>%
-                          mutate(date = lubridate::ymd(paste0(year,"-01-01")) + week)
+                          mutate(date = ISOweek2date(paste0(year,"-W",ifelse(nchar(week)==1,"0",""),week,"-3")))
 
 ```
 
 ```{r single munic}
 
 # Checking with official RIVM reported numbers
-
-sewage_gor <- average_sewage_per_week %>% subset(regio_naam == 'Gorinchem' & week==40 & year == 2021)
-
-weekRNA_gor <- RNA_per_munic_per_week %>% subset(regio_naam == 'Gorinchem' & week==40 & year == 2021)
-
+average_sewage_per_week %>% subset(regio_naam == 'Gorinchem' & week==40 & year == 2021)
+RNA_per_munic_per_week %>% subset(regio_naam == 'Gorinchem' & week==40 & year == 2021)
 
 ```
 
@@ -140,14 +134,6 @@ weekRNA_gor <- RNA_per_munic_per_week %>% subset(regio_naam == 'Gorinchem' & wee
 RNA_single_week <- RNA_per_munic_per_week %>% subset(week== 30 & year == 2021)
 
 munic_single_week <- merge(x=munic, y=RNA_single_week, by.x = 'gemeentenaam', by.y = 'regio_naam')
-
-# Map
-munic_map <- mapview::mapview(munic_single_week, 
-                              zcol= 'RNA_load',
-                              col.regions=brewer.pal(11, "RdYlGn"),
-                              layer.name = 'RNA per 100000 citizens'
-                              )
-munic_map
 
 # outliers visualisation
 RNA_single_week %>% ggplot(aes(RNA_single_week$RNA_load)) + geom_histogram()
@@ -164,12 +150,12 @@ RNA_per_munic_per_week_after_outlier <- RNA_per_munic_per_week %>% subset(abs(RN
 
 RNA_single_week <- RNA_per_munic_per_week_after_outlier %>% subset(week== 30 & year == 2021)
 
-munic_single_week <- merge(x=munic, y=RNA_single_week, by.x = 'gemeentenaam', by.y = 'regio_naam')
+munic_single_week <- merge(x=munic, y=RNA_single_week, by.x = 'gemeentenaam', by.y = 'regio_naam', all.x = TRUE)
 
 # Map
 munic_map <- mapview::mapview(munic_single_week, 
                               zcol= 'RNA_load',
-                              col.regions=brewer.pal(11, "RdYlGn"),
+                              col.regions=rev(brewer.pal(11, "RdYlGn")),
                               layer.name = 'RNA per 100000 citizens'
                               )
 munic_map
@@ -180,11 +166,41 @@ RNA_single_week %>% ggplot(aes(RNA_single_week$RNA_load)) + geom_density()
 
 ```
 
-```{r time series for 1 municipality}
+```{r week aggregation of other data}
+
+covid_per_week <- covid %>% mutate(year = lubridate::isoyear(Date_of_publication),
+                                   week = lubridate::isoweek(Date_of_publication),
+                                   date = ISOweek2date(paste0(year,"-W",ifelse(nchar(week)==1,"0",""),week,"-3"))) %>%
+                            group_by(year,week,Municipality_name) %>%
+                            summarise(date,
+                                      mean_cases = mean(Total_reported),
+                                      mean_deceased = mean(Deceased))
+
+```
+
+
+```{r EDA 1 municipality}
 
 RNA_week_Utr <- RNA_per_munic_per_week_after_outlier %>% subset(regio_naam=='Utrecht')
+covid_week_Utr <- covid_per_week %>% subset(Municipality_name == 'Utrecht')
 
-RNA_week_Utr %>% ggplot(aes(week,RNA_load)) + geom_point()
+
+#combine to 1 df
+df <- merge(x=covid_week_Utr,y=RNA_week_Utr,x.by=c(date,Municipality_name),y.by=c(date,regio_naam), all.x=TRUE)
+
+df %>% ggplot() + 
+  geom_point(aes(date,log(RNA_load),col='RNA')) +
+  geom_point(aes(date,log(mean_cases),col='cases')) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b-%Y") +
+  theme(axis.text.x=element_text(angle=60, hjust=1))
+
+df %>% ggplot() + 
+  geom_point(aes(log(mean_cases),log(RNA_load)))
+
+df %>% ggplot() + 
+  geom_point(aes(mean_cases,RNA_load))
+
+
 
 ```
 
