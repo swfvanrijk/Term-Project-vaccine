@@ -1,0 +1,163 @@
+---
+title: "Data cleaning and visualization"
+author: "S. W. F. van Rijk"
+date: "24-3-2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 
+
+```{r Path}
+Globalpath <- "C:/Users/SWFva/OneDrive/Documents/Studie/Block 3/Spatial Statistics and Machine Learning/Term project" #change the path to your folder
+setwd(Globalpath)
+getwd()
+```
+
+## 
+
+```{r Packages}
+if (!require("easypackages")) install.packages("easypackages") #easy package manager
+
+#Set up and data analysis packages
+if (!require("tidyverse")) install.packages("tidyverse") #main data science packages
+
+#Some GIS other analyses packages 
+if (!require("sf")) install.packages("sf") #main GIS package
+if (!require("sp")) install.packages("sp") #needed for some GIS operation, will not be in use from 2023
+if (!require("spdep")) install.packages("spdep") #neighborhood analysis in R
+if (!require("spatialreg")) install.packages("spatialreg") #spatial modelling such as lag, error
+if (!require("spgwr")) install.packages("spgwr") #GWR modelling
+if (!require("RColorBrewer")) install.packages("RColorBrewer") # getting interesting color
+if (!require("tmap")) install.packages("tmap") # Mapping package
+if (!require("mapview")) install.packages("mapview") # Mapping package
+if (!require("car")) install.packages("car") #some base regression functions
+if (!require("cowplot")) install.packages("cowplot") #some base regression functions
+if (!require("leafsync")) install.packages("leafsync") #using with mapview
+if (!require("leaflet.extras2")) install.packages("leaflet.extras2") #using with mapview
+
+#load libraries
+
+easypackages::packages ("sf", "sp", "spdep", "spatialreg", "spgwr", "tmap", "mapview", "car", "RColorBrewer", "tidyverse", 
+                        "cowplot", "leafsync", "leaflet.extras2", "mapview")
+library(readxl)
+library(sqldf)
+#clean your environment
+rm(list=ls())
+```
+
+```{r}
+munic <- st_read("data/bestuurlijkegrenzen.gpkg", layer = "gemeenten")
+```
+
+```{r}
+#Now let us map and see these variables interactively
+munic_map <- mapview::mapview(munic, col.regions=brewer.pal(11, "YlOrRd"))
+munic_map
+
+```
+## Reading the data
+
+```{r data}
+covid <- read_delim("data/COVID-19_aantallen_gemeente_per_dag.csv", delim =";", show_col_types = FALSE)
+
+sewage <- read_delim("data/COVID-19_rioolwaterdata.csv", delim=";", show_col_types = FALSE)
+
+citizens_servingarea <- read_excel("data/20210930-Aantal inwoners per verzorgingsgebied 2021.xlsx", sheet = "Tabel 1")
+```
+
+Then we need to join the sewage data with citizens per sewage serving area and contribution per municipality to convert our numbers to per municipality.
+
+```{r}
+
+# enforce date datatypes
+citizens_servingarea$startdatum <- as.Date(citizens_servingarea$startdatum)
+citizens_servingarea$einddatum <- as.Date(citizens_servingarea$einddatum)
+sewage$Date_measurement <- as.Date(sewage$Date_measurement)
+
+# joining sewage data and citizens of serving area
+sewage_per_munic <- sqldf(
+"SELECT * FROM sewage S 
+INNER JOIN citizens_servingarea C
+ON S.RWZI_AWZI_code = C.rwzi_code 
+AND C.regio_type = 'GM'
+AND 
+(CASE
+  WHEN C.einddatum IS NULL THEN S.Date_measurement >= C.startdatum
+  ELSE S.Date_measurement >= C.startdatum AND S.Date_measurement <= C.einddatum
+  END
+)
+AND C.toelichting = 'definitief';
+")
+
+
+# calculating aandeel
+sewage_per_munic$X <- sewage_per_munic$aandeel * sewage_per_munic$inwoners
+sewage_per_munic$RNA_flow_per_person <- sewage_per_munic$RNA_flow_per_100000 / 100000
+
+
+# 
+sewage_per_munic$week <- lubridate::isoweek(sewage_per_munic$Date_measurement)
+sewage_per_munic$year <- lubridate::isoyear(sewage_per_munic$Date_measurement)
+
+sewage_per_munic <- sewage_per_munic %>% 
+        group_by(regio_naam,
+                 Date_measurement, 
+                 ) %>% 
+        summarise(virus_load_per_person = sum(RNA_flow_per_person*X)/sum(X),
+                  virus_load_100000 = virus_load_per_person*100000
+                  )
+
+```
+
+```{r}
+
+length(unique(sewage_per_munic$regio_naam))
+length(unique(sewage_per_munic$Date_measurement))
+
+```
+
+```{r}
+
+
+```
+
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
