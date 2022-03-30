@@ -9,15 +9,11 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## 
-
-```{r Path}
+```{r Path, include=FALSE}
 getwd()
 ```
 
-## 
-
-```{r Packages}
+```{r Packages, include=FALSE}
 if (!require("easypackages")) install.packages("easypackages") #easy package manager
 
 #Set up and data analysis packages
@@ -44,12 +40,17 @@ easypackages::packages ("sf", "sp", "spdep", "spatialreg", "spgwr", "tmap", "map
 library(readxl)
 library(sqldf)
 library(ISOweek)
+library(sf)
 #clean your environment
 rm(list=ls())
 ```
 
+Read municipalities geolocation polygons for GWR and visualisation.
+
 ```{r}
 munic <- st_read("data/gemeente_onshore.gpkg", layer = "gemeente_onshore")
+
+neigh <- read_sf("data/wijk_2021_v1.shp",layer="wijk_2021_v1")
 ```
 
 ## Reading the data
@@ -61,10 +62,24 @@ sewage <- read_delim("data/COVID-19_rioolwaterdata.csv", delim=";")
 
 citizens_servingarea <- read_excel("data/20210930-Aantal inwoners per verzorgingsgebied 2021.xlsx", sheet = "Tabel 1")
 
-# enforce date datatypes
+# enforce date datatypes for later joins
 citizens_servingarea$startdatum <- as.Date(citizens_servingarea$startdatum)
 citizens_servingarea$einddatum <- as.Date(citizens_servingarea$einddatum)
 sewage$Date_measurement <- as.Date(sewage$Date_measurement)
+
+hospital <- read_delim("data/COVID-19_ziekenhuisopnames.csv", delim=";")
+
+vaccines <- read_delim("data/COVID-19_vaccinatiegraad_per_gemeente_per_week_leeftijd.csv", delim=";")
+vaccines$Vaccination_coverage_completed <- as.numeric(vaccines$Vaccination_coverage_completed)
+vaccines$Vaccination_coverage_partly <- as.numeric(vaccines$Vaccination_coverage_partly)
+
+
+variants <- read_delim("data/COVID-19_varianten.csv", delim=";")
+
+
+# demographic data
+citizens_munic <- read_excel("data/voorlopige-bevolkings-gegevens-20210101.xlsx", sheet = "Tabel 1")
+
 ```
 
 Then we need to join the sewage data with citizens per sewage serving area and contribution per municipality to convert our sewage numbers to per municipality.
@@ -171,10 +186,43 @@ RNA_single_week %>% ggplot(aes(RNA_single_week$RNA_load)) + geom_density()
 covid_per_week <- covid %>% mutate(year = lubridate::isoyear(Date_of_publication),
                                    week = lubridate::isoweek(Date_of_publication),
                                    date = ISOweek2date(paste0(year,"-W",ifelse(nchar(week)==1,"0",""),week,"-3"))) %>%
-                            group_by(year,week,Municipality_name) %>%
+                            group_by(year,
+                                     week,
+                                     Municipality_name) %>%
                             summarise(date,
                                       mean_cases = mean(Total_reported),
-                                      mean_deceased = mean(Deceased))
+                                      mean_deceased = mean(Deceased)) %>% 
+                            distinct(Municipality_name,
+                                     year,week, 
+                                     .keep_all = TRUE)
+
+hospital_per_week <- hospital %>% mutate(year = lubridate::isoyear(Date_of_statistics),
+                                         week = lubridate::isoweek(Date_of_statistics),
+                                         date = ISOweek2date(paste0(year,"-W",ifelse(nchar(week)==1,"0",""),week,"-3"))) %>%
+                                  group_by(year,
+                                           week,
+                                           Municipality_name) %>%
+                                  summarise(date,
+                                      mean_hospital_notifications = mean(Hospital_admission_notification),
+                                      mean_hospitalized = mean(Hospital_admission)) %>% 
+                                  distinct(Municipality_name,
+                                           year,week, 
+                                           .keep_all = TRUE)
+
+vaccines_per_week <- vaccines %>% subset(Age_group = '18+') %>%
+                                  mutate(year = lubridate::isoyear(Date_of_statistics),
+                                         week = lubridate::isoweek(Date_of_statistics),
+                                         date = ISOweek2date(paste0(year,"-W",ifelse(nchar(week)==1,"0",""),week,"-3"))) %>%
+                                  group_by(year,
+                                           week,
+                                           Region_name) %>%
+                                  summarise(date,
+                                            vaccine_partly_coverage=mean(Vaccination_coverage_partly),
+                                            vaccine_total_coverage = mean(Vaccination_coverage_completed)) %>% 
+                                  distinct(Region_name,
+                                           year,
+                                           week,
+                                           .keep_all = TRUE)
 
 ```
 
@@ -204,7 +252,11 @@ df %>% ggplot() +
 
 ```
 
+```{r variants time line}
 
+variants %>% subset(ECDC_category = 'VOC') %>% drop_na(,Variant_name) %>% ggplot(aes(Date_of_statistics_week_start,Variant_cases/Sample_size, col=Variant_name)) + geom_point() + geom_line()
+
+```
 
 
 
