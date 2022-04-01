@@ -50,7 +50,12 @@ Read municipalities geolocation polygons for GWR and visualisation.
 ```{r}
 munic <- st_read("data/gemeente_onshore.gpkg", layer = "gemeente_onshore")
 
-neigh <- read_sf("data/wijk_2021_v1.shp",layer="wijk_2021_v1")
+neigh <- read_sf("data/wijk_2021_v1.shp", layer = "wijk_2021_v1")
+
+
+names(neigh)
+
+neigh <- neigh[,c("WK_CODE","WK_NAAM","GM_CODE","GM_NAAM","Shape_Area","geometry")]
 ```
 
 ## Reading the data
@@ -261,8 +266,62 @@ variants %>% subset(ECDC_category = 'VOC') %>% drop_na(,Variant_name) %>% ggplot
 
 
 
+# Vaccination in neighborhoods study
 
 
+
+```{r}
+
+neigh_no_geom <- st_drop_geometry(neigh)
+
+
+neigh_data <- read_excel("data/kwb-2021.xls", sheet = "KWB2021")
+
+neigh_data <- neigh_data %>% subset(recs=='Wijk')
+
+neigh_data[,8:26] <- neigh_data[,8:26] %>% mutate_if(is.character,as.numeric) 
+neigh_data[,9:26] <- neigh_data[,9:26]/ neigh_data$a_inw
+neigh_data <- neigh_data[,1:26]
+
+
+
+vaccine_neigh <- read_delim("data/COVID-19_vaccinatiegraad_per_wijk_per_week.csv", delim=";")
+
+vaccine_neigh <- vaccine_neigh %>% subset(Date_of_statistics=='14-3-2022')
+
+
+
+neigh_complete_data_no_geom <- sqldf("SELECT * FROM (SELECT WK_CODE FROM neigh_no_geom) n 
+                                      LEFT JOIN vaccine_neigh vn 
+                                      ON n.WK_CODE = vn.Region_code
+                                      LEFT JOIN neigh_data nd 
+                                      ON n.WK_CODE = nd.gwb_code_10;")
+
+
+
+
+
+
+
+sum(is.na(vaccine_neigh$Region_code))
+
+
+```
+
+```{r}
+
+a = data.frame(c(111,222,333,444),c(1,5,3,8))
+b = data.frame(c(111,222),c(0.1,0.4))
+colnames(a)=c("code","value") 
+colnames(b)=c("code","value")
+c = merge(a
+          ,b
+          ,by="code"
+          ,all.x=T)
+
+c
+
+```
 
 
 
