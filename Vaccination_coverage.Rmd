@@ -99,11 +99,32 @@ for(row in 1:nrow(var_to_norm)){
 
 # neighborhood vaccination data
 vaccine_neigh <- read_delim("data/COVID-19_vaccinatiegraad_per_wijk_per_week.csv", delim=";")
-vaccine_neigh <- vaccine_neigh %>% subset(Date_of_statistics=='14-3-2022')
+vaccine_neigh[,10:11] <- vaccine_neigh[,10:11] %>% mutate_if(is.character,as.numeric) # set variables to numeric
 
+vaccine_neigh[vaccine_neigh == 9999] <- NA # make hidden missing values no longer hidden
+
+vaccine_neigh <- vaccine_neigh %>% 
+  subset(Date_of_statistics=='14-3-2022') %>% 
+  mutate(coverage_partly_norm = ((Coverage_primary_partly) - mean(Coverage_primary_partly,na.rm=TRUE)) / sd(Coverage_primary_partly,na.rm=TRUE),
+         coverage_completed_norm= ((Coverage_primary_completed) - mean(Coverage_primary_completed, na.rm=TRUE))/sd(Coverage_primary_completed, na.rm = TRUE))
+
+mean(vaccine_neigh$Coverage_primary_partly, na.rm=TRUE)
+sd(vaccine_neigh$Coverage_primary_partly, na.rm=TRUE)
+
+mean(vaccine_neigh$Coverage_primary_completed, na.rm=TRUE)
+sd(vaccine_neigh$Coverage_primary_completed, na.rm=TRUE)
 
 ```
 
 ## Delete outlier neighborhoods?
 
 ## Join datasets
+
+```{r}
+
+data_compl <- sp::merge(x = vaccine_neigh, 
+                        y = neigh_data,
+                        by.x = 'Region_code',
+                        by.y = 'gwb_code')
+
+```
