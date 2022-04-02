@@ -75,13 +75,27 @@ neigh_map
 
 # neighborhood demographic data
 neigh_data <- read_excel("data/kwb-2020.xls", sheet = "KWB2020")
+# metadata
+neigh_meta <- read_excel("data/kwb-variables.xlsx", sheet="kwb-variables")
+
+# filtering
 neigh_data <- neigh_data %>% subset(recs=='Wijk') # filter to only 'wijk' regions
-neigh_data[,7:119] <- neigh_data[,7:119] %>% mutate_if(is.character,as.numeric) 
+neigh_data[,7:119] <- neigh_data[,7:119] %>% mutate_if(is.character,as.numeric) # set variables to numeric
 
-neigh_data <- neigh_data %>% rename(percentage_female = a_vrouw / a_inw)
+var_to_keep <- (neigh_meta %>% subset(Include==1))$Variabelenaam # subset to variables to keep
+neigh_data <- neigh_data %>% select(var_to_keep) # filter data to variables to keep
 
+# normalizing
+var_to_norm <- neigh_meta %>% subset(`Need to normalise`==1 & Include==1) %>% select(c('Variabelenaam','Normalisatie'))
 
-neigh_data[,9:26] <- neigh_data[,9:26]/ neigh_data$a_inw
+neigh_data[1,'a_inw']
+
+for(row in 1:nrow(var_to_norm)){
+  var <- var_to_norm[row,'Variabelenaam'][[1]]
+  norm <- var_to_norm[row,'Normalisatie'][[1]]
+  neigh_data[,var] <- neigh_data[,var]/neigh_data[,norm]
+}
+
 
 # neighborhood vaccination data
 vaccine_neigh <- read_delim("data/COVID-19_vaccinatiegraad_per_wijk_per_week.csv", delim=";")
