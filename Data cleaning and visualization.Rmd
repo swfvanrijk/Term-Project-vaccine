@@ -56,6 +56,7 @@ neigh <- read_sf("data/wijk_2021_v1.shp", layer = "wijk_2021_v1")
 names(neigh)
 
 neigh <- neigh[,c("WK_CODE","WK_NAAM","GM_CODE","GM_NAAM","Shape_Area","geometry")]
+
 ```
 
 ## Reading the data

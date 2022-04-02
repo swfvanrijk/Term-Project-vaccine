@@ -1,0 +1,95 @@
+---
+title: "Vaccination_coverage"
+author: "S.W.F.  van Rijk"
+date: "1-4-2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 
+
+```{r cars}
+getwd()
+```
+
+## 
+
+```{r Packages, include=FALSE}
+if (!require("easypackages")) install.packages("easypackages") #easy package manager
+
+#Set up and data analysis packages
+if (!require("tidyverse")) install.packages("tidyverse") #main data science packages
+
+#Some GIS other analyses packages 
+if (!require("sf")) install.packages("sf") #main GIS package
+if (!require("sp")) install.packages("sp") #needed for some GIS operation, will not be in use from 2023
+if (!require("spdep")) install.packages("spdep") #neighborhood analysis in R
+if (!require("spatialreg")) install.packages("spatialreg") #spatial modelling such as lag, error
+if (!require("spgwr")) install.packages("spgwr") #GWR modelling
+if (!require("RColorBrewer")) install.packages("RColorBrewer") # getting interesting color
+if (!require("tmap")) install.packages("tmap") # Mapping package
+if (!require("mapview")) install.packages("mapview") # Mapping package
+if (!require("car")) install.packages("car") #some base regression functions
+if (!require("cowplot")) install.packages("cowplot") #some base regression functions
+if (!require("leafsync")) install.packages("leafsync") #using with mapview
+if (!require("leaflet.extras2")) install.packages("leaflet.extras2") #using with mapview
+
+#load libraries
+
+easypackages::packages ("sf", "sp", "spdep", "spatialreg", "spgwr", "tmap", "mapview", "car", "RColorBrewer", "tidyverse", 
+                        "cowplot", "leafsync", "leaflet.extras2", "mapview")
+library(readxl)
+library(sqldf)
+library(ISOweek)
+library(sf)
+#clean your environment
+rm(list=ls())
+```
+
+## Reading polygons
+
+```{r}
+
+neigh <- st_read("data/wijken_onshore.gpkg", layer = "wijken_onshore")
+
+
+names(neigh)
+
+neigh <- neigh[,c("WK_CODE","WK_NAAM","GM_CODE","GM_NAAM","Shape_Area","geom")]
+
+# Map
+neigh_map <- mapview::mapview(neigh,
+                              col.regions=rev(brewer.pal(11, "RdYlGn")),
+                              layer.name = 'Neighborhoods'
+                              )
+neigh_map
+
+```
+
+## Read data
+
+```{r}
+
+# neighborhood demographic data
+neigh_data <- read_excel("data/kwb-2020.xls", sheet = "KWB2020")
+neigh_data <- neigh_data %>% subset(recs=='Wijk') # filter to only 'wijk' regions
+neigh_data[,7:119] <- neigh_data[,7:119] %>% mutate_if(is.character,as.numeric) 
+
+neigh_data <- neigh_data %>% rename(percentage_female = a_vrouw / a_inw)
+
+
+neigh_data[,9:26] <- neigh_data[,9:26]/ neigh_data$a_inw
+
+# neighborhood vaccination data
+vaccine_neigh <- read_delim("data/COVID-19_vaccinatiegraad_per_wijk_per_week.csv", delim=";")
+vaccine_neigh <- vaccine_neigh %>% subset(Date_of_statistics=='14-3-2022')
+
+
+```
+
+## Delete outlier neighborhoods?
+
+## Join datasets
