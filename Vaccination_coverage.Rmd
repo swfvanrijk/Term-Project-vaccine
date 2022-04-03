@@ -146,6 +146,19 @@ vaccine_neigh %>% ggplot() +
 
 ## Delete outlier neighborhoods?
 
+
+```{r}
+# Delete where a_inw == 0, causes NaNs and Inf numbers through divide by zero
+neigh_data_filt <- neigh_data %>% filter(a_inw != 0)
+
+# maybe remove all neigh lower than 50 people?
+# neigh_data_filt <- neigh_data %>% filter(a_inw >= 50)
+
+
+```
+
+
+
 ## Join datasets
 
 ```{r}
@@ -154,7 +167,7 @@ vaccine_neigh %>% ggplot() +
 # take into accounts for models, some columns have NA !
 
 data_compl <- sp::merge(x = vaccine_neigh, 
-                        y = neigh_data,
+                        y = neigh_data_filt,
                         by.x = 'Region_code',
                         by.y = 'gwb_code',
                         all = FALSE)
@@ -206,6 +219,8 @@ corr <- cor(as.data.frame(data_compl)[,test_var],use="complete.obs")
 library(corrplot)
 
 corrplot(corr, order = "hclust",method="color", tl.cex=0.5,tl.col = 'black')
+
+
 
 ```
 
