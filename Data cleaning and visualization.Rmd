@@ -286,7 +286,6 @@ neigh_data <- neigh_data[,1:26]
 
 
 
-vaccine_neigh <- read_delim("data/COVID-19_vaccinatiegraad_per_wijk_per_week.csv", delim=";")
 
 vaccine_neigh <- vaccine_neigh %>% subset(Date_of_statistics=='14-3-2022')
 
