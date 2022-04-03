@@ -80,6 +80,7 @@ neigh_meta <- read_excel("data/kwb-variables.xlsx", sheet="kwb-variables")
 
 # filtering
 neigh_data <- neigh_data %>% subset(recs=='Wijk') # filter to only 'wijk' regions
+neigh_data[,7:119] <- lapply(neigh_data[,7:119], gsub, pattern = ",", replacement = ".") # comma separators to dots
 neigh_data[,7:119] <- neigh_data[,7:119] %>% mutate_if(is.character,as.numeric) # set variables to numeric
 
 var_to_keep <- (neigh_meta %>% subset(Include==1))$Variabelenaam # subset to variables to keep
@@ -88,7 +89,7 @@ neigh_data <- neigh_data %>% select(var_to_keep) # filter data to variables to k
 # normalizing
 var_to_norm <- neigh_meta %>% subset(`Need to normalise`==1 & Include==1) %>% select(c('Variabelenaam','Normalisatie'))
 
-neigh_data[1,'a_inw']
+neigh_data[1,'a_inw']neigh_data
 
 for(row in 1:nrow(var_to_norm)){
   var <- var_to_norm[row,'Variabelenaam'][[1]]
@@ -118,13 +119,28 @@ sd(vaccine_neigh$Coverage_primary_completed, na.rm=TRUE)
 
 ## Delete outlier neighborhoods?
 
+
+```{r}
+# Delete where a_inw == 0, causes NaNs and Inf numbers through divide by zero
+neigh_data_filt <- neigh_data %>% filter(a_inw != 0)
+
+# maybe remove all neigh lower than 50 people?
+# neigh_data_filt <- neigh_data %>% filter(a_inw >= 50)
+
+
+```
+
+
+
 ## Join datasets
 
 ```{r}
 
 data_compl <- sp::merge(x = vaccine_neigh, 
-                        y = neigh_data,
+                        y = neigh_data_filt,
                         by.x = 'Region_code',
                         by.y = 'gwb_code')
+
+
 
 ```
