@@ -1,0 +1,558 @@
+---
+title: "Vaccination_coverage"
+author: "S.W.F.  van Rijk"
+date: "1-4-2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 
+
+```{r cars}
+getwd()
+```
+
+
+
+```{r Packages, include=FALSE}
+if (!require("easypackages")) install.packages("easypackages") #easy package manager
+
+#Set up and data analysis packages
+if (!require("tidyverse")) install.packages("tidyverse") #main data science packages
+
+#Some GIS other analyses packages 
+if (!require("sf")) install.packages("sf") #main GIS package
+if (!require("sp")) install.packages("sp") #needed for some GIS operation, will not be in use from 2023
+if (!require("spdep")) install.packages("spdep") #neighborhood analysis in R
+if (!require("spatialreg")) install.packages("spatialreg") #spatial modelling such as lag, error
+if (!require("spgwr")) install.packages("spgwr") #GWR modelling
+if (!require("RColorBrewer")) install.packages("RColorBrewer") # getting interesting color
+if (!require("tmap")) install.packages("tmap") # Mapping package
+if (!require("mapview")) install.packages("mapview") # Mapping package
+if (!require("car")) install.packages("car") #some base regression functions
+if (!require("cowplot")) install.packages("cowplot") #some base regression functions
+if (!require("leafsync")) install.packages("leafsync") #using with mapview
+if (!require("leaflet.extras2")) install.packages("leaflet.extras2") #using with mapview
+
+#load libraries
+
+easypackages::packages ("sf", "sp", "spdep", "spatialreg", "spgwr", "tmap", "mapview", "car", "RColorBrewer", "tidyverse", 
+                        "cowplot", "leafsync", "leaflet.extras2", "mapview")
+library(readxl)
+library(sqldf)
+library(ISOweek)
+library(sf)
+#clean your environment
+rm(list=ls())
+```
+
+## Reading polygons
+
+```{r}
+
+neigh <- st_read("data/wijken_onshore.gpkg", layer = "wijken_onshore")
+
+neigh <- neigh[,c("WK_CODE","WK_NAAM","GM_CODE","GM_NAAM","Shape_Area","geom")]
+
+# Map
+neigh_map <- mapview::mapview(neigh,
+                              col.regions=rev(brewer.pal(11, "RdYlGn")),
+                              layer.name = 'Neighborhoods'
+                              )
+neigh_map
+
+```
+
+## Read data
+
+```{r}
+
+# neighborhood demographic data
+neigh_data <- read_excel("data/kwb-2020.xls", sheet = "KWB2020")
+# metadata
+neigh_meta <- read_excel("data/kwb-variables.xlsx", sheet="kwb-variables")
+
+# filtering
+neigh_data <- neigh_data %>% subset(recs=='Wijk') # filter to only 'wijk' regions
+neigh_data[,7:119] <- lapply(neigh_data[,7:119], gsub, pattern = ",", replacement = ".") # comma separators to dots
+neigh_data[,7:119] <- neigh_data[,7:119] %>% mutate_if(is.character,as.numeric) # set variables to numeric
+
+var_to_keep <- (neigh_meta %>% subset(Include==1))$Variabelenaam # subset to variables to keep
+neigh_data <- neigh_data %>% select(var_to_keep) # filter data to variables to keep
+
+# normalizing
+var_to_norm <- neigh_meta %>% subset(`Need to normalise`==1 & Include==1) %>% select(c('Variabelenaam','Normalisatie'))
+
+for(row in 1:nrow(var_to_norm)){
+  var <- var_to_norm[row,'Variabelenaam'][[1]]
+  norm <- var_to_norm[row,'Normalisatie'][[1]]
+  neigh_data[,var] <- neigh_data[,var]/neigh_data[,norm]
+}
+
+
+# neighborhood vaccination data
+vaccine_neigh <- read_delim("data/COVID-19_vaccinatiegraad_per_wijk_per_week.csv", delim=";")
+vaccine_neigh[,10:11] <- vaccine_neigh[,10:11] %>% mutate_if(is.character,as.numeric) # set variables to numeric
+
+vaccine_neigh[vaccine_neigh == 9999] <- NA # make hidden missing values no longer hidden
+
+vaccine_neigh <- vaccine_neigh %>% 
+  subset(Date_of_statistics=='14-3-2022') %>% 
+  mutate(coverage_partly_norm = ((Coverage_primary_partly) - mean(Coverage_primary_partly,na.rm=TRUE)) / sd(Coverage_primary_partly,na.rm=TRUE),
+         coverage_completed_norm= ((Coverage_primary_completed) - mean(Coverage_primary_completed, na.rm=TRUE))/sd(Coverage_primary_completed, na.rm = TRUE))
+
+
+# check normalisation
+mean(vaccine_neigh$coverage_completed_norm, na.rm=TRUE)
+sd(vaccine_neigh$coverage_completed_norm, na.rm=TRUE)
+
+mean(vaccine_neigh$coverage_partly_norm, na.rm=TRUE)
+sd(vaccine_neigh$coverage_partly_norm, na.rm=TRUE)
+
+# national coverage values
+mpart <- round(mean(vaccine_neigh$Coverage_primary_partly, na.rm=TRUE),digits=2)
+spart <- round(sd(vaccine_neigh$Coverage_primary_partly, na.rm=TRUE),digits=2)
+
+mfull <- round(mean(vaccine_neigh$Coverage_primary_completed, na.rm=TRUE),digits=2)
+sfull <- round(sd(vaccine_neigh$Coverage_primary_completed, na.rm=TRUE),digits=2)
+
+
+
+
+# histogram of vaccination status
+
+vaccine_neigh %>% ggplot() +
+    # partly vaccinated
+    geom_histogram(aes(x = Coverage_primary_partly), fill = 'red', alpha = 0.5, bins=75, na.rm = TRUE) + 
+    geom_density(aes(x = Coverage_primary_partly,y = ..count..), col='red',size=1,na.rm = TRUE) + 
+    
+    # fully vaccinated
+    geom_histogram(aes(x = Coverage_primary_completed), fill = "blue", alpha = 0.5,bins=75, na.rm = TRUE) + 
+    geom_density(aes(x = Coverage_primary_completed, y = ..count..),col='blue',size=1,na.rm = TRUE) +
+    # means
+    geom_vline(aes(xintercept=mean(Coverage_primary_completed, na.rm=TRUE),col='blue'), linetype="dashed", size=1) +
+    geom_vline(aes(xintercept=mean(Coverage_primary_partly, na.rm=TRUE),col='red'), linetype="dashed", size=1) +
+    # formatting
+    labs(title='Vaccination against SARS-CoV-2 coverage on 14-3-2022') +
+    ylab('Number of neighbourhoods') +
+    xlab('Percentage') + 
+    # legend
+    scale_colour_manual(name="Coverage type", values=c("blue", "red"), labels=c(paste(mfull,'% (',sfull,'%)'), paste(mpart,'% (',spart,'%)')))
+
+```
+
+## Delete outlier neighborhoods?
+
+
+```{r}
+# Delete where a_inw == 0, causes NaNs and Inf numbers through divide by zero
+neigh_data_filt <- neigh_data %>% filter(a_inw != 0)
+
+# maybe remove all neigh lower than 50 people?
+# neigh_data_filt <- neigh_data %>% filter(a_inw >= 50)
+
+
+```
+
+
+
+## Join datasets
+
+```{r}
+
+# FULL OUTER JOINS 
+# take into accounts for models, some columns have NA !
+
+data_compl <- sp::merge(x = vaccine_neigh, 
+                        y = neigh_data_filt,
+                        by.x = 'Region_code',
+                        by.y = 'gwb_code',
+                        all = FALSE)
+
+data_compl <- data_compl[complete.cases(data_compl),]
+
+data_compl <- sp::merge(x = neigh,
+                        y = data_compl,
+                        by.x = 'WK_CODE',
+                        by.y = 'Region_code',
+                        all = FALSE)
+
+
+
+
+
+vaccine_map <- mapview::mapview(data_compl,
+                                zcol = 'Coverage_primary_completed',
+                                col.regions=brewer.pal(11, "RdYlGn"),
+                                layer.name = 'Vaccination coverage'
+                                )
+vaccine_map
+
+vaccine_norm_map <- mapview::mapview(data_compl,
+                                zcol = 'coverage_completed_norm',
+                                col.regions=brewer.pal(11, "RdYlGn"),
+                                layer.name = 'Vaccination coverage z-score normalized'
+                                )
+vaccine_norm_map
+
+
+```
+## Correlation
+
+```{r}
+library(mice)
+
+md.pattern(data_compl)
+
+
+
+
+
+test_var <- data_compl %>% select_if(is.numeric) %>% names()
+test_var <- test_var[-length(test_var)]
+
+corr <- cor(as.data.frame(data_compl)[,test_var],use="complete.obs")
+
+library(corrplot)
+
+corrplot(corr, order = "hclust",method="color", tl.cex=0.5,tl.col = 'black')
+
+
+
+```
+
+
+
+## Linear model and Morran's I
+
+```{r}
+
+# basic equation
+lm_eq1 <- coverage_partly_norm ~ 
+    #a_inw +
+  # gender
+    #a_man + 
+    #a_vrouw + 
+  # age groups
+    a_00_14 +
+    #a_15_24 +
+    a_25_44 +
+    a_45_64 +
+    a_65_oo +
+  # ethnic groups
+    #a_w_all  +
+    #a_nw_all +
+    a_marok +
+    a_antaru +
+    a_suri +
+    a_tur +
+    #a_ov_nw +
+  # household
+    p_geb +
+    #p_ste +
+    a_hh +
+    a_1p_hh +
+    a_hh_z_k +
+    a_hh_m_k +
+    g_hhgro +
+    #bev_dich +
+    #p_1gezw +
+    #p_mgezw +
+  # education
+    a_opl_lg +
+    a_opl_md +
+    a_opl_hg
+
+
+
+#run the model
+linearMod <- lm (lm_eq1, data = data_compl)
+
+#get summary
+summary(linearMod)
+
+```
+```{r}
+
+vif(linearMod)
+
+# high multicollinearity between the variables.
+
+```
+
+```{r}
+
+#creating adjacency matrix
+data_nbq <- poly2nb(data_compl, queen=TRUE) #Queen’s Contiguity neighborhood
+summary(data_nbq)
+
+data_nbq_w <- nb2listw(data_nbq, style="W", zero.policy = TRUE) #Queen’s neighborhood wights
+summary(data_nbq_w, zero.policy = TRUE)
+
+#for plotting
+coordsW <- data_compl%>%
+  st_centroid()%>%
+  st_geometry()
+
+plot(data_nbq, st_geometry(coordsW), col="red")
+
+```
+
+```{r}
+#Usually we use the moran.test function to get the Moran’s I, but that method is sensitive to irregularly distributed polygons. So we would use Monte Carlo method to bootstrap different polygon distribution. Here moran.mc() funtion does the job
+
+mc_global <- moran.mc(linearMod$residuals, data_nbq_w, 20, alternative="greater", zero.policy = TRUE,  adjust.n = TRUE)
+
+#plot the  Moran’s I
+plot(mc_global)
+
+
+#Now plot the residual on the polygon
+data_compl$res_lm <- residuals(linearMod)
+lmres <- qtm(data_compl, "res_lm")
+lmres
+
+
+```
+
+## GWR model on neighborhoods
+```{r, GWR}
+
+#1 - Testing spatial lag model
+spa_lagmodel = lagsarlm (lm_eq1, data = data_compl, listw= data_nbq_w, zero.policy = TRUE)
+
+summary(spa_lagmodel, Nagelkerke=T)
+```
+
+```{r, residual}
+#check residual autocorrelation
+
+mc2_global <-moran.mc(spa_lagmodel$residuals, data_nbq_w, 2999, alternative="greater", zero.policy = TRUE,  adjust.n = TRUE)
+
+plot(mc2_global)
+
+mc2_global
+```
+
+```{r, plot}
+#add the residual to polygon and plot
+data_compl$res_slm <- residuals(spa_lagmodel)
+
+#plot using t-map
+slmres <-qtm(data_compl, "res_slm")
+
+#compare with OLS residual
+tmap_arrange(lmres, slmres, asp = 1, ncol = 2)
+```
+
+```{r, gwr, fixed}
+#Before we do any analysis for GWR we need to convert our importanted sf object into a sp spatial object. As the spgwr package usually works on sp objects
+#converting the sf polygon into sp object
+
+data_sp <- as_Spatial(data_compl)
+
+#find the optimum bandwidth distance for fixed kernel using the gwr.sel() function from spgwr package
+fbw <- gwr.sel(lm_eq1, 
+               data = data_sp,
+               longlat = TRUE,
+               adapt=FALSE, 
+               gweight = gwr.Gauss, 
+               verbose = T)
+```
+
+```{r,}
+fb_gwr <- gwr(lm_eq1, 
+              data = data_sp,
+              longlat = TRUE,
+              bandwidth = fbw, 
+              gweight = gwr.Gauss,
+              hatmatrix=TRUE, 
+              se.fit=TRUE)
+
+#summary of the model
+fb_gwr
+```
+
+```{r}
+#Extract the modeled relations for gwr object
+fb_gwr_out <- as.data.frame(fb_gwr$SDF)
+
+#see the data frame, there is 1673 regressions, each row is a regression result
+view(fb_gwr_out)
+
+
+#join that with our main polygon data frame for the R2
+data_compl$fmb_localR2 <- fb_gwr_out$localR2
+
+mapview::mapview(data_compl, zcol = "fmb_localR2", col.regions=brewer.pal(11, "RdYlGn"))
+```
+
+```{r, plotting}
+#join that with our main polygon data frame for Green space availability
+data_compl$coverage_completed_norm = fb_gwr_out$coverage_completed_norm
+
+coef_fb_gav <- mapview::mapview(data_compl, zcol = "coverage_completed_norm")
+
+coef_fb_gav
+```
+
+```{r, adaptive kernal}
+#adaptive kernel
+abw <- gwr.sel (lm_eq1, 
+              data = data_sp,
+              adapt = TRUE, 
+              gweight = gwr.Gauss)
+
+abw
+
+#Fitting the adaptive Kernel GWR
+ab_gwr <- gwr(lm_eq1, 
+              data = data_sp,
+              longlat = TRUE,
+              adapt = abw, 
+              gweight = gwr.Gauss,
+              hatmatrix=TRUE, 
+              se.fit=TRUE)
+
+#summary of the model
+ab_gwr
+```
+
+
+```{r, gwr->DF}
+#adaptive GWR results in data frame
+ab_gwr_out <- as.data.frame(ab_gwr$SDF)
+
+#join the local R2 for each model to each neighborhood
+data_compl$amb_localR2 <- ab_gwr_out$localR2
+
+mapview::mapview(data_compl, zcol = "amb_localR2", col.regions=brewer.pal(11, "RdYlGn")) 
+```
+
+```{r,variability}
+#join that with our main polygon data frame for coverage availability
+data_compl$Coverage_primary_completed = ab_gwr_out$Coverage_primary_completed
+
+coef_ab_gav <- mapview::mapview(data_compl, zcol = "Coverage_primary_completed")
+
+coef_ab_gav
+```
+
+## investigate religion per municipality
+#load libraries
+```{r,}
+easypackages::packages ("sf", "sp", "spdep", "spatialreg", "spgwr", "tmap", "mapview", "car", "RColorBrewer", "tidyverse", 
+                        "cowplot", "leafsync", "leaflet.extras2", "mapview")
+library(readxl)
+library(sqldf)
+library(ISOweek)
+library(sf)
+#clean your environment
+rm(list=ls())
+```
+
+## Reading polygons
+```{r}
+
+neigh <- st_read("data/wijken_onshore.gpkg", layer = "wijken_onshore")
+
+
+names(neigh)
+
+neigh <- neigh[,c("WK_CODE","WK_NAAM","GM_CODE","GM_NAAM","Shape_Area","geom")]
+
+# Map
+neigh_map <- mapview::mapview(neigh,
+                              col.regions=rev(brewer.pal(11, "RdYlGn")),
+                              layer.name = 'Neighborhoods'
+                              )
+neigh_map
+
+```
+
+## Read data
+
+```{r}
+
+# neighborhood demographic data
+neigh_data <- read_excel("data/kwb-2020.xls", sheet = "KWB2020")
+# metadata
+neigh_meta <- read_excel("data/kwb-variables.xlsx", sheet="kwb-variables")
+
+# filtering
+neigh_data <- neigh_data %>% subset(recs=='Gemeente') # filter to only 'wijk' regions
+neigh_data[,7:119] <- lapply(neigh_data[,7:119], gsub, pattern = ",", replacement = ".") # comma separators to dots
+neigh_data[,7:119] <- neigh_data[,7:119] %>% mutate_if(is.character,as.numeric) # set variables to numeric
+
+var_to_keep <- (neigh_meta %>% subset(Include==1))$Variabelenaam # subset to variables to keep
+neigh_data <- neigh_data %>% select(var_to_keep) # filter data to variables to keep
+
+# normalizing
+var_to_norm <- neigh_meta %>% subset(`Need to normalise`==1 & Include==1) %>% select(c('Variabelenaam','Normalisatie'))
+
+neigh_data[1,'a_inw']
+
+for(row in 1:nrow(var_to_norm)){
+  var <- var_to_norm[row,'Variabelenaam'][[1]]
+  norm <- var_to_norm[row,'Normalisatie'][[1]]
+  neigh_data[,var] <- neigh_data[,var]/neigh_data[,norm]
+}
+
+
+# municipality vaccination data
+vaccine_mun <- read_delim("data/COVID-19_vaccinatiegraad_per_gemeente_per_week_leeftijd.csv", delim=";")
+vaccine_mun[,8:9] <- lapply(vaccine_mun[,8:9], gsub, pattern = ">=", replacement = "") # remove bigger than signs
+vaccine_mun[,8:9] <- vaccine_mun[,8:9] %>% mutate_if(is.character,as.numeric) # set variables to numeric
+
+vaccine_mun[vaccine_mun == 9999] <- NA # make hidden missing values no longer hidden
+
+vaccine_mun <- vaccine_mun %>% 
+  subset(Date_of_statistics=='2022-03-14') %>% 
+  mutate(coverage_partly_norm = ((Vaccination_coverage_partly) - mean(Vaccination_coverage_partly,na.rm=TRUE)) / sd(Vaccination_coverage_partly,na.rm=TRUE),
+         coverage_completed_norm= ((Vaccination_coverage_completed) - mean(Vaccination_coverage_completed, na.rm=TRUE))/sd(Vaccination_coverage_completed, na.rm = TRUE))
+
+mean(vaccine_mun$Vaccination_coverage_partly, na.rm=TRUE)
+sd(vaccine_mun$Vaccination_coverage_partly, na.rm=TRUE)
+
+mean(vaccine_mun$Vaccination_coverage_partly, na.rm=TRUE)
+sd(vaccine_mun$Vaccination_coverage_partly, na.rm=TRUE)
+
+
+# info on religions per municipality
+religion_data <- read_excel("data/edit for R - Religie en kerkbezoek naar gemeente 2010-2014.xls", sheet = "Tabel_R")
+# convert municipality code to correct format
+religion_data$Gemcode <- as.character(religion_data$Gemcode) %>%
+  lapply(str_pad, width = 4, side = "left", pad = "0")
+religion_data$Gemcode <- paste("GM", religion_data$Gemcode, sep = "")
+```
+
+## Delete outlier neighborhoods?
+```{r}
+# Delete where a_inw == 0, causes NaNs and Inf numbers through divide by zero
+# not applicable for municipalities, lowest is 947
+neigh_data_filt <- neigh_data %>% filter(a_inw != 0)
+
+  # maybe remove all neigh lower than 50 people?
+  # ... %>% filter(a_inw >= 50)
+
+
+```
+
+
+## Join datasets
+```{r}
+
+data_compl <- sp::merge(x = vaccine_mun, 
+                        y = neigh_data_filt,
+                        by.x = 'Region_code',
+                        by.y = 'gwb_code')
+
+data_compl <- left_join(x = data_compl, y = religion_data, by = c("Region_code" = "Gemcode"))
+
+
+```
+
+
