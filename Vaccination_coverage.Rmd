@@ -89,7 +89,7 @@ neigh_data <- neigh_data %>% select(var_to_keep) # filter data to variables to k
 # normalizing
 var_to_norm <- neigh_meta %>% subset(`Need to normalise`==1 & Include==1) %>% select(c('Variabelenaam','Normalisatie'))
 
-neigh_data[1,'a_inw']neigh_data
+neigh_data[1,'a_inw']
 
 for(row in 1:nrow(var_to_norm)){
   var <- var_to_norm[row,'Variabelenaam'][[1]]
@@ -124,12 +124,11 @@ sd(vaccine_neigh$Coverage_primary_completed, na.rm=TRUE)
 # Delete where a_inw == 0, causes NaNs and Inf numbers through divide by zero
 neigh_data_filt <- neigh_data %>% filter(a_inw != 0)
 
-# maybe remove all neigh lower than 50 people?
-# neigh_data_filt <- neigh_data %>% filter(a_inw >= 50)
+  # maybe remove all neigh lower than 50 people?
+  # ... %>% filter(a_inw >= 50)
 
 
 ```
-
 
 
 ## Join datasets
@@ -144,3 +143,7 @@ data_compl <- sp::merge(x = vaccine_neigh,
 
 
 ```
+
+
+## investigate religion per municipality
+
