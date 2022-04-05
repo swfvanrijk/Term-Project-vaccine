@@ -156,9 +156,13 @@ neigh_data_filt <- neigh_data %>% filter(a_inw != 0)
 
 
 ```
+
+
+
 ## Join datasets
 
 ```{r}
+
 # FULL OUTER JOINS 
 # take into accounts for models, some columns have NA !
 
@@ -168,13 +172,17 @@ data_compl <- sp::merge(x = vaccine_neigh,
                         by.y = 'gwb_code',
                         all = FALSE)
 
-#data_compl <- data_compl[complete.cases(data_compl),]
+data_compl <- data_compl[complete.cases(data_compl),]
 
 data_compl <- sp::merge(x = neigh,
                         y = data_compl,
                         by.x = 'WK_CODE',
                         by.y = 'Region_code',
                         all = FALSE)
+
+
+
+
 
 vaccine_map <- mapview::mapview(data_compl,
                                 zcol = 'Coverage_primary_completed',
@@ -189,6 +197,8 @@ vaccine_norm_map <- mapview::mapview(data_compl,
                                 layer.name = 'Vaccination coverage z-score normalized'
                                 )
 vaccine_norm_map
+
+
 ```
 ## Correlation
 
@@ -196,6 +206,10 @@ vaccine_norm_map
 library(mice)
 
 md.pattern(data_compl)
+
+
+
+
 
 test_var <- data_compl %>% select_if(is.numeric) %>% names()
 test_var <- test_var[-length(test_var)]
@@ -205,6 +219,9 @@ corr <- cor(as.data.frame(data_compl)[,test_var],use="complete.obs")
 library(corrplot)
 
 corrplot(corr, order = "hclust",method="color", tl.cex=0.5,tl.col = 'black')
+
+
+
 ```
 
 
@@ -212,6 +229,7 @@ corrplot(corr, order = "hclust",method="color", tl.cex=0.5,tl.col = 'black')
 ## Linear model and Morran's I
 
 ```{r}
+
 # basic equation
 lm_eq1 <- coverage_partly_norm ~ 
     #a_inw +
@@ -255,6 +273,7 @@ linearMod <- lm (lm_eq1, data = data_compl)
 
 #get summary
 summary(linearMod)
+
 ```
 ```{r}
 
@@ -284,15 +303,19 @@ plot(data_nbq, st_geometry(coordsW), col="red")
 
 ```{r}
 #Usually we use the moran.test function to get the Moran’s I, but that method is sensitive to irregularly distributed polygons. So we would use Monte Carlo method to bootstrap different polygon distribution. Here moran.mc() funtion does the job
-mc_global <- moran.mc(linearMod$residuals, data_nbq_w, 2999, alternative="greater", zero.policy = TRUE,  adjust.n = TRUE)
+
+mc_global <- moran.mc(linearMod$residuals, data_nbq_w, 20, alternative="greater", zero.policy = TRUE,  adjust.n = TRUE)
 
 #plot the  Moran’s I
 plot(mc_global)
+
 
 #Now plot the residual on the polygon
 data_compl$res_lm <- residuals(linearMod)
 lmres <- qtm(data_compl, "res_lm")
 lmres
+
+
 ```
 
 ## GWR model on neighborhoods
@@ -313,6 +336,7 @@ plot(mc2_global)
 
 mc2_global
 ```
+
 ```{r, plot}
 #add the residual to polygon and plot
 data_compl$res_slm <- residuals(spa_lagmodel)
@@ -368,9 +392,9 @@ mapview::mapview(data_compl, zcol = "fmb_localR2", col.regions=brewer.pal(11, "R
 
 ```{r, plotting}
 #join that with our main polygon data frame for Green space availability
-data_compl$coverage_completed_norm = fb_gwr_out$coverage_completed_norm
+data_compl$a_opl_hg = fb_gwr_out$a_opl_hg
 
-coef_fb_gav <- mapview::mapview(data_compl, zcol = "coverage_completed_norm")
+coef_fb_gav <- mapview::mapview(data_compl, zcol = "a_opl_hg")
 
 coef_fb_gav
 ```
@@ -410,12 +434,51 @@ mapview::mapview(data_compl, zcol = "amb_localR2", col.regions=brewer.pal(11, "R
 
 ```{r,variability}
 #join that with our main polygon data frame for coverage availability
-data_compl$Coverage_primary_completed = ab_gwr_out$Coverage_primary_completed
+data_compl$a_opl_hg = ab_gwr_out$a_opl_hg
 
-coef_ab_gav <- mapview::mapview(data_compl, zcol = "Coverage_primary_completed")
+coef_ab_gav <- mapview::mapview(data_compl, zcol = "a_opl_hg")
 
 coef_ab_gav
 ```
+
+```{r}
+#For fixed model
+#estimate the t-value for high education variable for fixed kernel model
+data_compl$ft_a_opl_hg = fb_gwr_out$a_opl_hg / fb_gwr_out$a_opl_hg_se
+
+#categorize the t-value to statistical significance
+data_compl$ft_a_opl_hg_cat <- cut(data_compl$ft_a_opl_hg,
+                             breaks=c(min(data_compl$ft_a_opl_hg), -1.96, 1.96, max(data_compl$ft_a_opl_hg)),
+                             labels=c("sig","nonsig", "sig"))
+
+#plot the significance for fixed kernel model
+opl_hg_sig_fb <- mapview::mapview (data_compl, zcol = "ft_a_opl_hg_cat")
+
+
+
+#For Adaptive model
+#estimate the t-value for opl_hg_ space availability variable for fixed kernel model
+data_compl$at_a_opl_hg = ab_gwr_out$a_opl_hg / ab_gwr_out$a_opl_hg_se
+
+#categorize the t-value to statistical significance
+data_compl$at_a_opl_hg_cat <- cut(data_compl$at_a_opl_hg,
+                             breaks=c(min(data_compl$at_a_opl_hg), -1.96, 1.96, max(data_compl$at_a_opl_hg)),
+                             labels=c("sig","nonsig", "sig"))
+
+#plot the significance for adaptive kernel model
+opl_hg_sig_ab <- mapview::mapview(data_compl, zcol = "at_a_opl_hg_cat")
+
+
+#compare the maps
+#opl_hg_sig_ab | opl_hg_sig_fb # doesn't seem to work so plot separately
+opl_hg_sig_ab
+opl_hg_sig_fb
+
+
+```
+
+
+
 
 ## investigate religion per municipality
 #load libraries
