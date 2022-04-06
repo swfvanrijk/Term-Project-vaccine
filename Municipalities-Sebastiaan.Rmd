@@ -82,19 +82,19 @@ munic_data <- merge(x = munic_data,
 
 
 # merge VACCINATION COVERAGE DATA
-munic_data <- merge(x = munic_data,
-                    y = munic_vac_data %>% subset(Age_group == '12-17') %>% 
-                      summarise(Region_code,
-                                Vaccination_completely_12_17 = Vaccination_coverage_completed,
-                                Vaccination_partly_12_17 = Vaccination_coverage_partly),
-                    by.x = 'RegioS',
-                    by.y = 'Region_code')
+#munic_data <- merge(x = munic_data,
+#                    y = munic_vac_data %>% subset(Age_group == '12-17') %>% 
+#                      summarise(Region_code,
+#                                Vaccination_completely_12_17 = Vaccination_coverage_completed,
+#                                Vaccination_partly_12_17 = Vaccination_coverage_partly),
+#                    by.x = 'RegioS',
+#                    by.y = 'Region_code')
 
 
 munic_data <- merge(x = munic_data,
                     y = munic_vac_data %>% subset(Age_group == '18+') %>% summarise(Region_code,
-                                                                   `Vaccination_completely_18+` = Vaccination_coverage_completed,
-                                                                   `Vaccination_partly_18+` = Vaccination_coverage_partly),
+                                                                   `Vaccination_completely_18` = Vaccination_coverage_completed,
+                                                                   `Vaccination_partly_18` = Vaccination_coverage_partly),
                     by.x = 'RegioS',
                     by.y = 'Region_code')
 
@@ -109,12 +109,7 @@ munic_data <- merge(x = munic_data,
 
 
 
-# merge SPATIAL DATA
-munic_data <- sp::merge(x = st_read("data/gemeente_onshore.gpkg", layer = "gemeente_onshore") %>% mutate(code=paste0('GM',code)),
-                        y = munic_data,
-                        by.x = 'code',
-                        by.y = 'RegioS',
-                        all.x = TRUE)
+
 
 # check summary
 summary(munic_data)
@@ -126,8 +121,6 @@ md.pattern(munic_data,rotate.names = TRUE)
 ```
 
 ```{r normalising}
-
-
 
 munic_data <- munic_data %>% mutate(Mannen_2 = Mannen_2 / TotaleBevolking_1 * 100, 
                                     Vrouwen_3 = Vrouwen_3 / TotaleBevolking_1 * 100,
@@ -155,17 +148,7 @@ munic_data <- munic_data %>% mutate(Mannen_2 = Mannen_2 / TotaleBevolking_1 * 10
 ```
 
 
-## mapping
 
-```{r}
-munic_map <- mapview::mapview(munic_data,
-                              zcol = 'LowEducation',
-                              col.regions=rev(brewer.pal(11, "RdYlGn")),
-                              layer.name = 'LowEducation'
-                              )
-munic_map
-
-```
 
 
 
@@ -176,9 +159,11 @@ munic_map
 ```{r}
 
 test_var <- munic_data %>% select_if(is.numeric) %>% names()
-test_var <- test_var[-length(test_var)]
 
-corr <- cor(as.data.frame(munic_data)[,test_var],use="complete.obs")
+# normalise to [0,1]
+munic_data[,test_var] <- munic_data[,test_var] / 100
+
+corr <- cor(munic_data[,test_var],use="complete.obs")
 
 
 
@@ -186,17 +171,40 @@ corrplot(corr, order = "hclust",method="color", tl.cex=0.5,tl.col = 'black')
 
 
 # correlation with outcome
-cor(as.data.frame(munic_data)[,test_var],munic_data$`Vaccination_completely_18+`,use="complete.obs")
-
-# normalise to [0,1]
-munic_data[,test_var] <- as.data.frame(munic_data[,test_var]) / 100
+cor(munic_data[,test_var],munic_data$`Vaccination_completely_18+`,use="complete.obs")
 
 
+```
+## Adding spatial data
 
-summary(munic_data)
+```{r}
+
+# complete cases
+data_compl  <- munic_data[munic_data %>% complete.cases(),] 
+
+
+# merge SPATIAL DATA
+data_compl <- sp::merge(x = st_read("data/gemeente_onshore.gpkg", layer = "gemeente_onshore") %>% mutate(code=paste0('GM',code)),
+                        y = data_compl,
+                        by.x = 'code',
+                        by.y = 'RegioS',
+                        all.x = FALSE)
 
 ```
 
+
+
+## mapping
+
+```{r}
+munic_map <- mapview::mapview(data_compl,
+                              zcol = 'LowEducation',
+                              col.regions=rev(brewer.pal(11, "RdYlGn")),
+                              layer.name = 'LowEducation'
+                              )
+munic_map
+
+```
 
 
 ## Linear model and Morran's I
@@ -204,7 +212,7 @@ summary(munic_data)
 ```{r}
 
 # basic equation
-lm_eq <-  `Vaccination_completely_18+` ~ 
+lm_eq <-  `Vaccination_completely_18` ~ 
     #TotaleBevolking_1 +
   # gender
     Mannen_2 +
@@ -280,20 +288,20 @@ lm_eq <-  `Vaccination_completely_18+` ~
 
 
 #run the model
-linearMod <- lm (lm_eq, data = munic_data,na.action=na.exclude)
+linearMod <- lm (lm_eq, data = data_compl,na.action=na.exclude)
 
 #get summary
 summary(linearMod)
 
 
 
-test_data <- sample_n(as.data.frame(munic_data),10)
+test_data <- sample_n(as.data.frame(data_compl),10)
 
 
 pred <- predict.lm(linearMod, newdata = test_data)
 
-RMSE(pred, test_data$`Vaccination_completely_18+`)
-R2(pred, test_data$`Vaccination_completely_18+`)
+RMSE(pred, test_data$`Vaccination_completely_18`)
+R2(pred, test_data$`Vaccination_completely_18`)
 
 ```
 
@@ -306,7 +314,6 @@ vif(linearMod)
 ```
 
 ```{r}
-
 #creating adjacency matrix
 data_nbq <- poly2nb(data_compl, queen=TRUE) #Queen’s Contiguity neighborhood
 summary(data_nbq)
@@ -331,18 +338,194 @@ mc_global <- moran.mc(linearMod$residuals, data_nbq_w, 20, alternative="greater"
 #plot the  Moran’s I
 plot(mc_global)
 
+mc_global
+```
+
+```{r}
 
 #Now plot the residual on the polygon
 data_compl$res_lm <- residuals(linearMod)
 lmres <- qtm(data_compl, "res_lm")
 lmres
 
+```
+
+## Spatial lag & error
+
+```{r spatial lag}
+
+#running spatial lag model with same weight matrix created previously
+spa_lagmodel = lagsarlm (lm_eq, data = data_compl, listw= data_nbq_w, zero.policy = TRUE)
+
+summary(spa_lagmodel, Nagelkerke=T)
+
+```
+```{r residual error}
+
+#check residual autocorrelation
+mc2_global <-moran.mc(spa_lagmodel$residuals, data_nbq_w, 2999, alternative="greater", zero.policy = TRUE)
+
+plot(mc2_global)
+mc2_global
+
+```
+```{r}
+
+#add the residual to polygon and plot
+data_compl$res_slm <- residuals(spa_lagmodel)
+
+#plot using t-map
+slmres <-qtm(data_compl, "res_slm")
+
+#compare with OLS residual
+tmap_arrange(lmres, slmres, asp = 1, ncol = 2)
 
 ```
 
 
-## GWR model on neighborhoods
-
-## Adding religion data and interpolating to municipalities
-
 ## GWR model on municipalities
+
+```{r}
+
+data_sp <- as_Spatial(data_compl)
+#find the optimum bandwidth distance for fixed kernel using the gwr.sel() function from spgwr package
+fbw <- gwr.sel(lm_eq, 
+               data = data_sp,
+               longlat = TRUE,
+               adapt = FALSE, 
+               gweight = gwr.Gauss, 
+               verbose = T)
+
+```
+```{r}
+fb_gwr <- gwr(lm_eq, 
+              data = data_sp,
+              longlat = TRUE,
+              bandwidth = fbw, 
+              gweight = gwr.Gauss,
+              hatmatrix=TRUE, 
+              se.fit=TRUE)
+
+#summary of the model
+fb_gwr
+```
+
+
+```{r}
+
+#Extract the modeled relations for gwr object
+fb_gwr_out <- as.data.frame(fb_gwr$SDF)
+
+#see the data frame, there is 1673 regressions, each row is a regression result
+view(fb_gwr_out)
+
+
+#join that with our main polygon data frame for the R2
+data_compl$fmb_localR2 <- fb_gwr_out$localR2
+
+mapview::mapview(data_compl, zcol = "fmb_localR2", col.regions=brewer.pal(11, "RdYlGn"))
+
+
+#join that with our main polygon data frame for Green space availability
+data_compl$fcoef_ZiektenVanAdemhalingsstelsel_66 = fb_gwr_out$ZiektenVanAdemhalingsstelsel_66
+
+coef_map <- mapview::mapview(data_compl, 
+                             zcol = "fcoef_ZiektenVanAdemhalingsstelsel_66", 
+                             col.regions=brewer.pal(11, "RdYlGn"))
+
+coef_map
+
+```
+
+
+
+## Adaptive model
+
+```{r}
+
+#adaptive kernel
+abw <- gwr.sel (lm_eq, 
+              data = data_sp,
+              adapt = TRUE, 
+              gweight = gwr.Gauss)
+
+abw
+
+```
+
+
+```{r}
+#Fitting the adaptive Kernel GWR
+ab_gwr <- gwr(lm_eq, 
+              data = data_sp,
+              longlat = TRUE,
+              adapt = abw, 
+              gweight = gwr.Gauss,
+              hatmatrix=TRUE, 
+              se.fit=TRUE)
+ab_gwr
+```
+
+
+```{r}
+
+#adaptive GWR results in data frame
+ab_gwr_out <- as.data.frame(ab_gwr$SDF)
+
+#join the local R2 for each model to each neighborhood
+data_compl$amb_localR2 <- ab_gwr_out$localR2
+
+mapview::mapview(data_compl, zcol = "amb_localR2", col.regions=brewer.pal(11, "RdYlGn"))
+
+```
+
+
+
+```{r}
+
+#For fixed model
+#estimate the t-value for green space availability variable for fixed kernel model
+data_compl$ft_AfstandTotHuisartsenpraktijk_209 = fb_gwr_out$AfstandTotHuisartsenpraktijk_209 / fb_gwr_out$AfstandTotHuisartsenpraktijk_209_se
+
+#categorize the t-value to statistical significance
+data_compl$ft_AfstandTotHuisartsenpraktijk_209_cat <- cut(data_compl$ft_AfstandTotHuisartsenpraktijk_209,
+                             breaks=c(min(data_compl$ft_AfstandTotHuisartsenpraktijk_209), -1.96, 1.96, max(data_compl$ft_AfstandTotHuisartsenpraktijk_209)),
+                             labels=c("sig","nonsig", "sig"))
+
+#plot the significance for fixed kernel model
+sig_fb <- mapview::mapview (data_compl, zcol = "ft_AfstandTotHuisartsenpraktijk_209_cat")
+
+
+
+#For Adaptive model
+#estimate the t-value for green space availability variable for fixed kernel model
+data_compl$at_AfstandTotHuisartsenpraktijk_209 = ab_gwr_out$AfstandTotHuisartsenpraktijk_209 / ab_gwr_out$AfstandTotHuisartsenpraktijk_209_se
+
+#categorize the t-value to statistical significance
+data_compl$at_AfstandTotHuisartsenpraktijk_209_cat <- cut(data_compl$at_AfstandTotHuisartsenpraktijk_209,
+                             breaks=c(min(data_compl$at_AfstandTotHuisartsenpraktijk_209), -1.96, 1.96, max(data_compl$at_AfstandTotHuisartsenpraktijk_209)),
+                             labels=c("sig","nonsig", "sig"))
+
+#plot the significance for adaptive kernel model
+sig_ab <- mapview::mapview(data_compl, zcol = "at_AfstandTotHuisartsenpraktijk_209_cat")
+
+sig_fb
+
+sig_ab
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
