@@ -1,0 +1,348 @@
+---
+title: "Vaccination_coverage"
+author: "S.W.F.  van Rijk"
+date: "1-4-2022"
+output: html_document
+---
+
+## 
+
+```{r}
+getwd()
+```
+
+## 
+
+```{r Packages, include=FALSE}
+if (!require("easypackages")) install.packages("easypackages") #easy package manager
+
+#Set up and data analysis packages
+if (!require("tidyverse")) install.packages("tidyverse") #main data science packages
+
+#Some GIS other analyses packages 
+if (!require("sf")) install.packages("sf") #main GIS package
+if (!require("sp")) install.packages("sp") #needed for some GIS operation, will not be in use from 2023
+if (!require("spdep")) install.packages("spdep") #neighborhood analysis in R
+if (!require("spatialreg")) install.packages("spatialreg") #spatial modelling such as lag, error
+if (!require("spgwr")) install.packages("spgwr") #GWR modelling
+if (!require("RColorBrewer")) install.packages("RColorBrewer") # getting interesting color
+if (!require("tmap")) install.packages("tmap") # Mapping package
+if (!require("mapview")) install.packages("mapview") # Mapping package
+if (!require("car")) install.packages("car") #some base regression functions
+if (!require("cowplot")) install.packages("cowplot") #some base regression functions
+if (!require("leafsync")) install.packages("leafsync") #using with mapview
+if (!require("leaflet.extras2")) install.packages("leaflet.extras2") #using with mapview
+
+#load libraries
+
+easypackages::packages ("sf", "sp", "spdep", "spatialreg", "spgwr", "tmap", "mapview", "car", "RColorBrewer", "tidyverse", 
+                        "cowplot", "leafsync", "leaflet.extras2", "mapview")
+
+library(mice)
+library(corrplot)
+library(caret)
+#clean your environment
+rm(list=ls())
+```
+
+
+## Read data
+
+
+```{r municipalities}
+
+# OUTCOME (vaccination coverage) DATA
+munic_vac_data <- read_delim("data/Municipalities data/COVID-19_vaccinatiegraad_per_gemeente_per_week_leeftijd.csv", delim=";")
+
+
+# MUNICAPALITY MERGING DATA
+# to do !!!
+
+
+
+# DEMOGRAPHIC DATA
+munic_data <- read_delim("data/Municipalities data/Kerncijfers Gemeenten 2020.csv", delim=";")
+munic_demo_meta <- read_delim("data/Municipalities data/Kerncijfers Gemeente Variabelen.csv", delim=";")
+
+# filter to vars to keep
+munic_data <- munic_data[,
+                         # filter meta to variables to include
+                         munic_demo_meta %>% subset(`Include in model`==1) %>%
+                           .$`Variable name`] %>%
+                         subset(!is.na(TotaleBevolking_1))
+
+
+# merge EDUCATION DATA
+munic_data <- merge(x = munic_data,
+                    y = read_delim("data/Municipalities data/Opleiding Gemeente 2019.csv", delim=";"),
+                    by.x='RegioS',
+                    by.y='GM_CODE',
+                    all.x = TRUE)
+
+
+
+# merge VACCINATION COVERAGE DATA
+munic_data <- merge(x = munic_data,
+                    y = munic_vac_data %>% subset(Age_group == '12-17') %>% 
+                      summarise(Region_code,
+                                Vaccination_completely_12_17 = Vaccination_coverage_completed,
+                                Vaccination_partly_12_17 = Vaccination_coverage_partly),
+                    by.x = 'RegioS',
+                    by.y = 'Region_code')
+
+
+munic_data <- merge(x = munic_data,
+                    y = munic_vac_data %>% subset(Age_group == '18+') %>% summarise(Region_code,
+                                                                   `Vaccination_completely_18+` = Vaccination_coverage_completed,
+                                                                   `Vaccination_partly_18+` = Vaccination_coverage_partly),
+                    by.x = 'RegioS',
+                    by.y = 'Region_code')
+
+# merge RELIGION DATA
+
+munic_data <- merge(x = munic_data,
+                    y = read_delim("data/Municipalities data/Kerkelijke gezindte en kerkbezoek naar gemeenten.csv", delim = ";"),
+                    by.x = 'RegioS',
+                    by.y = 'GM_CODE')
+
+
+
+
+
+# merge SPATIAL DATA
+munic_data <- sp::merge(x = st_read("data/gemeente_onshore.gpkg", layer = "gemeente_onshore") %>% mutate(code=paste0('GM',code)),
+                        y = munic_data,
+                        by.x = 'code',
+                        by.y = 'RegioS',
+                        all.x = TRUE)
+
+# check summary
+summary(munic_data)
+
+# check missing data pattern
+md.pattern(munic_data,rotate.names = TRUE)
+
+
+```
+
+```{r normalising}
+
+
+
+munic_data <- munic_data %>% mutate(Mannen_2 = Mannen_2 / TotaleBevolking_1 * 100, 
+                                    Vrouwen_3 = Vrouwen_3 / TotaleBevolking_1 * 100,
+                                    
+                                    Ongehuwd_25 = Ongehuwd_25 / TotaleBevolking_1 * 100,
+                                    Gehuwd_26 = Gehuwd_26 / TotaleBevolking_1 * 100,
+                                    Gescheiden_27 = Gescheiden_27 / TotaleBevolking_1 * 100,
+                                    Verweduwd_28 = Verweduwd_28 / TotaleBevolking_1 * 100,
+                                    
+                                    ZiektenVanHartEnVaatstelsel_65 = ZiektenVanHartEnVaatstelsel_65 / TotaleBevolking_1 * 100,
+                                    ZiektenVanAdemhalingsstelsel_66 = ZiektenVanAdemhalingsstelsel_66 / TotaleBevolking_1 * 100,
+                                    UitwendigeDoodsoorzaken_67 = UitwendigeDoodsoorzaken_67 / TotaleBevolking_1 * 100,
+                                    OverigeDoodsoorzaken_68 = OverigeDoodsoorzaken_68 / TotaleBevolking_1 * 100,
+                                    
+                                    WAOUitkering_160 = WAOUitkering_160 / TotaleBevolking_1 * 100,
+                                    WIAUitkeringWGARegeling_161 = WIAUitkeringWGARegeling_161 / TotaleBevolking_1 * 100,
+                                    WajongUitkering_162 = WajongUitkering_162 / TotaleBevolking_1 * 100,
+                                    AOW_163 = AOW_163 / TotaleBevolking_1 * 100,
+                                    
+                                    LowEducation = LowEducation / TotaleBevolking_1 * 100,
+                                    MiddleEducation = MiddleEducation / TotaleBevolking_1 * 100,
+                                    HighEducation = HighEducation / TotaleBevolking_1 * 100)
+
+
+```
+
+
+## mapping
+
+```{r}
+munic_map <- mapview::mapview(munic_data,
+                              zcol = 'LowEducation',
+                              col.regions=rev(brewer.pal(11, "RdYlGn")),
+                              layer.name = 'LowEducation'
+                              )
+munic_map
+
+```
+
+
+
+
+
+## Correlation
+
+```{r}
+
+test_var <- munic_data %>% select_if(is.numeric) %>% names()
+test_var <- test_var[-length(test_var)]
+
+corr <- cor(as.data.frame(munic_data)[,test_var],use="complete.obs")
+
+
+
+corrplot(corr, order = "hclust",method="color", tl.cex=0.5,tl.col = 'black')
+
+
+# correlation with outcome
+cor(as.data.frame(munic_data)[,test_var],munic_data$`Vaccination_completely_18+`,use="complete.obs")
+
+# normalise to [0,1]
+munic_data[,test_var] <- as.data.frame(munic_data[,test_var]) / 100
+
+
+
+summary(munic_data)
+
+```
+
+
+
+## Linear model and Morran's I
+
+```{r}
+
+# basic equation
+lm_eq <-  `Vaccination_completely_18+` ~ 
+    #TotaleBevolking_1 +
+  # gender
+    Mannen_2 +
+    #Vrouwen_3 +
+  # age groups
+    #JongerDan5Jaar_13 +
+    #k_5Tot10Jaar_14 +
+    #k_10Tot15Jaar_15 +
+    #k_15Tot20Jaar_16 +
+    #k_20Tot25Jaar_17 +
+    #k_25Tot45Jaar_18 +
+    #k_45Tot65Jaar_19 +
+    #k_65Tot80Jaar_20 +
+    #k_80JaarOfOuder_21 +
+  # Marriage
+    #Ongehuwd_25 +
+    #Gehuwd_26 +
+    #Gescheiden_27 +
+    #Verweduwd_28 +
+  # Ethnicity
+    #NederlandseAchtergrond_43 +
+    #TotaalMetMigratieachtergrond_44 +
+    WesterseMigratieachtergrond_45 +
+    #TotaalNietWesterseMigratieachtergrond_46 +
+    Marokko_47 +
+    VoormaligeNederlandseAntillenAruba_48 +
+    Suriname_49 +
+    Turkije_50 +
+    #OverigNietWesterseMigratieachtergrond_51 + 
+  # 
+    #Bevolkingsdichtheid_57 +
+    #GeboorteRelatief_59 +
+    #SterfteRelatief_61 +
+    #GeboorteoverschotRelatief_63 +
+  # Diseases and death causes
+    ZiektenVanHartEnVaatstelsel_65 + 
+    ZiektenVanAdemhalingsstelsel_66 +
+    #UitwendigeDoodsoorzaken_67 +
+    #OverigeDoodsoorzaken_68 +
+  #
+    BevolkingsgroeiRelatief_80 +
+  # Social benefits
+    #Werkloosheid_155 +
+    #WAOUitkering_160 +
+    #WIAUitkeringWGARegeling_161 +
+    #WajongUitkering_162 +
+    #AOW_163 +
+  # Availability of healthcare
+    AfstandTotHuisartsenpraktijk_209 +
+    #AantalHuisartsenpraktijkenBinnen3Km_210 +
+    AfstandTotHuisartsenpost_211 +
+    AfstandTotZiekenhuis_212 +
+    #AantalZiekenhuizenBinnen20Km_213 +
+  # Education
+    LowEducation +
+    MiddleEducation +
+    HighEducation +
+  # Religion
+    KerkbezoekMeerDan1KeerPerMaand +
+    GeenKerkelijkeGezindte +
+    #WelKerkelijkeGezindte +
+    RoomsKatholiek +
+    Protestants +
+    NederlandsHervormd +
+    GereformeerdeKerken +
+    #ProtestantseKerkNederland +
+    Islam +
+    Joods +
+    Hindoe +
+    Boeddhist +
+    anders
+
+
+
+#run the model
+linearMod <- lm (lm_eq, data = munic_data,na.action=na.exclude)
+
+#get summary
+summary(linearMod)
+
+
+
+test_data <- sample_n(as.data.frame(munic_data),10)
+
+
+pred <- predict.lm(linearMod, newdata = test_data)
+
+RMSE(pred, test_data$`Vaccination_completely_18+`)
+R2(pred, test_data$`Vaccination_completely_18+`)
+
+```
+
+```{r}
+
+vif(linearMod)
+
+# high multicollinearity between the variables.
+
+```
+
+```{r}
+
+#creating adjacency matrix
+data_nbq <- poly2nb(data_compl, queen=TRUE) #Queen’s Contiguity neighborhood
+summary(data_nbq)
+
+data_nbq_w <- nb2listw(data_nbq, style="W", zero.policy = TRUE) #Queen’s neighborhood wights
+summary(data_nbq_w, zero.policy = TRUE)
+
+#for plotting
+coordsW <- data_compl%>%
+  st_centroid()%>%
+  st_geometry()
+
+plot(data_nbq, st_geometry(coordsW), col="red")
+
+```
+
+```{r}
+#Usually we use the moran.test function to get the Moran’s I, but that method is sensitive to irregularly distributed polygons. So we would use Monte Carlo method to bootstrap different polygon distribution. Here moran.mc() funtion does the job
+
+mc_global <- moran.mc(linearMod$residuals, data_nbq_w, 20, alternative="greater", zero.policy = TRUE,  adjust.n = TRUE)
+
+#plot the  Moran’s I
+plot(mc_global)
+
+
+#Now plot the residual on the polygon
+data_compl$res_lm <- residuals(linearMod)
+lmres <- qtm(data_compl, "res_lm")
+lmres
+
+
+```
+
+
+## GWR model on neighborhoods
+
+## Adding religion data and interpolating to municipalities
+
+## GWR model on municipalities

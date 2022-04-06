@@ -1,0 +1,347 @@
+---
+title: "Data cleaning and visualization"
+authors: "S. W. F. van Rijk"
+date: "24-3-2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r Path, include=FALSE}
+getwd()
+```
+
+```{r Packages, include=FALSE}
+if (!require("easypackages")) install.packages("easypackages") #easy package manager
+
+#Set up and data analysis packages
+if (!require("tidyverse")) install.packages("tidyverse") #main data science packages
+
+#Some GIS other analyses packages 
+if (!require("sf")) install.packages("sf") #main GIS package
+if (!require("sp")) install.packages("sp") #needed for some GIS operation, will not be in use from 2023
+if (!require("spdep")) install.packages("spdep") #neighborhood analysis in R
+if (!require("spatialreg")) install.packages("spatialreg") #spatial modelling such as lag, error
+if (!require("spgwr")) install.packages("spgwr") #GWR modelling
+if (!require("RColorBrewer")) install.packages("RColorBrewer") # getting interesting color
+if (!require("tmap")) install.packages("tmap") # Mapping package
+if (!require("mapview")) install.packages("mapview") # Mapping package
+if (!require("car")) install.packages("car") #some base regression functions
+if (!require("cowplot")) install.packages("cowplot") #some base regression functions
+if (!require("leafsync")) install.packages("leafsync") #using with mapview
+if (!require("leaflet.extras2")) install.packages("leaflet.extras2") #using with mapview
+
+#load libraries
+
+easypackages::packages ("sf", "sp", "spdep", "spatialreg", "spgwr", "tmap", "mapview", "car", "RColorBrewer", "tidyverse", 
+                        "cowplot", "leafsync", "leaflet.extras2", "mapview")
+library(readxl)
+library(sqldf)
+library(ISOweek)
+library(sf)
+#clean your environment
+rm(list=ls())
+```
+
+Read municipalities geolocation polygons for GWR and visualisation.
+
+```{r}
+munic <- st_read("data/gemeente_onshore.gpkg", layer = "gemeente_onshore")
+
+neigh <- read_sf("data/wijk_2021_v1.shp", layer = "wijk_2021_v1")
+
+
+names(neigh)
+
+neigh <- neigh[,c("WK_CODE","WK_NAAM","GM_CODE","GM_NAAM","Shape_Area","geometry")]
+
+```
+
+## Reading the data
+
+```{r data}
+covid <- read_delim("data/COVID-19_aantallen_gemeente_per_dag.csv", delim =";")
+
+sewage <- read_delim("data/COVID-19_rioolwaterdata.csv", delim=";")
+
+citizens_servingarea <- read_excel("data/20210930-Aantal inwoners per verzorgingsgebied 2021.xlsx", sheet = "Tabel 1")
+
+# enforce date datatypes for later joins
+citizens_servingarea$startdatum <- as.Date(citizens_servingarea$startdatum)
+citizens_servingarea$einddatum <- as.Date(citizens_servingarea$einddatum)
+sewage$Date_measurement <- as.Date(sewage$Date_measurement)
+
+hospital <- read_delim("data/COVID-19_ziekenhuisopnames.csv", delim=";")
+
+vaccines <- read_delim("data/COVID-19_vaccinatiegraad_per_gemeente_per_week_leeftijd.csv", delim=";")
+vaccines$Vaccination_coverage_completed <- as.numeric(vaccines$Vaccination_coverage_completed)
+vaccines$Vaccination_coverage_partly <- as.numeric(vaccines$Vaccination_coverage_partly)
+
+
+variants <- read_delim("data/COVID-19_varianten.csv", delim=";")
+
+
+# demographic data
+citizens_munic <- read_excel("data/voorlopige-bevolkings-gegevens-20210101.xlsx", sheet = "Tabel 1")
+
+```
+
+Then we need to join the sewage data with citizens per sewage serving area and contribution per municipality to convert our sewage numbers to per municipality.
+
+```{r joins and aggregation}
+
+# joining sewage data and citizens of serving area
+sewage_per_munic <- sqldf(
+  "SELECT 
+    *
+  FROM 
+    sewage S 
+  INNER JOIN 
+    citizens_servingarea C
+  ON S.RWZI_AWZI_code = C.rwzi_code 
+    AND C.regio_type = 'GM'
+    AND 
+    (
+      CASE
+      WHEN C.einddatum IS NULL THEN S.Date_measurement >= C.startdatum
+      ELSE S.Date_measurement <= C.einddatum
+      END
+    )
+    AND C.toelichting = 'definitief';
+")
+
+# calculating "aandeel"
+sewage_per_munic$X <- sewage_per_munic$aandeel * sewage_per_munic$inwoners
+sewage_per_munic$RNA_flow_per_person <- sewage_per_munic$RNA_flow_per_100000 / 100000
+
+
+# 
+sewage_per_munic$week <- lubridate::isoweek(sewage_per_munic$Date_measurement)
+sewage_per_munic$year <- lubridate::isoyear(sewage_per_munic$Date_measurement)
+
+
+average_sewage_per_week <- sewage_per_munic %>% 
+        group_by(rwzi_naam,
+                 year,
+                 week 
+                 ) %>% 
+        summarise(regio_naam,
+                  week_load = mean(RNA_flow_per_person),
+                  X
+                  ) %>% distinct(regio_naam,year,week, .keep_all = TRUE)
+
+RNA_per_munic_per_week <- average_sewage_per_week %>%
+                          group_by(regio_naam,
+                                   year,
+                                   week) %>%
+                          summarise(RNA_load = 100000*sum(week_load*X)/sum(X)) %>%
+                          mutate(date = ISOweek2date(paste0(year,"-W",ifelse(nchar(week)==1,"0",""),week,"-3")))
+
+```
+
+```{r single munic}
+
+# Checking with official RIVM reported numbers
+average_sewage_per_week %>% subset(regio_naam == 'Gorinchem' & week==40 & year == 2021)
+RNA_per_munic_per_week %>% subset(regio_naam == 'Gorinchem' & week==40 & year == 2021)
+
+```
+
+
+```{r single week}
+
+RNA_single_week <- RNA_per_munic_per_week %>% subset(week== 30 & year == 2021)
+
+munic_single_week <- merge(x=munic, y=RNA_single_week, by.x = 'gemeentenaam', by.y = 'regio_naam')
+
+# outliers visualisation
+RNA_single_week %>% ggplot(aes(RNA_single_week$RNA_load)) + geom_histogram()
+RNA_single_week %>% ggplot(aes(RNA_single_week$RNA_load)) + geom_density()
+
+# outlier removal
+RNA_per_munic_per_week_after_outlier <- RNA_per_munic_per_week %>% subset(abs(RNA_load-mean(RNA_load))<=3*sd(RNA_load)) 
+
+
+```
+
+
+```{r single week after outlier removal}
+
+RNA_single_week <- RNA_per_munic_per_week_after_outlier %>% subset(week== 30 & year == 2021)
+
+munic_single_week <- merge(x=munic, y=RNA_single_week, by.x = 'gemeentenaam', by.y = 'regio_naam', all.x = TRUE)
+
+# Map
+munic_map <- mapview::mapview(munic_single_week, 
+                              zcol= 'RNA_load',
+                              col.regions=rev(brewer.pal(11, "RdYlGn")),
+                              layer.name = 'RNA per 100000 citizens'
+                              )
+munic_map
+
+# outliers visualisation
+RNA_single_week %>% ggplot(aes(RNA_single_week$RNA_load)) + geom_histogram()
+RNA_single_week %>% ggplot(aes(RNA_single_week$RNA_load)) + geom_density()
+
+```
+
+```{r week aggregation of other data}
+
+covid_per_week <- covid %>% mutate(year = lubridate::isoyear(Date_of_publication),
+                                   week = lubridate::isoweek(Date_of_publication),
+                                   date = ISOweek2date(paste0(year,"-W",ifelse(nchar(week)==1,"0",""),week,"-3"))) %>%
+                            group_by(year,
+                                     week,
+                                     Municipality_name) %>%
+                            summarise(date,
+                                      mean_cases = mean(Total_reported),
+                                      mean_deceased = mean(Deceased)) %>% 
+                            distinct(Municipality_name,
+                                     year,week, 
+                                     .keep_all = TRUE)
+
+hospital_per_week <- hospital %>% mutate(year = lubridate::isoyear(Date_of_statistics),
+                                         week = lubridate::isoweek(Date_of_statistics),
+                                         date = ISOweek2date(paste0(year,"-W",ifelse(nchar(week)==1,"0",""),week,"-3"))) %>%
+                                  group_by(year,
+                                           week,
+                                           Municipality_name) %>%
+                                  summarise(date,
+                                      mean_hospital_notifications = mean(Hospital_admission_notification),
+                                      mean_hospitalized = mean(Hospital_admission)) %>% 
+                                  distinct(Municipality_name,
+                                           year,week, 
+                                           .keep_all = TRUE)
+
+vaccines_per_week <- vaccines %>% subset(Age_group = '18+') %>%
+                                  mutate(year = lubridate::isoyear(Date_of_statistics),
+                                         week = lubridate::isoweek(Date_of_statistics),
+                                         date = ISOweek2date(paste0(year,"-W",ifelse(nchar(week)==1,"0",""),week,"-3"))) %>%
+                                  group_by(year,
+                                           week,
+                                           Region_name) %>%
+                                  summarise(date,
+                                            vaccine_partly_coverage=mean(Vaccination_coverage_partly),
+                                            vaccine_total_coverage = mean(Vaccination_coverage_completed)) %>% 
+                                  distinct(Region_name,
+                                           year,
+                                           week,
+                                           .keep_all = TRUE)
+
+```
+
+
+```{r EDA 1 municipality}
+
+RNA_week_Utr <- RNA_per_munic_per_week_after_outlier %>% subset(regio_naam=='Utrecht')
+covid_week_Utr <- covid_per_week %>% subset(Municipality_name == 'Utrecht')
+
+
+#combine to 1 df
+df <- merge(x=covid_week_Utr,y=RNA_week_Utr,x.by=c(date,Municipality_name),y.by=c(date,regio_naam), all.x=TRUE)
+
+df %>% ggplot() + 
+  geom_point(aes(date,log(RNA_load),col='RNA')) +
+  geom_point(aes(date,log(mean_cases),col='cases')) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b-%Y") +
+  theme(axis.text.x=element_text(angle=60, hjust=1))
+
+df %>% ggplot() + 
+  geom_point(aes(log(mean_cases),log(RNA_load)))
+
+df %>% ggplot() + 
+  geom_point(aes(mean_cases,RNA_load))
+
+
+
+```
+
+```{r variants time line}
+
+variants %>% subset(ECDC_category = 'VOC') %>% drop_na(,Variant_name) %>% ggplot(aes(Date_of_statistics_week_start,Variant_cases/Sample_size, col=Variant_name)) + geom_point() + geom_line()
+
+```
+
+
+
+
+# Vaccination in neighborhoods study
+
+
+
+```{r}
+
+neigh_no_geom <- st_drop_geometry(neigh)
+
+
+neigh_data <- read_excel("data/kwb-2021.xls", sheet = "KWB2021")
+
+neigh_data <- neigh_data %>% subset(recs=='Wijk')
+
+neigh_data[,8:26] <- neigh_data[,8:26] %>% mutate_if(is.character,as.numeric) 
+neigh_data[,9:26] <- neigh_data[,9:26]/ neigh_data$a_inw
+neigh_data <- neigh_data[,1:26]
+
+
+
+
+vaccine_neigh <- vaccine_neigh %>% subset(Date_of_statistics=='14-3-2022')
+
+
+
+neigh_complete_data_no_geom <- sqldf("SELECT * FROM (SELECT WK_CODE FROM neigh_no_geom) n 
+                                      LEFT JOIN vaccine_neigh vn 
+                                      ON n.WK_CODE = vn.Region_code
+                                      LEFT JOIN neigh_data nd 
+                                      ON n.WK_CODE = nd.gwb_code_10;")
+
+
+
+
+
+
+
+sum(is.na(vaccine_neigh$Region_code))
+
+
+```
+
+```{r}
+
+a = data.frame(c(111,222,333,444),c(1,5,3,8))
+b = data.frame(c(111,222),c(0.1,0.4))
+colnames(a)=c("code","value") 
+colnames(b)=c("code","value")
+c = merge(a
+          ,b
+          ,by="code"
+          ,all.x=T)
+
+c
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

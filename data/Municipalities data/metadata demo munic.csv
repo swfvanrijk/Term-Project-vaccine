@@ -1,0 +1,2387 @@
+﻿ID;Position;ParentID;Type;Key;Title;Description;ReleasePolicy;Datatype;Unit;Decimals;Default
+0;0;;GeoDimension;RegioS;Regio's;;;;;;
+1;1;;TimeDimension;Perioden;Perioden;;false;;;;
+2;;;TopicGroup;;Bevolking;De geregistreerde bevolking van Nederland.;;;;;
+3;;2;TopicGroup;;Bevolkingssamenstelling op 1 januari;"Bevolking:
+De inwoners van een bepaald gebied.
+
+In de bevolkingsaantallen zijn uitsluitend personen begrepen die zijn opgenomen in het bevolkingsregister van een Nederlandse gemeente. In principe wordt iedereen die voor onbepaalde tijd in Nederland woont, opgenomen in het bevolkingsregister van de woongemeente. Personen die tot de bevolking van Nederland behoren, maar voor wie geen vaste woonplaats valt aan te wijzen, zijn opgenomen in het bevolkingsregister van de gemeente 's-Gravenhage. In de bevolkingsregisters zijn niet opgenomen de in Nederland wonende personen waarvoor uitzonderingsregels gelden met betrekking tot opneming in de bevolkingsregisters (bijvoorbeeld diplomaten en NAVO militairen) en personen die niet legaal in Nederland verblijven.";;;;;
+4;2;3;Topic;TotaleBevolking_1;Totale bevolking;"Bevolking op 1 januari.
+
+Bevolking:
+De inwoners van een bepaald gebied.
+
+In de bevolkingsaantallen zijn uitsluitend personen begrepen die zijn opgenomen in het bevolkingsregister van een Nederlandse gemeente. In principe wordt iedereen die voor onbepaalde tijd in Nederland woont, opgenomen in het bevolkingsregister van de woongemeente. Personen die tot de bevolking van Nederland behoren, maar voor wie geen vaste woonplaats valt aan te wijzen, zijn opgenomen in het bevolkingsregister van de gemeente 's-Gravenhage. In de bevolkingsregisters zijn niet opgenomen de in Nederland wonende personen waarvoor uitzonderingsregels gelden met betrekking tot opneming in de bevolkingsregisters (bijvoorbeeld diplomaten en NAVO militairen) en personen die niet legaal in Nederland verblijven.";;Double;aantal;0;Impossible
+5;;3;TopicGroup;;Geslacht;;;;;;
+6;3;5;Topic;Mannen_2;Mannen;;;Double;aantal;0;Impossible
+7;4;5;Topic;Vrouwen_3;Vrouwen;;;Double;aantal;0;Impossible
+8;;3;TopicGroup;;Leeftijd;Leeftijd per 1 januari.;;;;;
+9;;8;TopicGroup;;Leeftijdsgroepen;;;;;;
+10;5;9;Topic;JongerDan5Jaar_4;Jonger dan 5 jaar;;;Double;aantal;0;Impossible
+11;6;9;Topic;k_5Tot10Jaar_5;5 tot 10 jaar;;;Double;aantal;0;Impossible
+12;7;9;Topic;k_10Tot15Jaar_6;10 tot 15 jaar;;;Double;aantal;0;Impossible
+13;8;9;Topic;k_15Tot20Jaar_7;15 tot 20 jaar;;;Double;aantal;0;Impossible
+14;9;9;Topic;k_20Tot25Jaar_8;20 tot 25 jaar;;;Double;aantal;0;Impossible
+15;10;9;Topic;k_25Tot45Jaar_9;25 tot 45 jaar;;;Double;aantal;0;Impossible
+16;11;9;Topic;k_45Tot65Jaar_10;45 tot 65 jaar;;;Double;aantal;0;Impossible
+17;12;9;Topic;k_65Tot80Jaar_11;65 tot 80 jaar;;;Double;aantal;0;Impossible
+18;13;9;Topic;k_80JaarOfOuder_12;80 jaar of ouder;;;Double;aantal;0;Impossible
+19;;8;TopicGroup;;Leeftijdsgroepen, relatief;;;;;;
+20;14;19;Topic;JongerDan5Jaar_13;Jonger dan 5 jaar;;;Double;%;1;Impossible
+21;15;19;Topic;k_5Tot10Jaar_14;5 tot 10 jaar;;;Double;%;1;Impossible
+22;16;19;Topic;k_10Tot15Jaar_15;10 tot 15 jaar;;;Double;%;1;Impossible
+23;17;19;Topic;k_15Tot20Jaar_16;15 tot 20 jaar;;;Double;%;1;Impossible
+24;18;19;Topic;k_20Tot25Jaar_17;20 tot 25 jaar;;;Double;%;1;Impossible
+25;19;19;Topic;k_25Tot45Jaar_18;25 tot 45 jaar;;;Double;%;1;Impossible
+26;20;19;Topic;k_45Tot65Jaar_19;45 tot 65 jaar;;;Double;%;1;Impossible
+27;21;19;Topic;k_65Tot80Jaar_20;65 tot 80 jaar;;;Double;%;1;Impossible
+28;22;19;Topic;k_80JaarOfOuder_21;80 jaar of ouder;;;Double;%;1;Impossible
+29;;8;TopicGroup;;Demografische druk;;;;;;
+30;23;29;Topic;TotaleDruk_22;Totale druk;De verhouding tussen het aantal personen van 0 tot 20 jaar en van 65 jaar of ouder ten opzichte van de personen in de zogenaamde 'productieve' leeftijdsgroep van 20 tot 65 jaar.;;Double;%;1;Impossible
+31;24;29;Topic;GroeneDruk_23;Groene druk;De verhouding tussen het aantal personen van 0 tot 20 jaar ten opzichte van de personen in de zogenaamde 'productieve' leeftijdsgroep van 20 tot 65 jaar.;;Double;%;1;Impossible
+32;25;29;Topic;GrijzeDruk_24;Grijze druk;De verhouding tussen het aantal personen van 65 jaar of ouder ten opzichte van de personen in de zogenaamde 'productieve' leeftijdsgroep van 20 tot 65 jaar.;;Double;%;1;Impossible
+33;;3;TopicGroup;;Burgerlijke staat;"Vanaf 2010 is een kleine verschuiving tussen de verschillende burgerlijke staten zichtbaar (minder ongehuwd en meer gescheiden respectievelijk verweduwd).
+Dit komt omdat in de periode 1998 tot 2010 niet alle burgerlijke staten beschikbaar zijn in de bronbestanden die het CBS gebruikt. De burgerlijke staten 'verweduwd na partnerschap' en 'gescheiden na partnerschap' worden daardoor binnen deze statistiek binnen deze periode genegeerd. 
+Voor deze statistiek betekent dit dat de burgerlijke staat van vóór het partnerschap is gebruikt wat in de meeste gevallen ongehuwd was.";;;;;
+34;;33;TopicGroup;;Totale bevolking;;;;;;
+35;26;34;Topic;Ongehuwd_25;Ongehuwd;Burgerlijke staat die aangeeft dat een persoon nog nooit een huwelijk heeft gesloten of een geregistreerd partnerschap is aangegaan.;;Double;aantal;0;Impossible
+36;27;34;Topic;Gehuwd_26;Gehuwd;"Burgerlijke staat die ontstaat na sluiting van een huwelijk of het aangaan van een geregistreerd partnerschap. Inclusief personen die gescheiden zijn van tafel en bed, want zij blijven formeel gehuwd.
+Per 1 januari 1998 is in Nederland het geregistreerd partnerschap ingevoerd. De registratie van het partnerschap in de gemeentelijke basisadministratie (GBA) is mogelijk voor paren van gelijk en van verschillend geslacht.
+Vanaf 1999 zijn personen die een geregistreerd partnerschap zijn aangegaan geteld bij de gehuwden.
+Sinds 1 april 2001 is het in Nederland ook voor paren van gelijk geslacht mogelijk in het huwelijk te treden.";;Double;aantal;0;Impossible
+37;28;34;Topic;Gescheiden_27;Gescheiden;"Burgerlijke staat die ontstaat na ontbinding van een huwelijk door echtscheiding of na ontbinding van een geregistreerd partnerschap anders dan door het overlijden van de partner. 
+Behalve personen die gescheiden zijn van tafel en bed, want zij blijven formeel gehuwd.";;Double;aantal;0;Impossible
+38;29;34;Topic;Verweduwd_28;Verweduwd;Burgerlijke staat die ontstaat na ontbinding van een huwelijk of geregistreerd partnerschap door overlijden van de partner.;;Double;aantal;0;Impossible
+39;;33;TopicGroup;;Bevolking 15 jaar of ouder;;;;;;
+40;30;39;Topic;Inwoners15JaarOfOuder_29;Inwoners 15 jaar of ouder;;;Double;aantal;0;Impossible
+41;31;39;Topic;Ongehuwd_30;Ongehuwd;Burgerlijke staat die aangeeft dat een persoon nog nooit een huwelijk heeft gesloten of een geregistreerd partnerschap is aangegaan.;;Double;in % van  inwoners 15 jaar of ouder;1;Impossible
+42;32;39;Topic;Gehuwd_31;Gehuwd;"Burgerlijke staat die ontstaat na sluiting van een huwelijk of het aangaan van een geregistreerd partnerschap. Inclusief personen die gescheiden zijn van tafel en bed, want zij blijven formeel gehuwd.
+Per 1 januari 1998 is in Nederland het geregistreerd partnerschap ingevoerd. De registratie van het partnerschap in de gemeentelijke basisadministratie (GBA) is mogelijk voor paren van gelijk en van verschillend geslacht.
+Vanaf 1999 zijn personen die een geregistreerd partnerschap zijn aangegaan geteld bij de gehuwden.
+Sinds 1 april 2001 is het in Nederland ook voor paren van gelijk geslacht mogelijk in het huwelijk te treden.";;Double;in % van  inwoners 15 jaar of ouder;1;Impossible
+43;33;39;Topic;Gescheiden_32;Gescheiden;"Burgerlijke staat die ontstaat na ontbinding van een huwelijk door echtscheiding of na ontbinding van een geregistreerd partnerschap anders dan door het overlijden van de partner. 
+Behalve personen die gescheiden zijn van tafel en bed, want zij blijven formeel gehuwd.";;Double;in % van  inwoners 15 jaar of ouder;1;Impossible
+44;34;39;Topic;Verweduwd_33;Verweduwd;Burgerlijke staat die ontstaat na ontbinding van een huwelijk of geregistreerd partnerschap door overlijden van de partner.;;Double;in % van  inwoners 15 jaar of ouder;1;Impossible
+45;;3;TopicGroup;;Migratieachtergrond;Kenmerk dat weergeeft met welk land een persoon verbonden is op basis van het geboorteland van de ouders of van zichzelf.;;;;;
+46;;45;TopicGroup;;Migratieachtergrond;;;;;;
+47;35;46;Topic;NederlandseAchtergrond_34;Nederlandse achtergrond;"Persoon met een Nederlandse achtergrond
+
+Persoon van wie de beide ouders in Nederland zijn geboren.
+";;Double;aantal;0;Impossible
+48;;46;TopicGroup;;Met migratieachtergrond;"Persoon met een migratieachtergrond
+
+Persoon van wie ten minste één ouder in het buitenland is geboren.";;;;;
+49;36;48;Topic;TotaalMetMigratieachtergrond_35;Totaal met migratieachtergrond;"Totaal personen met een migratieachtergrond
+
+Personen van wie ten minste één ouder in het buitenland is geboren.";;Double;aantal;0;Impossible
+50;37;48;Topic;WesterseMigratieachtergrond_36;Westerse migratieachtergrond;"Persoon met een westerse migratieachtergrond
+
+Persoon met als migratieachtergrond een van de landen in Europa (exclusief Turkije), Noord-Amerika en Oceanië, en Indonesië en Japan.
+
+Op grond van hun sociaal- economische en sociaal-culturele positie worden personen met een migratieachtergrond uit Indonesië en Japan tot de westerse migratieachtergrond gerekend. Het gaat vooral om mensen die in het voormalig Nederlands-Indië zijn geboren en werknemers van Japanse bedrijven met hun gezin.
+";;Double;aantal;0;Impossible
+51;;48;TopicGroup;;Niet-westerse migratieachtergrond;"Persoon met een niet-westerse migratieachtergrond
+
+Persoon met als migratieachtergrond een van de landen in Afrika, Latijns-Amerika en Azië (exclusief Indonesië en Japan) of Turkije. 
+
+Op grond van hun sociaal-economische en sociaal-culturele positie worden personen met een migratieachtergrond uit Indonesië en Japan tot de westerse migratieachtergrond gerekend. Het gaat vooral om mensen die in het voormalig Nederlands-Indië zijn geboren en werknemers van Japanse bedrijven met hun gezin.
+";;;;;
+52;38;51;Topic;TotaalNietWesterseMigratieachtergrond_37;Totaal niet-westerse migratieachtergrond;"Totaal personen met een niet-westerse migratieachtergrond
+
+Personen met als migratieachtergrond een van de landen in Afrika, Latijns-Amerika en Azië (exclusief Indonesië en Japan) of Turkije. 
+
+Op grond van hun sociaal-economische en sociaal-culturele positie worden personen met een migratieachtergrond uit Indonesië en Japan tot de westerse migratieachtergrond gerekend. Het gaat vooral om mensen die in het voormalig Nederlands-Indië zijn geboren en werknemers van Japanse bedrijven met hun gezin.
+";;Double;aantal;0;Impossible
+53;39;51;Topic;Marokko_38;Marokko;Personen met als migratieachtergrond Marokko, Ifni, Spaanse Sahara, Westelijke Sahara.;;Double;aantal;0;Impossible
+54;40;51;Topic;VoormaligeNederlandseAntillenAruba_39;(voormalige) Nederlandse Antillen, Aruba;"Personen met als migratieachtergrond (voormalige) Nederlandse Antillen en Aruba.
+
+Betreft een samentelling van de eilanden die tot het grondgebied van de Nederlandse Antillen en Aruba van vóór 10 oktober 2010 behoorden. Het gaat om de eilanden Bonaire, Curaçao, Saba, Sint-Eustatius, Sint-Maarten en Aruba. 
+
+Vanaf 10 oktober 2010 zijn de Nederlandse Antillen ontbonden. Het Koninkrijk der Nederlanden bestaat dan uit vier landen: Nederland, Aruba, Curaçao en Sint Maarten. Alle eilanden hebben een nieuwe status. 
+Curaçao en Sint Maarten zijn nieuwe landen binnen het Koninkrijk. Met een 'Status aparte' binnen het Koninkrijk zijn Curaçao en Sint Maarten autonome landen. De landen hebben een zelfstandig bestuur en zijn niet meer afhankelijk van Nederland. De openbare lichamen Bonaire, Sint Eustatius en Saba, ook wel Caribisch Nederland, hebben een diepere band met Nederland en functioneren als bijzondere gemeente van Nederland. 
+
+Op 1 januari 1986 werd Aruba afgescheiden van de Nederlandse Antillen. Sinds die datum is Aruba een nieuw land binnen het Koninkrijk de Nederlanden. Met een 'Status aparte' binnen het Koninkrijk is Aruba een autonoom land. Aruba heeft een zelfstandig bestuur en is niet meer afhankelijk van Nederland.
+";;Double;aantal;0;Impossible
+55;41;51;Topic;Suriname_40;Suriname;Personen met als migratieachtergrond Suriname.;;Double;aantal;0;Impossible
+56;42;51;Topic;Turkije_41;Turkije;Personen met als migratieachtergrond Turkije.;;Double;aantal;0;Impossible
+57;43;51;Topic;OverigNietWesterseMigratieachtergrond_42;Overig niet-westerse migratieachtergrond;Alle personen met een niet-westerse migratieachtergrond waarvan de migratieachtergrond niet gelijk is aan Turkije, Marokko, Suriname, de Nederlandse Antillen of Aruba.;;Double;aantal;0;Impossible
+58;;45;TopicGroup;;Migratieachtergrond, relatief;;;;;;
+59;44;58;Topic;NederlandseAchtergrond_43;Nederlandse achtergrond;Personen van wie de beide ouders in Nederland zijn geboren als percentage van het totaal aantal inwoners per 1 januari.;;Double;%;1;Impossible
+60;;58;TopicGroup;;Met migratieachtergrond;Personen van wie ten minste één ouder in het buitenland is geboren als percentage van het totaal aantal inwoners per 1 januari.;;;;;
+61;45;60;Topic;TotaalMetMigratieachtergrond_44;Totaal met migratieachtergrond;Personen van wie ten minste één ouder in het buitenland is geboren, als percentage van het totaal aantal inwoners per 1 januari;;Double;%;1;Impossible
+62;46;60;Topic;WesterseMigratieachtergrond_45;Westerse migratieachtergrond;Personen met als migratieachtergrond een van de landen in Europa (exclusief Turkije), Noord-Amerika en Oceanië, en Indonesië en Japan, als percentage van het totaal aantal inwoners per 1 januari.;;Double;%;1;Impossible
+63;;60;TopicGroup;;Niet-westerse migratieachtergrond;"Persoon met een niet-westerse migratieachtergrond
+
+Personen met als migratieachtergrond een van de landen in Afrika, Latijns-Amerika en Azië (exclusief Indonesië en Japan) of Turkije, als percentage van het totaal aantal inwoners per 1 januari.
+
+Op grond van hun sociaal-economische en sociaal-culturele positie worden personen met een migratieachtergrond uit Indonesië en Japan tot de westerse migratieachtergrond gerekend. Het gaat vooral om mensen die in het voormalig Nederlands-Indië zijn geboren en werknemers van Japanse bedrijven met hun gezin.";;;;;
+64;47;63;Topic;TotaalNietWesterseMigratieachtergrond_46;Totaal niet-westerse migratieachtergrond;"Personen met als migratieachtergrond een van de landen in Afrika, Latijns-Amerika en Azië (exclusief Indonesië en Japan) of Turkije, als percentage van het totaal aantal inwoners per 1 januari.
+
+Op grond van hun sociaal-economische en sociaal-culturele positie worden personen met een migratieachtergrond uit Indonesië en Japan tot de westerse migratieachtergrond gerekend. Het gaat vooral om mensen die in het voormalig Nederlands-Indië zijn geboren en werknemers van Japanse bedrijven met hun gezin.";;Double;%;1;Impossible
+65;48;63;Topic;Marokko_47;Marokko;"Personen met als migratieachtergrond Marokko, Ifni, Spaanse Sahara of
+Westelijke Sahara, als percentage van het totaal aantal inwoners per 1 januari.
+";;Double;%;1;Impossible
+66;49;63;Topic;VoormaligeNederlandseAntillenAruba_48;(voormalige) Nederlandse Antillen, Aruba;"Personen met als migratieachtergrond (voormalige) Nederlandse Antillen en Aruba, als percentage van het totaal aantal inwoners per 1 januari.
+
+Betreft een samentelling van de eilanden die tot het grondgebied van de Nederlandse Antillen en Aruba van vóór 10 oktober 2010 behoorden. Het gaat om de eilanden Bonaire, Curaçao, Saba, Sint-Eustatius, Sint-Maarten en Aruba. 
+
+Vanaf 10 oktober 2010 zijn de Nederlandse Antillen ontbonden. Het Koninkrijk der Nederlanden bestaat dan uit vier landen: Nederland, Aruba, Curaçao en Sint Maarten. Alle eilanden hebben een nieuwe status. 
+Curaçao en Sint Maarten zijn nieuwe landen binnen het Koninkrijk. Met een 'Status aparte' binnen het Koninkrijk zijn Curaçao en Sint Maarten autonome landen. De landen hebben een zelfstandig bestuur en zijn niet meer afhankelijk van Nederland. De openbare lichamen Bonaire, Sint Eustatius en Saba, ook wel Caribisch Nederland, hebben een diepere band met Nederland en functioneren als bijzondere gemeente van Nederland. 
+
+Op 1 januari 1986 werd Aruba afgescheiden van de Nederlandse Antillen. Sinds die datum is Aruba een nieuw land binnen het Koninkrijk de Nederlanden. Met een 'Status aparte' binnen het Koninkrijk is Aruba een autonoom land. Aruba heeft een zelfstandig bestuur en is niet meer afhankelijk van Nederland.
+";;Double;%;1;Impossible
+67;50;63;Topic;Suriname_49;Suriname;Personen met als migratieachtergrond Suriname, als percentage van het totaal aantal inwoners per 1 januari.;;Double;%;1;Impossible
+68;51;63;Topic;Turkije_50;Turkije;Personen met als migratieachtergrond Turkije, als percentage van het totaal aantal inwoners per 1 januari.;;Double;%;1;Impossible
+69;52;63;Topic;OverigNietWesterseMigratieachtergrond_51;Overig niet-westerse migratieachtergrond;Alle personen met een niet-westerse migratieachtergrond waarvan de migratieachtergrond niet gelijk is aan Turkije, Marokko, Suriname, de Nederlandse Antillen of Aruba, als percentage van het totaal aantal inwoners per 1 januari.;;Double;%;1;Impossible
+70;;3;TopicGroup;;Stedelijkheidsklasse;"Inwoners naar stedelijkheid op 1 januari afgerond op tientallen. De som van de afgeronde getallen is hierdoor niet altijd gelijk aan de afgeronde som.
+
+De stedelijkheid is een maat voor de concentratie van menselijke activiteiten (zoals wonen, werken, schoolgaan, winkelen en uitgaan) en gebaseerd op de gemiddelde omgevingsadressendichtheid (OAD).
+ 
+Vanaf 2015 is gebruik gemaakt van de Basisregistraties Adressen en Gebouwen (BAG) als bron voor de OAD. Hiervoor werd het Geografisch Basisregister (GBR) als bron gebruikt. Deze bronwijziging veroorzaakt een trendbreuk in de cijfers ten opzichte van 2014. De veranderingen die te maken hebben met deze bronwijziging betreffen onder andere:
+- De objecten zijn nu grondslag en niet de adressen. De BAG bevat vaak meer objecten dan er voorheen adressen waren;
+- Van alle objecten is nu direct al de exacte geografische locatie bekend. Voorheen was die van een groot aantal nieuwe adressen nog niet bekend;
+- Veel gemeenten voeren nu alle recreatiewoningen op. Wanneer deze dicht bij de kern liggen verhogen ze de OAD.
+
+Voor de berekening van de gemiddelde OAD wordt eerst voor ieder adres de OAD vastgesteld. Dat is het aantal adressen binnen een cirkel met een straal van één kilometer rondom een adres, gedeeld door de oppervlakte van de cirkel. De OAD wordt uitgedrukt in adressen per km².
+Daarna is het gemiddelde berekend van de omgevingsadressendichtheid van alle afzonderlijke adressen binnen het beschouwde gebied. De hier gebruikte OAD komt overeen met de definitieve OAD in de StatLine-publicatie Maatstaven Financiële-verhoudingswet (Fvw). 
+De definitieve OAD wordt gebruikt voor de vaststelling van de definitieve uitkering voor het Gemeentefonds, dus inclusief gemeentelijke herindelingen, grenscorrecties, sloop en nieuwe adressen.
+Voor de berekening per gemeente (of bijvoorbeeld provincie) van het aantal inwoners naar stedelijkheidsklasse wordt per vierkant van 500 bij 500 m aan de hand van de gemiddelde OAD van dat vierkant de stedelijkheidsklasse bepaald. Vervolgens zijn per categorie van de stedelijkheidsklasse de inwoners van de betreffende gemeente samengeteld.
+
+Er worden vijf categorieën onderscheiden:
+- zeer sterk stedelijk: gemiddelde OAD van 2 500 of meer adressen per km²;
+- sterk stedelijk: gemiddelde OAD van 1 500 tot 2 500 adressen per km²;
+- matig stedelijk: gemiddelde OAD van 1 000 tot 1 500 adressen per km²;
+- weinig stedelijk: gemiddelde OAD van 500 tot 1 000 adressen per km²;
+- niet stedelijk: gemiddelde OAD van minder dan 500 adressen per km².";;;;;
+71;53;70;Topic;ZeerSterkStedelijk_52;Zeer sterk stedelijk;Gebied met een omgevingsadressendichtheid groter of gelijk aan 2 500 adressen per vierkante kilometer.;;Double;aantal;0;Impossible
+72;54;70;Topic;SterkStedelijk_53;Sterk stedelijk;Gebied met een omgevingsadressendichtheid groter of gelijk aan 1 500 en kleiner dan 2 500 adressen per vierkante kilometer.;;Double;aantal;0;Impossible
+73;55;70;Topic;MatigStedelijk_54;Matig stedelijk;Gebied met een omgevingsadressendichtheid groter of gelijk aan 1 000 en kleiner dan 1 500 adressen per vierkante kilometer.;;Double;aantal;0;Impossible
+74;56;70;Topic;WeinigStedelijk_55;Weinig stedelijk;Gebied met een omgevingsadressendichtheid groter of gelijk aan 500 en kleiner dan 1 000 adressen per vierkante kilometer.;;Double;aantal;0;Impossible
+75;57;70;Topic;NietStedelijk_56;Niet stedelijk;Gebied met een omgevingsadressendichtheid kleiner dan 500 adressen per vierkante kilometer.;;Double;aantal;0;Impossible
+76;58;3;Topic;Bevolkingsdichtheid_57;Bevolkingsdichtheid;"Aantal inwoners op 1 januari per km² land.
+
+Door verschillende niveaus van afronding van de oppervlakte land bij de berekening van de bevolkingsdichtheid kunnen elders gepubliceerde cijfers incidenteel miniem afwijken van de cijfers in deze tabel.";;Double;aantal inwoners per km²;0;Impossible
+77;;2;TopicGroup;;Bevolkingsontwikkeling;"De manier waarop de cijfers over bevolkingsontwikkeling worden geproduceerd is in 2014 gewijzigd. Dit heeft tot gevolg dat de cijfers van bevolkingsontwikkeling over 2013 in verschillende tabellen soms niet overeenkomen. De verschillen zijn minimaal en treden alleen op in 2013.
+
+Verwerking grenswijziging Rotterdam en Rozenburg in 2010:
+Per 18 maart 2010 is de gemeente Rozenburg opgeheven en in zijn geheel overgegaan naar de gemeente Rotterdam.
+Voor de overzichtelijkheid zijn de cijfers met betrekking tot geboorte, sterfte, buitenlandse migratie en verhuizingen in Rozenburg voor geheel 2010 bij Rotterdam geteld.
+Voor Rozenburg zijn dus geen gegevens over de bevolkingsontwikkeling in 2010 beschikbaar.
+De bevolkingsgroei van Rotterdam is steeds gerelateerd aan de bevolkingsaantallen van Rotterdam en Rozenburg samen.
+";;;;;
+78;;77;TopicGroup;;Geboorte en sterfte;;;;;;
+79;59;78;Topic;Geboorte_58;Geboorte;"Het aantal levendgeborenen van 1 januari tot en met 31 december van het betreffende jaar. Levendgeborenen zijn kinderen die na de geboorte enig teken van leven hebben vertoond, ongeacht de zwangerschapsduur. 
+Elke levendgeborene is geteld naar de woongemeente van de geborene en dus niet naar de gemeente waar de geboorte heeft plaatsgevonden.";;Double;aantal;0;Impossible
+80;60;78;Topic;GeboorteRelatief_59;Geboorte, relatief;Het aantal levendgeborenen van 1 januari tot en met 31 december van het betreffende jaar per duizend van de gemiddelde bevolking.;;Double;per 1 000 inwoners;1;Impossible
+81;61;78;Topic;Sterfte_60;Sterfte;"Het aantal overledenen van 1 januari tot en met 31 december van het betreffende jaar waarbij een bevoegde arts een overlijdensakte heeft ondertekend. Elke overledene is geteld naar de woongemeente van de overledene en dus niet naar de gemeente waar het overlijden heeft
+plaatsgevonden.";;Double;aantal;0;Impossible
+82;62;78;Topic;SterfteRelatief_61;Sterfte, relatief;"Het aantal overledenen van 1 januari tot en met 31 december van het betreffende jaar waarbij een bevoegde arts een overlijdensakte heeft ondertekend, per duizend van de gemiddelde bevolking. 
+Elke overledene is geteld naar de woongemeente van de overledene en dus niet naar de gemeente waar het overlijden heeft plaatsgevonden.";;Double;per 1 000 inwoners;1;Impossible
+83;63;78;Topic;Geboorteoverschot_62;Geboorteoverschot;Het aantal levendgeborenen min het aantal sterfgevallen. Ook wel: natuurlijke bevolkingsgroei.;;Double;aantal;0;Impossible
+84;64;78;Topic;GeboorteoverschotRelatief_63;Geboorteoverschot, relatief;Geboorteoverschot per duizend van de gemiddelde bevolking.;;Double;per 1 000 inwoners;1;Impossible
+85;;78;TopicGroup;;Doodsoorzaken;"Het CBS is in het statistiekjaar 2013 overgestapt op het gebruik van internationale software voor automatisch coderen van de doodsoorzaken. Hiermee zijn de cijfers beter reproduceerbaar en internationaal vergelijkbaar. Wel zijn er eenmalig enkele forse verschuivingen te zien in de doodsoorzaken.
+
+Onderliggende doodsoorzaak
+De gebruikte doodsoorzaakcodes zijn afkomstig uit de lijst van 'drie-teken categorieën' van de International Statistical Classification of Diseases and Related Health Problems (ICD, 10e revisie) van de World Health Organization (WHO).
+Het coderen volgens de richtlijnen van de WHO houdt in dat slechts één ziekte of gebeurtenis als onderliggende doodsoorzaak, of voorheen primaire doodsoorzaak, kan worden aangemerkt. De onderliggende doodsoorzaak is gedefinieerd als de ziekte of de gebeurtenis waarmee de aaneenschakeling van gebeurtenissen die tot de dood leidde, startte. Bij een zogenaamde uitwendige doodsoorzaak (ongeval, geweld of bijvoorbeeld suïcide) wordt vrijwel altijd de gebeurtenis als onderliggende doodsoorzaak aangemerkt en het ontstane letsel apart gecodeerd.
+";;;;;
+86;65;85;Topic;Nieuwvormingen_64;Nieuwvormingen;"Ziekelijke weefselontaarding. Er worden zowel goedaardige als kwaadaardige gezwellen (kanker), inclusief kwaadaardige bloedziekten onder verstaan (ICD-10 codes C00-D48).
+";;Double;aantal;0;Impossible
+87;66;85;Topic;ZiektenVanHartEnVaatstelsel_65;Ziekten van hart en vaatstelsel;"Ziekten van hart en vaatstelsel.
+Volgens classificatielijst ICD-10: codes I00-I99.";;Double;aantal;0;Impossible
+88;67;85;Topic;ZiektenVanAdemhalingsstelsel_66;Ziekten van ademhalingsstelsel;"Ziekten van ademhalingsstelsel.
+Volgens classificatielijst ICD-10: codes J00-J99.";;Double;aantal;0;Impossible
+89;68;85;Topic;UitwendigeDoodsoorzaken_67;Uitwendige doodsoorzaken;"Niet-natuurlijke doodsoorzaken: ongevallen, zelfdoding, moord en doodslag, gebeurtenissen waarvan opzet onbekend is en overige uitwendige oorzaken van sterfte.
+Volgens classificatielijst ICD-10: codes V01-Y89.";;Double;aantal;0;Impossible
+90;69;85;Topic;OverigeDoodsoorzaken_68;Overige doodsoorzaken;"Overige doodsoorzaken (alle doodsoorzaken met uitzondering van nieuwvormingen, ziekten van hart en vaatstelsel, ziekten van ademhalingsstelsel en uitwendige doodsoorzaken).
+Volgens classificatielijst ICD-10: codes A00-Y89 met uitzondering van codes C00-D48, I00-I99, J00-J99 en V01-Y89.";;Double;aantal;0;Impossible
+91;;77;TopicGroup;;Verhuizingen;;;;;;
+92;70;91;Topic;VestigingUitAndereGemeente_69;Vestiging uit andere gemeente;Gevestigd in de gemeente komend uit een andere gemeente binnen Nederland.;;Double;aantal;0;Impossible
+93;71;91;Topic;VertrekNaarAndereGemeente_70;Vertrek naar andere gemeente;Vertrokken uit de gemeente naar een andere gemeente binnen Nederland.;;Double;aantal;0;Impossible
+94;72;91;Topic;BinnenlandsMigratiesaldo_71;Binnenlands migratiesaldo;"Het aantal gevestigde personen (uit een andere gemeente binnen Nederland) min het aantal vertrokken personen (naar een andere gemeente binnen Nederland).
+
+";;Double;aantal;0;Impossible
+95;73;91;Topic;BinnenlandsMigratiesaldoRelatief_72;Binnenlands migratiesaldo, relatief;"Binnenlands migratiesaldo per duizend van de gemiddelde bevolking.
+
+Binnenlands migratiesaldo:
+Het aantal gevestigde personen (uit een andere gemeente binnen Nederland) min het aantal vertrokken personen (naar een andere gemeente binnen Nederland).";;Double;per 1 000 inwoners;1;Impossible
+96;74;91;Topic;VerhuismobiliteitRelatief_73;Verhuismobiliteit, relatief;"Verhuismobiliteit per duizend van de gemiddelde bevolking.
+
+Verhuismobiliteit:
+Cijfer dat de mobiliteit van binnenlandse verhuizingen in een bepaalde regio (gemeente, provincie, landsdeel) weergeeft. 
+De verhuismobiliteit van een regio wordt berekend als het totaal van de binnen gemeenten verhuisde personen in de regio plus de halve som van de tussen gemeenten verhuisde
+personen (vestigers plus vertrekkers) in de regio.
+De verhuismobiliteit van Nederland is gelijk aan de som van alle binnen de gemeenten verhuisde personen en tussen gemeenten verhuisde personen.";;Double;per 1 000 inwoners;1;Impossible
+97;;77;TopicGroup;;Immigratie en emigratie;"De emigratie is weergegeven inclusief de administratieve correcties. Het migratieoverschot is daarom ook inclusief de administratieve correcties.
+
+Trendbreuk buitenlandse migratiecijfers en saldo overige correcties:
+Door een verbetering in het productieproces vindt er een kleine verschuiving plaats in de cijfers van de buitenlandse migratie.
+Met ingang van 2010 zijn de volgende wijzigingen doorgevoerd:
+- eerder gemiste berichten worden nu wel meegeteld;
+- administratieve opnemingen die voorafgegaan worden door emigratie worden nu beschouwd als immigratie;
+- administratieve afvoeringen die gevolgd worden door immigratie worden nu beschouwd als emigratie.
+Door de verbetering in het productieproces is het saldo overige correcties sterk verminderd vanaf 2010.
+
+";;;;;
+98;75;97;Topic;Immigratie_74;Immigratie;Vestiging in Nederland vanuit het buitenland.;;Double;aantal;0;Impossible
+99;76;97;Topic;Emigratie_75;Emigratie;"Emigratie inclusief administratieve correcties.
+Vertrek van personen naar het buitenland plus de administratief afgevoerde personen uit de gemeentelijke bevolkingsregisters min de administratief opgenomen personen in de gemeentelijke bevolkingsregisters.
+Een administratief afgevoerde persoon betreft verwijdering van een persoon uit de bevolkingsregisters van een gemeente nadat de gemeente heeft vastgesteld dat de verblijfplaats van deze persoon niet bekend is, deze persoon niet bereikbaar is en waarschijnlijk geen inwoner
+meer is van een Nederlandse gemeente. Een administratieve afvoering is meestal het gevolg van het vertrek van een persoon naar het buitenland zonder dat deze de gemeente hiervan op de hoogte heeft gesteld.
+Een administratief opgenomen persoon betreft opneming van een persoon in de bevolkingsregisters van een gemeente op verzoek van de betrokkene. 
+Deze opneming is niet het gevolg van geboorte, immigratie of vestiging van die persoon vanuit een andere gemeente in Nederland.
+Een administratieve opneming is meestal een hervestiging van een persoon die eerder administratief is afgevoerd en die verklaart nooit uit Nederland te zijn weggeweest.";;Double;aantal;0;Impossible
+100;77;97;Topic;Migratiesaldo_76;Migratiesaldo;"Personen die zich in Nederland vestigen min inwoners die Nederland verlaten om zich buiten Nederland te vestigen inclusief het saldo van de administratieve correcties (administratieve opnemingen min administratieve afvoeringen).
+
+Administratieve opneming:
+Opneming van een persoon in de bevolkingsregisters van een gemeente op verzoek van de betrokkene. Deze opneming is niet het gevolg van geboorte, immigratie of vestiging van die persoon vanuit een andere gemeente in Nederland. Een administratieve opneming is meestal een hervestiging van een persoon die eerder administratief is afgevoerd en die verklaart nooit uit Nederland te zijn weggeweest.
+
+Administratieve afvoering:
+Verwijdering van een persoon uit de bevolkingsregisters van een gemeente nadat de gemeente heeft vastgesteld dat de verblijfplaats van deze persoon niet bekend is, deze persoon niet bereikbaar is en waarschijnlijk geen inwoner meer is van een Nederlandse gemeente. Een administratieve afvoering is meestal het gevolg van het vertrek van een persoon naar het buitenland zonder dat deze de gemeente hiervan op de hoogte heeft gesteld.";;Double;aantal;0;Impossible
+101;78;97;Topic;MigratiesaldoRelatief_77;Migratiesaldo, relatief;"Migratiesaldo per duizend van de gemiddelde bevolking in het waarnemingsjaar.
+
+Migratiesaldo:
+Personen die zich in Nederland vestigen min inwoners die Nederland verlaten om zich buiten Nederland te vestigen.";;Double;per 1 000 inwoners;1;Impossible
+102;;77;TopicGroup;;Bevolkingsgroei;;;;;;
+103;79;102;Topic;InwonersOp31December_78;Inwoners op 31 december;De geregistreerde bevolking van Nederland op 1 januari plus de bevolkingsgroei over het jaar inclusief het saldo van administratieve correcties en overige correcties.;;Double;aantal;0;Impossible
+104;80;102;Topic;Bevolkingsgroei_79;Bevolkingsgroei;Het geboorteoverschot plus het vestigingsoverschot (binnenlands migratieoverschot en migratieoverschot) plus het saldo van de administratieve correcties en de overige correcties.;;Double;aantal;0;Impossible
+105;81;102;Topic;BevolkingsgroeiRelatief_80;Bevolkingsgroei, relatief;Bevolkingsgroei per duizend van de beginbevolking op 1 januari aanwezig in de periode waarin de desbetreffende mutaties (geboorte, overlijdensgevallen en dergelijke) plaatsvonden;;Double;per 1 000 inwoners;1;Impossible
+106;82;102;Topic;GemiddeldAantalInwoners_81;Gemiddeld aantal inwoners;De helft van de geregistreerde bevolking van Nederland op 1 januari plus de helft van de geregistreerde bevolking van Nederland op 31 december.;;Double;aantal;1;Impossible
+107;;2;TopicGroup;;Particuliere huishoudens;"Particuliere huishoudens bestaan uit één of meer personen die samen een woonruimte bewonen en zichzelf, dus niet-bedrijfsmatig, voorzien in de dagelijkse levensbehoeften.
+
+Trendbreuk
+Door de verbeterde waarneming van personen in institutionele huishoudens treedt vanaf 2014 een trendbreuk op in de ontwikkeling van het aantal eenpersoonshuishoudens/alleenstaanden. Circa 35 duizend personen die eerst voornamelijk als alleenstaanden getypeerd waren, verschuiven nu naar de institutionele huishoudens. Het aantal alleenstaanden steeg daardoor van 2013 op 2014 met maar duizend personen. Van 2012 op 2013 was die stijging nog 41 duizend personen. Ook de totale stijging van het aantal huishoudens liep als gevolg hiervan terug van 57 duizend van 2012 op 2013 naar 21 duizend van 2013 op 2014.
+Vanaf 2011 is er voor de samenstelling van huishoudensgegevens gebruik gemaakt van een nieuwe productiemethode. In deze nieuwe methode worden voor het bepalen van de huishoudenssamenstelling naast de gegevens uit het gemeentelijke bevolkingsregister ook belastingdienstgegevens over samenwonende paren gebruikt. De uitkomsten op basis van de nieuwe methode sluiten goed aan op de voorgaande uitkomsten, maar er treden vanaf 2011 wel kleine verschuivingen op in het aantal huishoudens naar samenstelling. 
+
+";;;;;
+108;;107;TopicGroup;;Particuliere huishoudens;;;;;;
+109;83;108;Topic;TotaalAantalParticuliereHuishoudens_82;Totaal aantal particuliere huishoudens;"Particuliere huishoudens bestaan uit één of meer personen die alleen of samen in een woonruimte wonen en zelf in hun dagelijkse behoeften voorzien.
+Naast eenpersoonshuishoudens onderscheiden we meerpersoonshuishoudens (niet-gehuwde paren met en zonder kinderen, echtparen met en zonder kinderen, eenouderhuishoudens en overige huishoudens).";;Double;aantal;0;Impossible
+110;84;108;Topic;Eenpersoonshuishoudens_83;Eenpersoonshuishoudens;Particulier huishouden bestaande uit één persoon.;;Double;aantal;0;Impossible
+111;85;108;Topic;HuishoudensZonderKinderen_84;Huishoudens zonder kinderen;"Meerpersoonshuishoudens zonder thuiswonende kinderen.
+
+Thuiswonend kind:
+Persoon ongeacht leeftijd of burgerlijke staat die een kind-ouder relatie heeft met één of twee tot het huishouden behorende ouders. 
+Onder thuiswonende kinderen worden ook begrepen adoptie- en stiefkinderen, maar geen pleegkinderen.";;Double;aantal;0;Impossible
+112;86;108;Topic;HuishoudensMetKinderen_85;Huishoudens met kinderen;"Meerpersoonshuishoudens met thuiswonende kinderen.
+
+Thuiswonend kind:
+Persoon ongeacht leeftijd of burgerlijke staat die een kind-ouder relatie heeft met één of twee tot het huishouden behorende ouders. 
+Onder thuiswonende kinderen worden ook begrepen adoptie- en stiefkinderen, maar geen pleegkinderen.
+ 
+";;Double;aantal;0;Impossible
+113;;107;TopicGroup;;Particuliere huishoudens, relatief;;;;;;
+114;87;113;Topic;Eenpersoonshuishoudens_86;Eenpersoonshuishoudens;Particuliere huishoudens bestaande uit één persoon, als percentage van het totaal aantal particuliere huishoudens.;;Double;%;1;Impossible
+115;88;113;Topic;HuishoudensZonderKinderen_87;Huishoudens zonder kinderen;"Meerpersoonshuishoudens zonder thuiswonende kinderen, als percentage van het totaal aantal particuliere huishoudens.
+
+Thuiswonend kind:
+Persoon ongeacht leeftijd of burgerlijke staat die een kind-ouder relatie heeft met één of twee tot het huishouden behorende ouders. 
+Onder thuiswonende kinderen worden ook begrepen adoptie- en stiefkinderen, maar geen pleegkinderen.";;Double;%;1;Impossible
+116;89;113;Topic;HuishoudensMetKinderen_88;Huishoudens met kinderen;"Meerpersoonshuishoudens met thuiswonende kinderen, als percentage van het totaal aantal particuliere huishoudens.
+
+Thuiswonend kind:
+Persoon ongeacht leeftijd of burgerlijke staat die een kind-ouder relatie heeft met één of twee tot het huishouden behorende ouders. 
+Onder thuiswonende kinderen worden ook begrepen adoptie- en stiefkinderen, maar geen pleegkinderen.
+ 
+";;Double;%;1;Impossible
+117;90;107;Topic;GemiddeldeHuishoudensgrootte_89;Gemiddelde huishoudensgrootte;Het aantal in particuliere huishoudens levende personen gedeeld door het aantal particuliere huishoudens.;;Double;personen per 1 huishouden;2;Impossible
+118;;;TopicGroup;;Bouwen en wonen;;;;;;
+119;;118;TopicGroup;;Woningvoorraad;"De gegevens zijn vanaf 2012 gebaseerd op de Basisregistraties Adressen en Gebouwen (BAG).
+De woningvoorraadcijfers zijn van 1995 tot en met 2011 gebaseerd op de administratieve woningtelling met peildatum 1-1-1992 en de daarna door de gemeenten aan het CBS gemelde mutaties.
+
+De verandering van de bron van de gegevens (BAG) vanaf 2012 betekent ook een aantal verschillen in definities en classificaties. De belangrijkste zijn:
+- Tijdelijke bouwwerken (bouwwerken met een aangeduide instandhoudingtermijn in de verleende bouwvergunning) werden in de woningvoorraadregistratie niet als woonruimte aangemerkt. De BAG kent dit onderscheid niet. Tijdelijke bouwwerken c.q. objecten worden in het vervolg meegeteld in de voorraden.
+- Wooneenheden (onzelfstandige woningen), zoals studentenflats, werden in de woningvoorraadregistratie aangemerkt als aparte categorie woonruimten. In de BAG worden ze alleen als woning gezien als ze een eigen adres hebben.
+- Recreatiewoningen werden in de woningvoorraadregistratie waargenomen als aparte categorie woonruimten. De recreatiewoningen kunnen in de BAG aangemerkt worden als woning of als niet-woning met een logiesfunctie.
+- De bewoningscapaciteit (aantal huisvestingsplaatsen voor permanente bewoning) van bijzondere woongebouwen, zoals verpleeghuizen en gezinsvervangende tehuizen, was in de woningvoorraadregistratie ook een aparte categorie woonruimten. Per adres van het bijzondere woongebouw was de bewoningscapaciteit bekend. In de BAG is informatie over de bewoningscapaciteit niet meer voorhanden. Daarnaast worden bijzondere woongebouwen in de BAG niet altijd aangeduid met een woonfunctie. Net als de recreatiewoningen worden dergelijke objecten dan niet meer meegeteld in de voorraad woningen.
+";;;;;
+120;91;119;Topic;VoorraadOp1Januari_90;Voorraad op 1 januari;"Het aantal woningen op 1 januari.
+Een woning is de kleinste binnen één of meer panden gelegen en voor woondoeleinden geschikte eenheid van gebruik, ontsloten via een eigen toegang vanaf de openbare weg, een erf of een gedeelde verkeersruimte.
+Voorbeelden zijn vrijstaande woningen, eengezinswoningen, flat- of portiekwoningen, studentenhuizen.
+Alle verblijfsobjecten met minimaal een woonfunctie en eventueel een of meer andere gebruiksfuncties worden als woning aangemerkt.
+";;Double;aantal;0;Impossible
+121;92;119;Topic;Nieuwbouwwoningen_91;Nieuwbouwwoningen;Het aantal in een bepaald jaar gereedgekomen nieuwbouwwoningen.;;Double;aantal;0;Impossible
+122;93;119;Topic;SaldoVermeerderingWoningenRelatief_92;Saldo vermeerdering woningen, relatief;"Saldo vermeerdering woningen per duizend woningen.
+Het saldo vermeerdering betreft het verschil tussen het aantal woningen dat aan de voorraad is toegevoegd en het aantal dat aan voorraad is onttrokken.
+De berekening van het saldo is inclusief administratieve correcties.
+";;Double;per 1 000 woningen;1;Impossible
+123;94;119;Topic;Woningdichtheid_93;Woningdichtheid;Totaal aantal woningen per km² land op 1 januari.;;Double;aantal woningen per km²;0;Impossible
+124;;119;TopicGroup;;Woningen naar eigendom;"Peildatum: 1 januari van het betreffende jaar.
+
+De afleiding van de eigendomssituatie van woningen vindt als volgt plaats:
+
+De eigendomssituatie wordt afgeleid via koppeling op woning en bewoner tussen de registraties Basisregistratie Adressen en Gebouwen (BAG), Basisregistratie Personen (BRP) en Inkomens Informatie Systeem (IIS). 
+In 2012 kon voor 81 procent van de woningvoorraad deze methode voor de eigendomssituatie worden toegepast, in 2015 is dit gestegen naar 93 procent.
+
+Voor de woningen waarbij via deze methode geen eigendom kan worden afgeleid wordt de eigendomssituatie afgeleid via koppeling van de woning aan de Kadasterregistratie
+of:
+via een door de gemeente toegekend nummer als aanvulling op het Rechtspersonen Samenwerkingsverbanden Informatie Nummer (RSIN)
+of:
+via het totaal aantal woningen dat een eigenaar met eenzelfde Burgerservicenummer (BSN) of RSIN in zijn bezit heeft.
+Als geen van deze methoden kan worden toegepast dan wordt de eigendomssituatie getypeerd als onbekend. 
+
+Tot en met verslagjaar 2011 werd de volgende werkwijze gehanteerd:
+Na koppeling van de woningen uit het woningregister met de woningen uit de WOZ-registratie (Wet Onroerende Zaken) is op basis van de WOZ-registratie bepaald of de eigenaar van de woning ook de bewoner was. Voor de woningen waarbij de eigenaar niet de bewoner was, is op basis van gegevens uit de GBA (Gemeentelijke Basisadministratie) gekeken of de woningen door iemand anders bewoond werd. Als dat het geval was, zijn deze woningen aangeduid als huurwoningen.
+";;;;;
+125;95;124;Topic;Koopwoningen_94;Koopwoningen;Woningen die eigendom zijn van de (toekomstige) bewoner(s) of in gebruik als tweede woning.;;Double;%;1;Impossible
+126;96;124;Topic;Huurwoningen_95;Huurwoningen;Woningen die niet bewoond worden door de eigenaar van de woning. Bij woningen waar geen bewoner geregistreerd is, gaat het om woningen waarvan het aannemelijk is dat de woning bestemd is voor de huurmarkt.;;Double;%;1;Impossible
+127;97;124;Topic;EigendomOnbekend_96;Eigendom onbekend;Woningen waarvan het eigendom niet afgeleid kon worden op basis van diverse registraties zoals het WOZ-register, Personenregister en het woningbestand Kadaster.;;Double;%;1;Impossible
+128;;118;TopicGroup;;Waarde onroerende zaken;"Het CBS verzamelt vanaf 1997 gegevens over de waarde van het onroerend goed op basis van de Wet Waardering Onroerende Zaken (WOZ) die sinds 1 januari 1995 van kracht is. Deze wet verplicht gemeenten alle onroerend zaken (WOZ-objecten), inclusief al het in aanbouw zijnde en leegstaande onroerend goed, binnen de gemeentegrenzen periodiek te taxeren en de aldus vastgestelde WOZ-waarde te gebruiken bij het bepalen van onder andere de gemeentelijke aanslag onroerendezaakbelastingen (OZB).
+
+Het eerste WOZ-tijdvak liep van 1 januari 1997 tot en met 31 december 2000 met als taxatiepeildatum 1 januari 1995. Dit betekent dat gemeenten gedurende de verslagjaren 1997 tot en met 2000 de onroerende zaken hebben getaxeerd naar de waarde op 1 januari 1995. 
+De taxatiepeildatum voor de verslagjaren 2001 tot en met 2004 is 1 januari 1999.
+De taxatiepeildatum voor de verslagjaren 2005 en 2006 is 1 januari 2003. 
+De taxatiepeildatum voor het verslagjaar 2007 is 1 januari 2005. 
+De taxatiepeildatum voor het verslagjaar 2008 is 1 januari 2007. 
+Vanaf 2008 worden onroerende zaken getaxeerd naar de waarde van 1 januari van het voorgaande jaar.
+";;;;;
+129;98;128;Topic;Woningen_97;Woningen;"Waarde van de WOZ-objecten woningen.
+Tot de woningen behoren die onroerende zaken die in hoofdzaak worden gebruikt voor wonen.
+Tot de WOZ-objecten woningen behoren de volgende drie klassen:
+1. Woningen dienend tot hoofdverblijf (WOZ-objectcode 10);
+Hieronder wordt verstaan onroerende zaken die als één geheel gedurende het gehele jaar worden gebruikt om in te wonen. Dit betreft zelfstandige woningen voor één- of meerpersoonshuishoudens waarin geen bedrijfsmatige activiteiten plaatsvinden of in ieder geval geen aan
+het object zichtbare bedrijfsmatige activiteiten.
+2. Woningen met praktijkruimte (WOZ-objectcode 11);
+Dit zijn onroerende zaken die in hoofdzaak worden gebruikt voor wonen en waarin de bewoner tevens in het kader van een zelfstandig beroep of bedrijf activiteiten verricht.
+3. Recreatiewoningen en overige woningen (WOZ-objectcode 12);
+- onroerende zaken die gedurende een deel van het jaar worden gebruikt voor woondoeleinden en waarbij het gebruik gedurende een deel van het jaar is beperkt;
+- een niet-zelfstandige eenheid, bijvoorbeeld studentenkamers, bejaardentehuizen, zusterflats en kloosters.
+- een onroerende zaak die ter beschikking staat aan het wonen.
+Bijvoorbeeld een aparte garage of schuur bij een woning. Hiermee wordt bereikt dat het voor de belastingcapaciteit (WOZ-waarde) geen verschil maakt of de garage samen met de woning een onroerend-goed zaak is of dat de garage een afzonderlijke onroerende zaak is.";;Double;mln euro;0;Impossible
+130;99;128;Topic;NietWoningen_98;Niet-woningen;"De waarde van WOZ-objecten niet-woningen.
+De WOZ-objecten niet-woningen zijn de overige onroerende goederen waarin in hoofdzaak bedrijfsmatige activiteiten worden uitgevoerd.
+De niet-woningen worden in vier groepen onderscheiden:
+1. Boerderijen (WOZ-objectcode 20);
+Dit zijn onroerende zaken waar wonen gecombineerd is met bedrijfsmatige agrarische activiteiten. Bijvoorbeeld akkerbouw-, veeteelt- en tuinbouwbedrijven. Woonboerderijen behoren dus niet tot deze categorie. Woonboerderijen zijn woningen. Ook voormalige boerderijen waarin nu een ander bedrijf wordt uitgeoefend (bijvoorbeeld kantoor of winkel) zijn geen boerderij.
+2. Niet-woningen deels in gebruik als woning (WOZ-objectcode 21);
+Dit zijn onroerende zaken die in hoofdzaak wordt gebruikt voor andere activiteiten dan wonen.
+3. Niet-woningen (WOZ-objectcode 30);
+- Dit betreft alle objecten voor bedrijfsmatige activiteiten zoals kantoren, winkels en bedrijfsruimten, maar ook bijzondere gebouwen die een niet bedrijfsmatig gebruik hebben (scholen, ziekenhuizen).
+Een object behoort alleen tot deze categorie, wanneer geen enkel deel van het object voor woondoeleinden wordt gebruikt.
+- De onroerende zaken waar het wonen als dienst in combinatie met andere functies wordt aangeboden, zoals hotels, pensions, verpleeghuizen en gevangenissen.
+4. Terreinen (WOZ-objectcode 40);
+Dit zijn onbebouwde onroerende zaken, zoals parken, sportvelden en bouwgrond. Bedrijfsmatig geëxploiteerde cultuurgrond wordt niet bij de waardebepaling van terreinen opgenomen.";;Double;mln euro;0;Impossible
+131;100;128;Topic;GemiddeldeWoningwaarde_99;Gemiddelde woningwaarde;Voor de bepaling van de gemiddelde woningwaarde wordt alleen gebruik gemaakt van die WOZ-objecten omschreven als woningen dienend tot hoofdverblijf (WOZ-objectcode 10) en woningen met praktijkruimte (WOZ-objectcode 11) met een waarde groter dan nul euro.;;Double;1 000 euro;0;Impossible
+132;;;TopicGroup;;Onderwijs;"Het aantal leerlingen/studenten en geslaagden/afgestudeerden op instellingen waar het onderwijs door de overheid bekostigd is (regulier onderwijs). Deze reeks loopt vanaf het schooljaar 2000/'01.
+
+TELLING ONDERWIJSSOORTEN
+Behalve bij het hoger beroepsonderwijs en het wetenschappelijk onderwijs zijn de gegevens over het aantal leerlingen gebaseerd op de jaarlijkse tellingen van het Ministerie van Onderwijs, Cultuur en Wetenschappen (OCW) en het Ministerie van Landbouw, Natuur en Voedselkwaliteit (LNV).
+De gegevens over het aantal studenten bij het hoger beroepsonderwijs en het wetenschappelijk onderwijs zijn gebaseerd op uitkomsten van het 'Project één cijfer Hoger Onderwijs'. In dit project werken het CBS, de Informatie Beheer Groep (IB-groep), de HBO-raad, de VSNU (Vereniging van Universiteiten), Cfi (een agentschap van het Ministerie van OCW) en het Ministerie van OCW samen om bij publicaties over het hoger onderwijs van dezelfde bronbestanden gebruik te maken en met uniforme definities en berekeningsmethoden tot een gecoördineerde standtelling te komen. Essentieel is dat genoemde instanties dezelfde afslag van het Centraal Register Inschrijvingen Hoger Onderwijs (CRIHO) hanteren. In onderling overleg is daar een aantal kenmerken aan toegevoegd.
+
+REGIONALE GEGEVENS
+Voorheen waren alle regionale gegevens over het onderwijs vermeld per gemeente van de (hoofd)vestiging. Door invoering van het onderwijsnummer is het nu mogelijk de gegevens te verstrekken naar de woongemeente van de leerling of student. Alleen bij het primair onderwijs (basisonderwijs, speciaal basisonderwijs en speciale scholen) zijn de leerlingen nog geteld naar de gemeente van de vestiging van de school.
+
+TELDATUM
+De teldatum voor het wetenschappelijk onderwijs is 1 december en voor de overige schoolsoorten 1 oktober. Dat betekent dat de gegevens over bijvoorbeeld het schooljaar 2005/'06 betrekking hebben op de situatie per 1 december 2005 of 1 oktober 2005.
+
+SCHOOL- OF STUDIEJAAR VERSUS STATISTIEKJAAR
+Een extra bijkomstigheid is dat in deze tabel een school- of studiejaar vertaald wordt naar een kalenderjaar en dat gemeentelijke herindelingen worden doorgevoerd per 1 januari. Een schooljaar bij het voortgezet of beroepsonderwijs loopt over twee kalenderjaren van 1 augustus tot en met 31 juli en een studiejaar bij het hoger onderwijs loopt over twee kalenderjaren van 1 september tot en met 31 augustus.
+In deze tabel staan de onderwijsgegevens bij het jaar waarin het school- of studiejaar begint, dus voor het schooljaar 2005/'06 bij 2005.";;;;;
+133;;132;TopicGroup;;Naar schoolgemeente;Een schoolgemeente beschrijft de groep leerlingen die naar school gaat op een vestiging die in de betreffende gemeente dan wel regio staat.;;;;;
+134;;133;TopicGroup;;Leerlingen;Het aantal leerlingen op instellingen waar het primair onderwijs (basisonderwijs, speciaal basisonderwijs en speciale scholen) door de overheid bekostigd is (regulier onderwijs) naar gemeente van de vestiging van de school.;;;;;
+135;101;134;Topic;Basisonderwijs_100;Basisonderwijs;"Het onderwijs zoals opgenomen in de Wet primair Onderwijs (WPO).
+Het reguliere basisonderwijs is bedoeld voor kinderen van 4-12 jaar.";;Double;aantal;0;Impossible
+136;102;134;Topic;SpeciaalBasisonderwijs_101;Speciaal basisonderwijs;"Het onderwijs zoals opgenomen in de Wet primair onderwijs (WPO).
+Het speciaal basisonderwijs is bedoeld voor kinderen die meer hulp behoeven bij de opvoeding en het leren dan het reguliere basisonderwijs kan bieden. Vergeleken met scholen voor basisonderwijs hebben scholen voor speciaal basisonderwijs kleinere groepen leerlingen en beschikken ze over meer deskundigen om de leerlingen met leer- en gedragsproblemen te begeleiden.";;Double;aantal;0;Impossible
+137;103;134;Topic;SpecialeScholen_102;Speciale scholen;"Speciale scholen zijn bedoeld voor basis- en voortgezet onderwijs aan zeer moeilijk lerende of opvoedbare kinderen, dove en slechthorende kinderen, visueel gehandicapte kinderen en langdurig zieken. 
+De leerlingen kunnen op deze scholen blijven totdat ze 20 jaar zijn.";;Double;aantal;0;Impossible
+138;;132;TopicGroup;;Naar woongemeente;"Een woongemeente beschrijft de groep leerlingen en studenten die op 1 oktober van het schooljaar of studiejaar in de betreffende gemeente dan wel regio woont. Van sommige leerlingen of studenten is de woongemeente onbekend. 
+Zij zijn dan wel opgenomen in het nationale totaal maar niet bij de onderliggende regionale niveaus.";;;;;
+139;;138;TopicGroup;;Leerlingen/studenten;"Het aantal leerlingen/studenten op instellingen waar het voortgezet onderwijs, middelbaar beroepsonderwijs en hoger onderwijs door de overheid bekostigd is (regulier onderwijs) die op 1 oktober van het school- of studiejaar in de betreffende gemeente dan wel regio wonen.
+Niet van elke leerling/student is bekend wat de woongemeente is.
+In het nationale totaal zit bij elke onderwijssoort een groep leerlingen/ studenten waarvan de woongemeente niet bekend is.
+Deze groep is < 0,8% bij het voortgezet onderwijs, < 0,5% bij de beroepsopleidende leerweg, < 1,3% bij de beroepsbegeleidende leerweg, < 7% bij het hoger beroepsonderwijs en < 4% bij het wetenschappelijk onderwijs en ontbreekt dus bij de onderliggende regionale niveaus.";;;;;
+140;104;139;Topic;VoortgezetOnderwijs_103;Voortgezet onderwijs;"Het onderwijs zoals opgenomen in de Wet op het voortgezet onderwijs (WVO) behalve het praktijkonderwijs. 
+De WVO omvat de volgende onderwijssoorten: vwo, havo, vmbo (met en zonder indicatie voor leerwegondersteuning) en praktijkonderwijs.
+In 2003 en 2004 is het vmbo behalve het agrarisch onderwijs dat wordt bekostigd door het Ministerie van LNV.
+Pas vanaf 2007 is het aantal leerlingen naar woongemeente in het praktijkonderwijs bekend.";;Double;aantal;0;Impossible
+141;105;139;Topic;BeroepsopleidendeLeerweg_104;Beroepsopleidende leerweg;"Een van de twee manieren waarop een mbo-opleiding in het kader van de WEB (Wet Educatie en Beroepsopleiding) kan worden gevolgd. 
+Hierbij wordt 20 tot 60 procent van de totale opleidingsduur besteed aan een stage in de praktijk van een bedrijf of instelling. De opleidingen kunnen als voltijd- en/of als deeltijdonderwijs worden aangeboden. 
+Het betreft hier vol- én deeltijdonderwijs.";;Double;aantal;0;Impossible
+142;106;139;Topic;BeroepsbegeleidendeLeerweg_105;Beroepsbegeleidende leerweg;"Een van de twee manieren waarop een mbo-opleiding in het kader van de WEB (Wet Educatie en Beroepsopleiding) kan worden gevolgd. Bij deze leerweg wordt meer dan 60 procent van de totale opleidingsduur besteed aan beroepspraktijkvorming (stages bij een bedrijf of instelling). De bbl is uitsluitend toegankelijk voor personen van 16 jaar en ouder. 
+Deze leerweg is te vergelijken met het vroegere leerlingwezen.";;Double;aantal;0;Impossible
+143;107;139;Topic;HogerBeroepsonderwijs_106;Hoger beroepsonderwijs;"Het onderwijs zoals opgenomen in de Wet op het hoger onderwijs en wetenschappelijk onderzoek (WHW).
+Het betreft hier voltijdonderwijs, deeltijdonderwijs en duaal onderwijs.";;Double;aantal;0;Impossible
+144;108;139;Topic;WetenschappelijkOnderwijs_107;Wetenschappelijk onderwijs;"Het betreft hier vol-, deeltijd- en duaal onderwijs.
+---
+De theologische universiteiten, de Universiteit voor Humanistiek, de transnationale Universiteit Limburg, de Universiteit van Nijenrode en de Open Universiteit zijn niet opgenomen.";;Double;aantal;0;Impossible
+145;;138;TopicGroup;;Gediplomeerden;Mensen die met goed gevolg een afsluitend examen voor een bepaalde onderwijssoort hebben afgelegd.;;;;;
+146;109;145;Topic;VoortgezetOnderwijs_108;Voortgezet onderwijs;"Het voortgezet onderwijs bij de geslaagden omvat vwo, havo, vmbo inclusief vanaf 2005 de vmbo-afdelingen van de Agrarische Opleidingscentra (AOC), leerwegondersteunend onderwijs (lwoo).
+Het voortgezet algemeen volwassenenonderwijs (vavo), het praktijk- onderwijs, de Engelse Stroom (onder havo) en het Internationaal Baccalaureaat (onder vwo) zijn buiten beschouwing gelaten.";;Double;aantal;0;Impossible
+147;110;145;Topic;MiddelbaarBeroepsonderwijs_109;Middelbaar beroepsonderwijs;"Het middelbaar beroepsonderwijs (mbo) omvat de beroepsopleidende leerweg (bol) en de beroepsbegeleidende leerweg (bbl) zoals opgenomen in de Wet educatie en beroepsonderwijs (WEB) plus de extranei (personen die geen onderwijs volgen maar slechts ingeschreven staan voor een examen).
+Het betreft hier vol- én deeltijdonderwijs.";;Double;aantal;0;Impossible
+148;111;145;Topic;HogerBeroepsonderwijsBachelor_110;Hoger beroepsonderwijs bachelor;"Een hoger beroepsonderwijs bachelor is iemand die een studie in het hoger beroepsonderwijs (hbo) succesvol heeft afgerond.
+Een bachelordiploma geeft toegang tot een masteropleiding in het hbo.
+De bachelorgraad werd ingevoerd bij de introductie van het zogeheten bachelor-masterstelsel in het hoger onderwijs in 2002/'03.
+Degenen die vóór 2002/'03 voor een hbo-studie zijn geslaagd, worden ook tot de bachelors gerekend.
+Voor toelating tot een masteropleiding aan een universiteit moet een gediplomeerde hbo'er vrijwel altijd eerst een schakelprogramma volgen.";;Double;aantal;0;Impossible
+149;112;145;Topic;WoMasterDoctoraal_111;Wo master/doctoraal;"Een masteropleiding in het wetenschappelijk onderwijs (wo) is sinds het studiejaar 2002/'03 de tweede fase van een universitaire studie. 
+Een masteropleiding duurt meestal 1-2 jaren. Om toegang te krijgen tot een wo-master is een diploma van een bacheloropleiding vereist.
+Voordat in 2002/'03 het bachelor-masterstelsel in het hoger onderwijs werd ingevoerd, sprak men bij het wo over geslaagden voor een doctoraalopleiding.
+Omdat de doctoraal- en masteropleidingen een vrijwel vergelijkbaar opleidingsniveau garanderen, kunnen de geslaagden daarvan bij elkaar worden geteld.
+De masterdiploma's voor de beroepsopleidingen geneeskunde,
+diergeneeskunde, tandheelkunde, farmacie of accountancy en alle universitaire lerarenopleidingen behoren tot de vervolgopleidingen en zijn in deze tabel niet meegeteld.";;Double;aantal;0;Impossible
+150;;;TopicGroup;;Arbeid;"Banen van werknemers bij bedrijven en instellingen.
+Een baan is een werkkring van een werknemer. Als iemand meer dan één werkkring heeft, telt elke werkkring als een afzonderlijke baan.
+Onder een werknemer wordt verstaan iemand die arbeid verricht op basis van loon of salaris.";;;;;
+151;;150;TopicGroup;;Banen van werknemers;"Het gemiddeld aantal banen in december van werknemers in dienst van bedrijven en instellingen.
+
+De banen van werknemers per bedrijf worden bepaald uit de Loonaangifteketen (Polisadministratie) van de Belastingdienst en het UWV. 
+Voor de verdeling van banen naar vestigingen wordt aanvullend schriftelijk geënquêteerd onder een aantal bedrijven. De vestigingsinformatie van de overige bedrijven, alsmede de SBI 2008, wordt gehaald uit het Algemeen Bedrijvenregister van het CBS.
+
+Met ingang van verslagjaar 2011 is de methode van baanafbakening uit de Polisadministratie gewijzigd. Deze methodewijziging is doorgevoerd omdat uit onderzoek is gebleken dat een aantal banen wel in de ruwe Polisdata en in ander bronmateriaal van de Belastingdienst (Fibase) aanwezig waren, maar niet in de uiteindelijk afgebakende baanpopulatie. De nieuwe methode neemt deze banen wel mee. Deze methodewijziging leidt tot een uitbreiding van de baanpopulatie met gemiddeld zo'n 100 duizend banen op jaarbasis, dit is 1,3 % van de totale populatie. Het overgrote deel van deze extra banen betreft banen zonder werknemersverzekeringen; ongeveer een derde zijn directeuren-grootaandeelhouder met een eigen bedrijf. Vanaf verslagjaar 2011 wordt de nieuwe baanpopulatie gebruikt. Voor 2010 geldt dat de nader voorlopige cijfers met de nieuwe baanpopulatie zijn gemaakt en de voorlopige cijfers met de oude baanpopulatie. Verslagjaar 2008 en 2009 zijn met de oude baanpopulatie gemaakt.
+
+Het CBS voegt bedrijven en instellingen vanaf 2010 in een beperkt aantal gevallen op een andere manier samen tot ondernemingengroepen dan daarvoor het geval was. 
+Een andere wijziging is dat het aantal werkzame personen en daarvan afgeleid de grootteklasse van bedrijven in het Algemeen Bedrijvenregister (ABR) van het CBS vanaf 2010 meer dan voorheen is gebaseerd op individuele gegevens uit de Polisadministratie van het UWV.
+Door deze veranderingen kan het voorkomen dat de codering volgens de Standaard Bedrijfsindeling (SBI 2008) en/of de grootteklasse van een bedrijf of ondernemingengroep wijzigen. Dit kan in sommige gevallen gevolgen hebben voor de uitkomsten van een statistiek, vooral voor de uitkomsten per branche/ bedrijfstak of grootteklasse.
+Voor de cijfers in deze tabel geldt dat de ontwikkeling van het aantal banen tussen 2009 en 2010 per bedrijfstak in een aantal regio's is beïnvloed is door de samenvoeging van bedrijven en instellingen tot ondernemingengroepen.
+
+Dit onderwerp bevat voorlopige cijfers van het meest recente verslagjaar. 
+Bij elke jaarlijkse actualisering worden voorlopige cijfers van een verslagjaar geüpdatet met een definitieve versie over hetzelfde jaar, en wordt een voorlopige versie van een nieuw verslagjaar gepubliceerd. De definitieve cijfers worden in principe niet meer verder geüpdatet, behalve wanneer de bron nog sterk wijzigt. Dit kan in principe tot vijf jaar na afloop van een verslagjaar.
+";;;;;
+152;113;151;Topic;TotaalAantalBanen_112;Totaal aantal banen;;;Double;x 1 000;1;Impossible
+153;114;151;Topic;ALandbouwBosbouwEnVisserij_113;A Landbouw, bosbouw en visserij;"Deze sectie omvat:
+- de exploitatie van natuurlijke plantaardige en dierlijke hulpbronnen:
+w.o. de akkerbouw, veeteelt en de productie van overige planten en dieren op een agrarisch bedrijf of in het natuurlijke leefgebied;
+w.o. bosbouw, houtteelt en jacht;
+w.o. specifieke loondiensten met betrekking tot het productieproces landbouw,
+jacht en bosbouw worden eveneens in deze sectie ingedeeld;
+w.o. visserij: de vangst of het kweken van vis, schaaldieren en weekdieren.
+";;Double;x 1 000;1;Impossible
+154;115;151;Topic;BFNijverheidEnEnergie_114;B-F Nijverheid en energie;"Deze categorie is een samentelling van categorieën:
+B Winning van delfstoffen
+C Industrie
+D Productie en distributie van en handel in elektriciteit, aardgas, stoom en gekoelde lucht
+E Winning en distributie van water; afval- en afvalwaterbeheer en sanering
+F Bouwnijverheid
+";;Double;x 1 000;1;Impossible
+155;116;151;Topic;GNCommercieleDienstverlening_115;G-N Commerciële dienstverlening;"Deze categorie is een samentelling van categorieën:
+G Groot- en detailhandel; reparatie van auto's
+H Vervoer en opslag
+I Logies-, maaltijd- en drankverstrekking
+J Informatie en communicatie
+K Financiële instellingen
+L Verhuur van en handel in onroerend goed
+M Advisering, onderzoek en overige specialistische zakelijke dienstverlening
+N Verhuur van roerende goederen en overige zakelijke dienstverlening
+";;Double;x 1 000;1;Impossible
+156;117;151;Topic;OUNietCommercieleDienstverlening_116;O-U Niet-commerciële dienstverlening;"Deze categorie is een samentelling van categorieën:
+O Openbaar bestuur, overheidsdiensten en verplichte sociale verzekeringen
+P Onderwijs
+Q Gezondheids- en welzijnszorg
+R Cultuur, sport en recreatie
+S Overige dienstverlening
+
+De categorieën
+T Huishoudens als werkgever
+U Extraterritoriale organisaties en lichamen
+zitten niet in de populatie.";;Double;x 1 000;1;Impossible
+157;;150;TopicGroup;;Banen van werknemers, relatief;Het gemiddeld aantal banen in december van werknemers in dienst van bedrijven en instellingen, als percentage van het totaal aantal banen.;;;;;
+158;118;157;Topic;ALandbouwBosbouwEnVisserij_117;A Landbouw, bosbouw en visserij;"Deze sectie omvat:
+- de exploitatie van natuurlijke plantaardige en dierlijke hulpbronnen:
+w.o. de akkerbouw, veeteelt en de productie van overige planten en dieren op een agrarisch bedrijf of in het natuurlijke leefgebied;
+w.o. bosbouw, houtteelt en jacht;
+w.o. specifieke loondiensten met betrekking tot het productieproces landbouw,
+jacht en bosbouw worden eveneens in deze sectie ingedeeld;
+w.o. visserij: de vangst of het kweken van vis, schaaldieren en weekdieren.
+";;Double;%;0;Impossible
+159;119;157;Topic;BFNijverheidEnEnergie_118;B-F Nijverheid en energie;"Deze categorie is een samentelling van categorieën:
+B Winning van delfstoffen
+C Industrie
+D Productie en distributie van en handel in elektriciteit, aardgas, stoom en gekoelde lucht
+E Winning en distributie van water; afval- en afvalwaterbeheer en sanering
+F Bouwnijverheid
+";;Double;%;0;Impossible
+160;120;157;Topic;GNCommercieleDienstverlening_119;G-N Commerciële dienstverlening;"Deze categorie is een samentelling van categorieën:
+G Groot- en detailhandel; reparatie van auto's
+H Vervoer en opslag
+I Logies-, maaltijd- en drankverstrekking
+J Informatie en communicatie
+K Financiële instellingen
+L Verhuur van en handel in onroerend goed
+M Advisering, onderzoek en overige specialistische zakelijke dienstverlening
+N Verhuur van roerende goederen en overige zakelijke dienstverlening
+";;Double;%;0;Impossible
+161;121;157;Topic;OUNietCommercieleDienstverlening_120;O-U Niet-commerciële dienstverlening;"Deze categorie is een samentelling van categorieën:
+O Openbaar bestuur, overheidsdiensten en verplichte sociale verzekeringen
+P Onderwijs
+Q Gezondheids- en welzijnszorg
+R Cultuur, sport en recreatie
+S Overige dienstverlening
+De categorieën T en U zitten niet in de populatie.
+";;Double;%;0;Impossible
+162;;;TopicGroup;;Inkomen en vermogen;Inkomen en vermogen van huishoudens. De populatie bestaat uit alle particuliere huishoudens met bekend inkomen, waarbij studentenhuishoudens in deze tabel worden uitgesloten. Peildatum voor de populatie is 1 januari van het verslagjaar.;;;;;
+163;122;162;Topic;ParticuliereHuishoudensExclStudenten_121;Particuliere huishoudens excl. studenten;Eén of meer personen die samen een woonruimte bewonen en zichzelf, dus niet-bedrijfsmatig, voorzien in de dagelijkse levensbehoeften (exclusief studentenhuishoudens).;;Double;x 1 000;1;Impossible
+164;;162;TopicGroup;;Inkomen van particuliere huishoudens;"Besteedbaar inkomen van particuliere huishoudens (exclusief studentenhuishoudens).
+
+Besteedbaar inkomen: het bruto-inkomen verminderd met betaalde inkomensoverdrachten, premies inkomensverzekeringen, premies ziektekostenverzekeringen en belastingen op inkomen en vermogen. Betaalde inkomensoverdrachten bestaan uit overdrachten tussen huishoudens zoals alimentatie betaald aan de ex-echtgeno(o)t(e). Premies inkomensverzekeringen betreffen premies betaald voor sociale verzekeringen, volksverzekeringen en particuliere verzekeringen in verband met werkloosheid, ziekte en arbeidsongeschiktheid en ouderdom en nabestaanden.
+";;;;;
+165;;164;TopicGroup;;Gemiddeld besteedbaar inkomen;"Gemiddeld besteedbaar inkomen van particuliere huishoudens (exclusief studentenhuishoudens).
+
+Het besteedbaar inkomen bestaat uit het bruto-inkomen verminderd met betaalde inkomensoverdrachten, premies inkomensverzekeringen, premies ziektekostenverzekeringen en belastingen op inkomen en vermogen.";;;;;
+166;123;165;Topic;ParticuliereHuishoudensExclStudenten_122;Particuliere huishoudens excl. studenten;Eén of meer personen die samen een woonruimte bewonen en zichzelf, dus niet-bedrijfsmatig, voorzien in de dagelijkse levensbehoeften (exclusief studentenhuishoudens).;;Double;1 000 euro;1;Impossible
+167;124;165;Topic;TypeEenpersoonshuishouden_123;Type: Eenpersoonshuishouden;"Particulier huishouden bestaande uit één persoon.
+
+Tot eenpersoonshuishoudens, ook wel alleenstaanden genoemd, worden ook personen gerekend die met anderen op eenzelfde adres wonen maar een eigen huishouding voeren. Alleenstaanden worden in alle burgerlijke staten aangetroffen; zo kunnen gehuwden na het stuklopen van hun relatie (in afwachting van een scheiding) alleen wonen.";;Double;1 000 euro;1;Impossible
+168;125;165;Topic;TypeEenoudergezin_124;Type: Eenoudergezin;Particulier huishouden bestaande uit één ouder met één of meer thuiswonende kinderen.;;Double;1 000 euro;1;Impossible
+169;126;165;Topic;TypePaarZonderKind_125;Type: Paar, zonder kind;"Meerpersoonshuishouden bestaande uit een paar zonder thuiswonend(e) kind(eren)
+
+Meerpersoonshuishouden: Een particulier huishouden bestaande uit twee of meer personen.
+Paar: Twee op basis van huwelijk, partnerschapsregistratie of samenwoonrelatie bij elkaar behorende personen.";;Double;1 000 euro;1;Impossible
+170;127;165;Topic;TypePaarMetKindEren_126;Type: Paar, met kind(eren);"Meerpersoonshuishouden bestaande uit een paar met (een) thuiswonend(e) kind(eren)
+
+Meerpersoonshuishouden: Een particulier huishouden bestaande uit twee of meer personen.
+Paar: Twee op basis van huwelijk, partnerschapsregistratie of samenwoonrelatie bij elkaar behorende personen.
+";;Double;1 000 euro;1;Impossible
+171;128;165;Topic;BronInkomenAlsWerknemer_127;Bron: Inkomen als werknemer;Huishoudens waarvoor het loon van werknemer de voornaamste inkomensbron vormt.;;Double;1 000 euro;1;Impossible
+172;129;165;Topic;BronInkomenAlsZelfstandige_128;Bron: Inkomen als zelfstandige;Huishoudens waarvoor het inkomen als zelfstandig ondernemer, directeur-grootaandeelhouder en overig zelfstandige de voornaamste inkomensbron vormt.;;Double;1 000 euro;1;Impossible
+173;130;165;Topic;BronOverdrachtsinkomen_129;Bron: Overdrachtsinkomen;Huishoudens waarvoor een uitkering, pensioen of studiefinanciering de voornaamste inkomensbron vormt.;;Double;1 000 euro;1;Impossible
+174;131;165;Topic;WoningbezitEigenWoning_130;Woningbezit: eigen woning;Een huishouden woont in een eigen woning of in een gehuurde woning. Van de huishoudens die een woning huren, is bepaald of zij wel of geen huurtoeslag ontvangen hebben.;;Double;1 000 euro;1;Impossible
+175;132;165;Topic;WoningbezitHuurwoning_131;Woningbezit: huurwoning;Een huishouden woont in een eigen woning of in een gehuurde woning. Van de huishoudens die een woning huren, is bepaald of zij wel of geen huurtoeslag ontvangen hebben.;;Double;1 000 euro;1;Impossible
+176;;164;TopicGroup;;Gemiddeld gestandaardiseerd inkomen;"Gemiddeld gestandaardiseerd inkomen van particuliere huishoudens (exclusief studentenhuishoudens).
+
+Het gestandaardiseerd besteedbaar inkomen is het besteedbaar inkomen gecorrigeerd voor verschillen in grootte en samenstelling van het huishouden. Deze correctie vindt plaats met behulp van equivalentiefactoren. In de equivalentiefactor komen de schaalvoordelen tot uitdrukking die het gevolg zijn van het voeren van een gemeenschappelijke huishouding. Met behulp van de equivalentiefactoren worden alle inkomens herleid tot het inkomen van een eenpersoonshuishouden. Op deze wijze is het welvaartsniveau van verschillende typen huishoudens onderling vergelijkbaar gemaakt. Het gestandaardiseerd inkomen is een maat voor de welvaart van (de leden van) een huishouden.";;;;;
+177;133;176;Topic;ParticuliereHuishoudensExclStudenten_132;Particuliere huishoudens excl. studenten;Eén of meer personen die samen een woonruimte bewonen en zichzelf, dus niet-bedrijfsmatig, voorzien in de dagelijkse levensbehoeften (exclusief studentenhuishoudens).;;Double;1 000 euro;1;Impossible
+178;134;176;Topic;TypeEenpersoonshuishouden_133;Type: Eenpersoonshuishouden;"Particulier huishouden bestaande uit één persoon.
+
+Tot eenpersoonshuishoudens, ook wel alleenstaanden genoemd, worden ook personen gerekend die met anderen op eenzelfde adres wonen maar een eigen huishouding voeren. Alleenstaanden worden in alle burgerlijke staten aangetroffen; zo kunnen gehuwden na het stuklopen van hun relatie (in afwachting van een scheiding) alleen wonen.";;Double;1 000 euro;1;Impossible
+179;135;176;Topic;TypeEenoudergezin_134;Type: Eenoudergezin;Particulier huishouden bestaande uit één ouder met één of meer thuiswonende kinderen.;;Double;1 000 euro;1;Impossible
+180;136;176;Topic;TypePaarZonderKind_135;Type: Paar, zonder kind;"Meerpersoonshuishouden bestaande uit een paar zonder thuiswonend(e) kind(eren)
+
+Meerpersoonshuishouden: Een particulier huishouden bestaande uit twee of meer personen.
+Paar: Twee op basis van huwelijk, partnerschapsregistratie of samenwoonrelatie bij elkaar behorende personen.";;Double;1 000 euro;1;Impossible
+181;137;176;Topic;TypePaarMetKindEren_136;Type: Paar, met kind(eren);"Meerpersoonshuishouden bestaande uit een paar met (een) thuiswonend(e) kind(eren)
+
+Meerpersoonshuishouden: Een particulier huishouden bestaande uit twee of meer personen.
+Paar: Twee op basis van huwelijk, partnerschapsregistratie of samenwoonrelatie bij elkaar behorende personen.
+";;Double;1 000 euro;1;Impossible
+182;138;176;Topic;BronInkomenAlsWerknemer_137;Bron: Inkomen als werknemer;Huishoudens waarvoor het loon van werknemer de voornaamste inkomensbron vormt.;;Double;1 000 euro;1;Impossible
+183;139;176;Topic;BronInkomenAlsZelfstandige_138;Bron: Inkomen als zelfstandige;Huishoudens waarvoor het inkomen als zelfstandig ondernemer, directeur-grootaandeelhouder en overig zelfstandige de voornaamste inkomensbron vormt.;;Double;1 000 euro;1;Impossible
+184;140;176;Topic;BronOverdrachtsinkomen_139;Bron: Overdrachtsinkomen;Huishoudens waarvoor een uitkering, pensioen of studiefinanciering de voornaamste inkomensbron vormt.;;Double;1 000 euro;1;Impossible
+185;141;176;Topic;WoningbezitEigenWoning_140;Woningbezit: eigen woning;Een huishouden woont in een eigen woning of in een gehuurde woning. Van de huishoudens die een woning huren, is bepaald of zij wel of geen huurtoeslag ontvangen hebben.;;Double;1 000 euro;1;Impossible
+186;142;176;Topic;WoningbezitHuurwoning_141;Woningbezit: huurwoning;Een huishouden woont in een eigen woning of in een gehuurde woning. Van de huishoudens die een woning huren, is bepaald of zij wel of geen huurtoeslag ontvangen hebben.;;Double;1 000 euro;1;Impossible
+187;;162;TopicGroup;;Mediaan vermogen huishoudens;"Mediaan vermogen van particuliere huishoudens (exclusief studentenhuishoudens).
+
+De mediaan is het middelste getal wanneer alle getalen van laag naar hoog worden gesorteerd.
+Vermogen is het saldo van bezittingen en schulden. Bezittingen worden gevormd door bank- en spaartegoeden, effecten, de eigen woning, overig onroerend goed, ondernemingsvermogen, aanmerkelijk belang en de overige bezittingen. De schulden omvatten onder meer schulden ten behoeve van een eigen woning en consumptief krediet.";;;;;
+188;143;187;Topic;ParticuliereHuishoudensExclStudenten_142;Particuliere huishoudens excl. studenten;Eén of meer personen die samen een woonruimte bewonen en zichzelf, dus niet-bedrijfsmatig, voorzien in de dagelijkse levensbehoeften (exclusief studentenhuishoudens).;;Double;1 000 euro;1;Impossible
+189;144;187;Topic;TypeEenpersoonshuishouden_143;Type: Eenpersoonshuishouden;"Particulier huishouden bestaande uit één persoon.
+
+Tot eenpersoonshuishoudens, ook wel alleenstaanden genoemd, worden ook personen gerekend die met anderen op eenzelfde adres wonen maar een eigen huishouding voeren. Alleenstaanden worden in alle burgerlijke staten aangetroffen; zo kunnen gehuwden na het stuklopen van hun relatie (in afwachting van een scheiding) alleen wonen.";;Double;1 000 euro;1;Impossible
+190;145;187;Topic;TypeEenoudergezin_144;Type: Eenoudergezin;Particulier huishouden bestaande uit één ouder met één of meer thuiswonende kinderen.;;Double;1 000 euro;1;Impossible
+191;146;187;Topic;TypePaarZonderKind_145;Type: Paar, zonder kind;"Meerpersoonshuishouden bestaande uit een paar zonder thuiswonend(e) kind(eren)
+
+Meerpersoonshuishouden: Een particulier huishouden bestaande uit twee of meer personen.
+Paar: Twee op basis van huwelijk, partnerschapsregistratie of samenwoonrelatie bij elkaar behorende personen.";;Double;1 000 euro;1;Impossible
+192;147;187;Topic;TypePaarMetKindEren_146;Type: Paar, met kind(eren);"Meerpersoonshuishouden bestaande uit een paar met (een) thuiswonend(e) kind(eren)
+
+Meerpersoonshuishouden: Een particulier huishouden bestaande uit twee of meer personen.
+Paar: Twee op basis van huwelijk, partnerschapsregistratie of samenwoonrelatie bij elkaar behorende personen.
+";;Double;1 000 euro;1;Impossible
+193;148;187;Topic;BronInkomenAlsWerknemer_147;Bron: Inkomen als werknemer;Huishoudens waarvoor het loon van werknemer de voornaamste inkomensbron vormt.;;Double;1 000 euro;1;Impossible
+194;149;187;Topic;BronInkomenAlsZelfstandige_148;Bron: Inkomen als zelfstandige;Huishoudens waarvoor het inkomen als zelfstandig ondernemer, directeur-grootaandeelhouder en overig zelfstandige de voornaamste inkomensbron vormt.;;Double;1 000 euro;1;Impossible
+195;150;187;Topic;BronOverdrachtsinkomen_149;Bron: Overdrachtsinkomen;Huishoudens waarvoor een uitkering, pensioen of studiefinanciering de voornaamste inkomensbron vormt.;;Double;1 000 euro;1;Impossible
+196;151;187;Topic;WoningbezitEigenWoning_150;Woningbezit: eigen woning;Een huishouden woont in een eigen woning of in een gehuurde woning. Van de huishoudens die een woning huren, is bepaald of zij wel of geen huurtoeslag ontvangen hebben.;;Double;1 000 euro;1;Impossible
+197;152;187;Topic;WoningbezitHuurwoning_151;Woningbezit: huurwoning;Een huishouden woont in een eigen woning of in een gehuurde woning. Van de huishoudens die een woning huren, is bepaald of zij wel of geen huurtoeslag ontvangen hebben.;;Double;1 000 euro;1;Impossible
+198;;;TopicGroup;;Sociale zekerheid;;;;;;
+199;;198;TopicGroup;;Uitkeringsontvangers, totaal;"Totaal aantal personen met een uitkering in het kader van de Werkloosheidswet (WW), bijstandswet (PW), bijstandsgerelateerde wet (IOAW, IOAZ, Bbz), arbeidsongeschiktheidswet (WAO, WIA, WAZ, Wajong, Wet Wajong) of de Algemene ouderdomswet (AOW).
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+Cijfers over het aantal personen met een AOW-uitkering zijn vanaf 2013 toegevoegd.
+
+Het is mogelijk dat een persoon aanspraak maakt op meer dan één uitkering. Dat kunnen uitkeringen zijn van eenzelfde soort (bijvoorbeeld twee WAO-uitkeringen) of twee uitkeringen van verschillend type (zoals een WW en een bijstandsuitkering). In het laatste geval wordt de persoon bij beide soorten uitkeringen meegeteld. In het eerste geval slechts één keer (bij de WAO). Bij de totaaltellingen wordt de persoon uiteraard maar één keer geteld.
+";;;;;
+200;153;199;Topic;UitkeringsontvangersTotaal_152;Uitkeringsontvangers, totaal;"Totaal aantal personen met een uitkering in het kader van de Werkloosheidswet (WW), bijstandswet (PW), bijstandsgerelateerde wet (IOAW, IOAZ, Bbz), arbeidsongeschiktheidswet (WAO, WIA, WAZ, Wajong, Wet Wajong) of de Algemene ouderdomswet (AOW).
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+Cijfers over het aantal personen met een AOW-uitkering zijn vanaf 2013 toegevoegd.
+
+Het is mogelijk dat een persoon aanspraak maakt op meer dan één uitkering. Dat kunnen uitkeringen zijn van eenzelfde soort (bijvoorbeeld twee WAO-uitkeringen) of twee uitkeringen van verschillend type (zoals een WW en een bijstandsuitkering). In het laatste geval wordt de persoon bij beide soorten uitkeringen meegeteld. In het eerste geval slechts één keer (bij de WAO). Bij de totaaltellingen wordt de persoon uiteraard maar één keer geteld.
+";;Double;aantal;0;Impossible
+201;154;199;Topic;TotDeAOWLeeftijd_153;Tot de AOW- leeftijd;"Het aantal personen tot de AOW-gerechtigde leeftijd dat een uitkering ontvangt in het kader van de Werkloosheidswet (WW), bijstandswet (PW), bijstandsgerelateerde wet (IOAW, IOAZ, WWIK, Bbz), arbeidsongeschiktheidswet (WAO, WIA, WAZ, Wajong, Wet Wajong) of Algemene ouderdomswet (AOW).
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+
+AOW-gerechtigde leeftijd (AOW-leeftijd) 
+De AOW-leeftijd is de leeftijd waarop het AOW-pensioen ingaat. De AOW-leeftijd is: 
+Tot 2013: 65 jaar.
+Vanaf 2013: gekoppeld aan de levensverwachting,
+";;Double;aantal;0;Impossible
+202;155;199;Topic;VanafDeAOWLeeftijd_154;Vanaf de AOW- leeftijd;"Het aantal personen vanaf de AOW-gerechtigde leeftijd dat een uitkering ontvangt in het kader van de bijstandswet of de Algemene ouderdomswet (AOW).
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+Cijfers over het aantal personen met een AOW-uitkering zijn vanaf 2013 toegevoegd.
+
+AOW-gerechtigde leeftijd (AOW-leeftijd) 
+De AOW-leeftijd is de leeftijd waarop het AOW-pensioen ingaat. De AOW-leeftijd is: 
+Tot 2013: 65 jaar.
+Vanaf 2013: gekoppeld aan de levensverwachting,
+";;Double;aantal;0;Impossible
+203;;198;TopicGroup;;Uitkeringsontvangers per soort uitkering;"Het aantal personen dat een sociale zekerheidsuitkering ontvangt uitgesplitst naar de soort uitkering.
+Het gaat hier om werkloosheidsuitkeringen, bijstandsuitkeringen, bijstandsgerelateerde uitkeringen, arbeidsongeschiktheidsuitkeringen en AOW-uitkeringen.
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+Cijfers over het aantal personen met een AOW-uitkering zijn vanaf 2013 toegevoegd.
+
+Het is mogelijk dat een persoon aanspraak maakt op meer dan één uitkering. Dat kunnen uitkeringen zijn van eenzelfde soort (bijvoorbeeld twee WAO-uitkeringen) of twee uitkeringen van verschillend type (zoals een WW en een bijstandsuitkering. In het laatste geval wordt de persoon bij beide soorten uitkeringen meegeteld. In het eerste geval slechts één keer (bij de WAO). Bij de totaaltellingen wordt de persoon uiteraard ook maar één keer geteld.
+";;;;;
+204;156;203;Topic;Werkloosheid_155;Werkloosheid;"Het aantal personen dat een uitkering ontvangt in het kader van de Werkloosheidwet (WW). 
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+";;Double;aantal;0;Impossible
+205;;203;TopicGroup;;Bijstand en bijstandsgerelateerd;"Het aantal personen dat een uitkering ontvangt in het kader van de bijstandswet of bijstandsgerelateerde wet.
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+
+Vanaf 1 januari 2015 is de Wet werk en bijstand opgegaan in de Participatiewet. Een ieder die kan werken maar daarbij ondersteuning nodig heeft, valt sinds 1 januari 2015 onder de Participatiewet.
+
+Bijstandsgerelateerde wetten zijn de Wet inkomensvoorziening oudere en gedeeltelijk arbeidsongeschikte werkloze werknemers (IOAW), de Wet inkomensvoorziening oudere en gedeeltelijk arbeidsongeschikte gewezen zelfstandigen (IOAZ) en het Besluit bijstandsverlening zelfstandigen 2004 (Bbz).
+Personen met een uitkering in het kader van het Besluit bijstandsverlening zelfstandigen 2004 (Bbz) zijn uitsluitend opgenomen in het totaal aantal personen dat een bijstandsuitkering of bijstandsgerelateerde uitkering ontvangt.
+
+Besluit bijstandsverlening zelfstandigen 2004 (Bbz):
+Het Besluit bijstandsverlening zelfstandigen 2004 (Bbz) is ingesteld om een zelfstandige tijdelijk een uitkering te verstrekken totdat hij weer in zijn eigen levensbehoeften kan voorzien. 
+Degenen die in aanmerking komen voor het Bbz zijn gevestigde zelfstandigen die tijdelijk in financiële problemen verkeren, of startende zelfstandigen. 
+Daarnaast biedt het Bbz ook hulp aan oudere zelfstandigen met een niet-levensvatbaar bedrijf of hulp wanneer zelfstandigen hun bedrijf willen beëindigen.
+";;;;;
+206;157;205;Topic;BijstandGerelateerdTotAOWLeeftijd_156;Bijstand(gerelateerd) tot AOW-leeftijd;"Het aantal personen tot de AOW-gerechtigde leeftijd dat een uitkering ontvangt in het kader van de Participatiewet (PW), de Wet inkomensvoorziening oudere en gedeeltelijk arbeidsongeschikte werkloze werknemers (IOAW), de Wet inkomensvoorziening oudere en gedeeltelijk arbeidsongeschikte gewezen zelfstandigen (IOAZ), de Wet werk en inkomen kunstenaars (WWIK) en het Besluit bijstandsverlening zelfstandigen 2004 (Bbz).
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+
+AOW-gerechtigde leeftijd (AOW-leeftijd) 
+De AOW-leeftijd is de leeftijd waarop het AOW-pensioen ingaat. De AOW-leeftijd is: 
+Tot 2013: 65 jaar.
+Vanaf 2013: gekoppeld aan de levensverwachting,
+";;Double;aantal;0;Impossible
+207;158;205;Topic;BijstandGerelateerdVanafAOWLeeftijd_157;Bijstand(gerelateerd) vanaf AOW-leeftijd;"Het aantal personen vanaf de AOW-gerechtigde leeftijd dat een uitkering ontvangt in het kader van de Participatiewet.
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+
+AOW-gerechtigde leeftijd (AOW-leeftijd) 
+De AOW-leeftijd is de leeftijd waarop het AOW-pensioen ingaat. De AOW-leeftijd is: 
+Tot 2013: 65 jaar.
+Vanaf 2013: gekoppeld aan de levensverwachting,
+";;Double;aantal;0;Impossible
+208;159;205;Topic;BijstandTotDeAOWLeeftijd_158;Bijstand tot de AOW-leeftijd;"Het aantal personen tot de AOW-gerechtigde leeftijd dat een uitkering ontvangt in het kader van de Participatiewet. Ingaande 1 januari 2015 is de Wet werk en bijstand opgegaan in de Participatiewet. Een ieder die kan werken maar daarbij ondersteuning nodig heeft, valt sinds 1 januari 2015 onder de Participatiewet.
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+
+AOW-gerechtigde leeftijd (AOW-leeftijd) 
+De AOW-leeftijd is de leeftijd waarop het AOW-pensioen ingaat. De AOW-leeftijd is: 
+Tot 2013: 65 jaar.
+Vanaf 2013: gekoppeld aan de levensverwachting,
+";;Double;aantal;0;Impossible
+209;;203;TopicGroup;;Arbeidsongeschiktheid;"Het aantal personen dat een arbeidsongeschiktheidsuitkering ontvangt in het kader van de Wet op de arbeidsongeschiktheidsverzekering (WAO), de Wet werk en inkomen naar arbeidsvermogen (WIA), de Wet arbeidsongeschiktheidsverzekering zelfstandigen (WAZ), 
+de Wet arbeidsongeschiktheidsvoorziening jonggehandicapten (Wajong) en de Wet werk en arbeidsondersteuning jonggehandicapten (Wet Wajong).
+Het recht op een uitkering in het kader van een van bovengenoemde wetten vervalt bij het bereiken van de AOW-gerechtigde leeftijd.
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+
+Het is mogelijk dat een persoon aanspraak maakt op meer dan één uitkering. Dat kunnen uitkeringen zijn van eenzelfde soort (bijvoorbeeld twee WAO-uitkeringen) of twee uitkeringen van verschillend type (zoals een WW en een bijstandsuitkering). In het laatste geval wordt de persoon bij beide soorten uitkeringen meegeteld. In het eerste geval slechts één keer (bij de WAO). Bij de totaaltellingen wordt de persoon uiteraard maar één keer geteld. 
+";;;;;
+210;160;209;Topic;ArbeidsongeschiktheidTotaal_159;Arbeidsongeschiktheid, totaal;"Het totaal aantal personen dat een arbeidsongeschiktheidsuitkering (WAO, WIA, WAZ, Wajong, Wet Wajong) ontvangt.
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+";;Double;aantal;0;Impossible
+211;161;209;Topic;WAOUitkering_160;WAO-uitkering;"Het aantal personen dat een uitkering ontvangt in het kader van de Wet op de arbeidsongeschiktheidsverzekering (WAO).
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+
+Wet op de arbeidsongeschiktheidsverzekering (WAO)
+De wet geeft werknemers die voor 1 januari 2004 arbeidsongeschikt zijn geworden recht op een loonvervangende uitkering, zolang zij minimaal 15% arbeidsongeschiktheid zijn.
+De WAO is met ingang van 2005 vervangen door de Wet werk en inkomen naar arbeidsvermogen (WIA), maar blijft bestaan voor mensen die al een WAO-uitkering hadden of binnen 5 jaar na het beëindigen van de uitkering opnieuw arbeidsongeschikt worden door dezelfde oorzaak.
+Het recht op een WAO-uitkering vervalt bij het bereiken van de AOW-gerechtigde leeftijd. 
+";;Double;aantal;0;Impossible
+212;162;209;Topic;WIAUitkeringWGARegeling_161;WIA-uitkering: WGA-regeling;"Het aantal personen dat een uitkering ontvangt in het kader van de Wet werk en inkomen naar arbeidsvermogen (WIA) regeling Werkhervatting gedeeltelijk arbeidsgeschikten (WGA).
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+
+Wet werk en inkomen naar arbeidsvermogen (WIA)
+De WIA geeft werknemers die na een wachttijd van twee jaar nog minstens 35 procent arbeidsongeschikt zijn, recht op een uitkering. De wet is zó opgezet dat men gestimuleerd wordt om naar vermogen te werken. 
+De wet kent twee regelingen: de regeling Inkomensverzekering volledig arbeidsongeschikten (IVA) en de regeling Werkhervatting gedeeltelijk arbeidsgeschikten (WGA).
+De IVA regelt een uitkering voor werknemers die langdurig en volledig arbeidsongeschikt zijn. De WGA geeft recht op een loonaanvullende uitkering als een werknemer gedeeltelijk arbeidsongeschikt is.
+De WIA vervangt per 29 december 2005 de WAO.
+Het recht op een WIA-uitkering vervalt bij het bereiken van de AOW-gerechtigde leeftijd.
+";;Double;aantal;0;Impossible
+213;163;209;Topic;WajongUitkering_162;Wajong-uitkering;"Het aantal personen dat een uitkering ontvangt in het kader van de Wet arbeidsongeschiktheidsvoorziening jonggehandicapten (Wajong) of de Wet werk en arbeidsondersteuning jonggehandicapten (Wet Wajong).
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+
+Wet arbeidsongeschiktheidsvoorziening jonggehandicapten (Wajong)
+De Wajong is een wettelijke voorziening in de financiële gevolgen van langdurige arbeidsongeschiktheid van mensen die geen aanspraak kunnen maken op de WAO/WIA omdat er geen arbeidsverleden is opgebouwd. 
+Dit zijn mensen die arbeidsongeschikt zijn voor de dag dat zij 17 jaar worden of na hun 17e jaar arbeidsongeschikt worden én een opleiding/studie volgen.
+Vanaf 1 januari 2010 is de Wajong vervangen door de Wet Wajong. De Wajong blijft gelden voor jongeren die voor 1 januari 2010 een uitkering hebben aangevraagd.
+Het recht op een Wajong-uitkering vervalt bij het bereiken van de AOW-gerechtigde leeftijd.
+
+Wet werk en arbeidsondersteuning jonggehandicapten (Wet Wajong)
+Met ingang van 1 januari 2010 is de Wet werk en arbeidsondersteuning jonggehandicapten (Wet Wajong) in werking getreden.
+In tegenstelling tot de Wajong hebben jongeren met een ziekte of handicap in de eerste plaats recht op hulp bij het vinden en houden van werk. Daaraan gekoppeld kunnen ze een inkomensondersteuning krijgen. 
+Vanaf 2015 staat de Wet Wajong alleen nog open voor jonggehandicapten die duurzaam geen mogelijkheden hebben om deel te nemen aan het arbeidsproces.
+Jonggehandicapten die nog kunnen werken, maar ondersteuning nodig hebben vallen vanaf die datum onder de Participatiewet en kunnen voor ondersteuning terecht bij de gemeente.
+Het recht op een uitkering in het kader van de Wet Wajong vervalt bij het bereiken van de AOW-gerechtigde leeftijd.
+";;Double;aantal;0;Impossible
+214;164;203;Topic;AOW_163;AOW;"Het aantal personen dat een uitkering ontvangt in het kader van de Algemene ouderdomswet (AOW).
+
+De cijfers hebben betrekking op de laatste dag van de verslagperiode.
+
+Algemene ouderdomswet (AOW)
+De AOW is een algemene, de gehele bevolking omvattende, verplichte verzekering die personen vanaf de AOW-gerechtigde leeftijd een inkomen garandeert. In het Nederlandse socialezekerheidsstelsel is dit een volksverzekering. 
+In principe is iedereen die nog niet de AOW-gerechtige leeftijd heeft bereikt en in Nederland woont, verzekerd voor de AOW. 
+Ook degenen die niet in Nederland wonen, maar in Nederland in dienstbetrekking arbeid verrichten waarover loonbelasting wordt betaald, zijn verzekerd. 
+Voor perioden die men in het buitenland woont, kan men zich verzekeren tegen verlies van aanspraak op een AOW-uitkering. 
+Een uitkering kan, binnen het kader van de wet Beperking export uitkeringen (wet BEU), naar het buitenland worden overgemaakt.
+
+AOW-gerechtigde leeftijd (AOW-leeftijd) 
+De AOW-leeftijd is de leeftijd waarop het AOW-pensioen ingaat. De AOW-leeftijd is: 
+Tot 2013: 65 jaar.
+Vanaf 2013: gekoppeld aan de levensverwachting,
+";;Double;aantal;0;Impossible
+215;;;TopicGroup;;Bedrijfsvestigingen;"Bedrijfsvestigingen naar activiteit op 1 januari (SBI 2008), exclusief bedrijfsvestigingen in de sectoren overheid, onderwijs en zorg
+
+Status van de cijfers:
+De cijfers hebben een voorlopig karakter.
+
+Deze tabel bevat gegevens over het aantal vestigingen van bedrijven naar economische activiteit, gebaseerd op de Standaard Bedrijfsindeling 2008 (SBI 2008). De vestigingen zijn voorts ingedeeld naar de gemeentelijke indeling per 1 januari van het verslagjaar.
+
+Vestiging:
+Elke afzonderlijk gelegen ruimte, terrein of complex van ruimten of terreinen, benut door een bedrijf voor uitoefening van de activiteiten. Ieder bedrijf bestaat uit ten minste één vestiging. Meerdere locaties van een bedrijf binnen één postcodegebied worden als één vestiging beschouwd.
+
+Standaard Bedrijfsindeling 2008 (SBI 2008):
+De Nederlandse hiërarchische indeling van economische activiteiten die door het CBS wordt gebruikt om bedrijfseenheden in te delen naar hun hoofdactiviteit. De SBI 2008 is de versie die vanaf 2008 gebruikt wordt.
+
+In deze tabel is gekozen voor de hoofdactiviteit (SBI) van de vestiging. Niet iedere vestiging van een bedrijf houdt zich bezig met de hoofdactiviteit (SBI) van het bedrijf als geheel. Om te weten welke activiteiten worden uitgevoerd in een regio is de hoofdactiviteit (SBI) van de vestiging gebruikt. In de tabel zijn de vestigingen (naast de totalen) ook naar de volgende zeven sectoren onderverdeeld:
+A: Landbouw, bosbouw en visserij
+B-F: Nijverheid en energie
+G+I: Handel en horeca
+H+J: Vervoer, informatie en communicatie
+K-L: Financiële diensten, onroerend goed
+M-N: Zakelijke dienstverlening
+R-U: Cultuur, recreatie, overige diensten
+
+De sectoren overheid, onderwijs en zorg zijn niet opgenomen vanwege de onbetrouwbaarheid van deze gegevens.
+
+Het aantal vestigingen is afgerond op een veelvoud van vijf. In geval van afrondingen kan het voorkomen, dat de totalen niet precies overeenstemmen met de som der opgetelde getallen.
+";;;;;
+216;165;215;Topic;BedrijfsvestigingenTotaal_164;Bedrijfsvestigingen totaal;;;Double;aantal;0;Impossible
+217;;215;TopicGroup;;Bedrijfsvestigingen naar activiteit;;;;;;
+218;166;217;Topic;ALandbouwBosbouwEnVisserij_165;A Landbouw, bosbouw en visserij;;;Double;aantal;0;Impossible
+219;167;217;Topic;BFNijverheidEnEnergie_166;B-F Nijverheid en energie;;;Double;aantal;0;Impossible
+220;168;217;Topic;GIHandelEnHoreca_167;G+I Handel en horeca;;;Double;aantal;0;Impossible
+221;169;217;Topic;HJVervoerInformatieEnCommunicatie_168;H+J Vervoer, informatie en communicatie;;;Double;aantal;0;Impossible
+222;170;217;Topic;KLFinancieleDienstenOnroerendGoed_169;K-L Financiële diensten, onroerend goed;;;Double;aantal;0;Impossible
+223;171;217;Topic;MNZakelijkeDienstverlening_170;M-N Zakelijke dienstverlening;;;Double;aantal;0;Impossible
+224;172;217;Topic;RUCultuurRecreatieOverigeDiensten_171;R-U Cultuur, recreatie, overige diensten;;;Double;aantal;0;Impossible
+225;;;TopicGroup;;Landbouw;"De gegevens voor dit onderwerp komen uit de landbouwtelling. De landbouwtelling maakt deel uit van de gecombineerde opgave, die onder meer gebruikt wordt voor de uitvoering van het landbouwbeleid en handhaving van de Meststoffenwet.
+
+De regionale indeling van de Landbouwtelling is gebaseerd op het hoofdvestigingsadres. Hierdoor kan de regio, waaraan de landbouwactiviteiten (houden van dieren, teelt van gewassen) worden toegerekend, afwijken van de plaats waar deze activiteiten daadwerkelijk plaatsvinden.
+
+De peildatum voor het aantal dieren is 1 april; de peildatum voor de gewassen is 15 mei.
+
+Met ingang van 2016 wordt voor de afbakening van de Landbouwtelling gebruik gemaakt van informatie uit het Handelsregister. Inschrijving in het Handelsregister met een agrarische SBI (Standaard BedrijfsIndeling) is leidend bij de bepaling of er sprake is van een landbouwbedrijf. Met deze afbakening wordt zo nauw mogelijk aangesloten bij de statistische verordeningen van Eurostat en de (Nederlandse) implementatie van het begrip 'actieve landbouwer' uit het Gemeenschappelijk Landbouwbeleid (GLB).
+
+De afbakening van de Landbouwtelling op basis van informatie uit het Handelsregister heeft vooral invloed op het aantal bedrijven, hier treedt een duidelijke trendbreuk op. De invloed op arealen (behalve bij niet-cultuurgrond en natuurlijk grasland) en de dieraantallen (behalve bij schapen, en paarden en pony's) zijn beperkt. Dit heeft met name te maken met het soort bedrijven dat bij de nieuwe afbakening wordt uitgesloten (zoals maneges, kinderboerderijen en natuurbeheer organisaties). 
+
+Met ingang van 2010 wordt een nieuwe norm voor de economische omvang van bedrijven en een nieuwe bedrijfstypering gehanteerd. Tot en met 2009 werd de economische omvang van agrarische bedrijven uitgedrukt in NGE (Nederlandse Grootte-Eenheid). Met ingang van 2010 is dit vervangen door SO (Standaard Opbrengst). Hierdoor wijzigt de ondergrens voor opname van bedrijven in de publicatie van de Landbouwtelling van 3 NGE in 3000 euro SO. 
+Voor vergelijkbaarheid in de tijd zijn de gegevens van 2000 tot en met 2009 herberekend op basis van SO-normen en -indelingen. SO-normen worden om de drie jaar geactualiseerd. De meest recente actualisatie vond plaats in 2016; bij de herberekening zijn de SO-normen uit 2010 gehanteerd.
+
+Met ingang van 2011 zijn er wijzigingen doorgevoerd in de geografische toedeling van bedrijven met hoofdvestiging in het buitenland. Dit kan met name in de grensgebieden invloed hebben op de regionale cijfers.
+";;;;;
+226;;225;TopicGroup;;Graasdieren;Graasdieren zijn paarden en pony's, rundvee, schapen en geiten.;;;;;
+227;173;226;Topic;Rundvee_172;Rundvee;Jongvee, melk- en kalfkoeien, zoogkoeien en vlees- en weidekoeien, fokstieren en kalveren.;;Double;aantal;0;Impossible
+228;174;226;Topic;Schapen_173;Schapen;Ooien, lammeren en rammen.;;Double;aantal;0;Impossible
+229;175;226;Topic;Geiten_174;Geiten;;;Double;aantal;0;Impossible
+230;176;226;Topic;PaardenEnPonyS_175;Paarden en pony's;Uitsluitend de op geregistreerde landbouwbedrijven voorkomende paarden en pony's.;;Double;aantal;0;Impossible
+231;;225;TopicGroup;;Hokdieren;"Hokdieren zijn varkens, diverse soorten pluimvee, konijnen en edelpelsdieren.
+
+Om hobbymatig van bedrijfsmatig gehouden dieren te onderscheiden, worden bij pluimvee, konijnen en edelpelsdieren aantallen van minder dan 25 stuks niet in de telling meegenomen.";;;;;
+232;177;231;Topic;Varkens_176;Varkens;Biggen, fokvarkens en vleesvarkens.;;Double;aantal;0;Impossible
+233;178;231;Topic;Kippen_177;Kippen;Leghennen, ouderdieren van leghennen, vleeskuikens en ouderdieren van vleeskuikens.;;Double;aantal;0;Impossible
+234;179;231;Topic;Kalkoenen_178;Kalkoenen;"Kalkoenen, slachteenden en pluimvee (legeenden, ganzen, parelhoenders en dergelijke met uitzondering van kippen).
+Om hobbymatig van bedrijfsmatig gehouden dieren te onderscheiden, worden bij pluimvee aantallen van minder dan 25 stuks niet in de telling meegenomen.";;Double;aantal;0;Impossible
+235;180;231;Topic;Slachteenden_179;Slachteenden;;;Double;aantal;0;Impossible
+236;181;231;Topic;OverigPluimvee_180;Overig pluimvee;Legeenden, ganzen, parelhoenders en dergelijke.;;Double;aantal;0;Impossible
+237;182;231;Topic;Konijnen_181;Konijnen;Gespeende vleeskonijnen en voedsters (moederdieren).;;Double;aantal;0;Impossible
+238;183;231;Topic;Edelpelsdieren_182;Edelpelsdieren;"Sinds 8 januari 2021 is er in Nederland een verbod op de pelsdierhouderij. 
+
+Nertsen en overige pelsdieren, uitsluitend moederdieren.
+
+Sinds 2008 voornamelijk nertsen.
+
+Het is in Nederland niet meer toegestaan vossen en chinchilla's te fokken voor bont. In 1998 werd al bepaald dat er geen nieuwe vossen- en chinchillafokkerijen bij mochten komen, en dat bestaande bedrijven niet konden uitbreiden. Op 1 april 2008 is er een einde gekomen aan de tienjarige overgangstermijn voor bestaande fokkerijen.
+";;Double;aantal;0;Impossible
+239;;225;TopicGroup;;Oppervlakte cultuurgrond;"Cultuurgrond is grond die, blijvend dan wel tijdelijk, deel uitmaakt van het bedrijf, en in hoofdzaak bestemd is voor het voortbrengen van landbouwproducten (akkerbouw, tuinbouw, veehouderij), met inbegrip van braakland en (tijdelijk) grasland.
+
+Omvat akkerbouw, tuinbouw open grond, tuinbouw onder glas, grasland en groenvoedergewassen.";;;;;
+240;184;239;Topic;TotaleOppervlakte_183;Totale oppervlakte;Oppervlakte cultuurgrond van alle land- en tuinbouwbedrijven.;;Double;are;0;Impossible
+241;185;239;Topic;Akkerbouw_184;Akkerbouw;"Oppervlakte cultuurgrond ten behoeve van akkerbouw als percentage van de totale oppervlakte cultuurgrond.
+
+Akkerbouw is teelt in de volle grond, veelal voor industriële verwerking.";;Double;%;1;Impossible
+242;186;239;Topic;TuinbouwOpenGrond_185;Tuinbouw open grond;"Oppervlakte cultuurgrond ten behoeve van tuinbouw open grond als percentage van de totale oppervlakte cultuurgrond.
+
+Tuinbouw open grond is teelt in de volle grond, veelal direct voor de markt.";;Double;%;1;Impossible
+243;187;239;Topic;TuinbouwOnderGlas_186;Tuinbouw onder glas;"Oppervlakte cultuurgrond ten behoeve van tuinbouw onder glas als percentage van de totale oppervlakte cultuurgrond.
+
+Tuinbouw onder glas is teelt in kassen, bedekt met glas of plastic, of in betreedbare plastic tunnels.";;Double;%;1;Impossible
+244;188;239;Topic;BlijvendGrasland_187;Blijvend grasland;"Oppervlakte cultuurgrond ten behoeve van blijvend grasland als percentage van de totale oppervlakte cultuurgrond.
+
+Blijvend grasland is grond met een natuurlijke of ingezaaide vegetatie van grassen of andere kruidachtige voedergewassen, die voor minstens 5 jaar niet in de vruchtwisseling is meegenomen. 
+
+Vruchtwisseling is het op een perceel na elkaar telen van verschillende gewassen om bodemziekten te voorkomen.";;Double;%;1;Impossible
+245;189;239;Topic;NatuurlijkGrasland_188;Natuurlijk grasland;"Oppervlakte cultuurgrond ten behoeve van natuurlijk grasland als percentage van de totale oppervlakte cultuurgrond.
+
+Natuurlijk grasland is grond met een natuurlijke of ingezaaide vegetatie van grassen of andere kruidachtige voedergewassen waarvan de opbrengst niet meer bedraagt dan 5 ton droge stof/ha per jaar en waarbij het beheer gedurende meerdere jaren op geen enkele wijze gericht is op een verhoging of handhaving van de landbouwkundige productie. Hiermee worden maatregelen bedoeld zoals bemesting, drainage en onkruidbestrijding.";;Double;%;1;Impossible
+246;190;239;Topic;TijdelijkGrasland_189;Tijdelijk grasland;"Oppervlakte cultuurgrond ten behoeve van tijdelijk grasland als percentage van de totale oppervlakte cultuurgrond.
+
+Tijdelijk grasland is grond met een natuurlijke of ingezaaide vegetatie van grassen of andere kruidachtige voedergewassen, die voor minder dan 5 jaar niet in de vruchtwisseling is meegenomen. 
+
+Vruchtwisseling is het op een perceel na elkaar telen van verschillende gewassen om bodemziekten te voorkomen.";;Double;%;1;Impossible
+247;191;239;Topic;Groenvoedergewassen_190;Groenvoedergewassen;"Oppervlakte cultuurgrond ten behoeve van groenvoedergewassen als percentage van de totale oppervlakte cultuurgrond.
+Omvat luzerne, snijmaïs en voederbieten.";;Double;%;1;Impossible
+248;;225;TopicGroup;;Mineralenuitscheiding;"Mineralenuitscheiding per ha cultuurgrond.
+
+De mineralenuitscheidingsfactoren worden voor elke stof apart berekend op basis van een balans per dier: uitscheiding van mineralen is gelijk aan opname van mineralen met voer minus vastlegging van mineralen in dierlijke producten. 
+De hoeveelheid uitgescheiden fosfaat en kalium wordt gelijk verondersteld aan de hoeveelheid fosfaat en kalium in de mest.
+
+De basis voor de balansberekening van de standaardfactoren wordt gevormd door gegevens over het veevoedergebruik (krachtvoer en ruwvoer) en gegevens over de dierlijke productie (melk, eieren en vlees, inclusief de groei en het aantal geboren dieren). 
+Deze gegevens worden zoveel mogelijk ontleend aan statistieken en technische administraties van het betreffende jaar. De uitscheidingsfactoren worden jaarlijks vastgesteld door de Werkgroep Uniformering berekeningswijze Mest- en mineralencijfers (WUM).
+
+De mineralenuitscheidingsfactoren per hectare cultuurgrond zijn berekend met behulp van de totale cultuurgrond exclusief braakland (natuurbraak en groenbraak) en snel groeiend hout.";;;;;
+249;192;248;Topic;Stikstofuitscheiding_191;Stikstofuitscheiding;De totale hoeveelheid uitgescheiden stikstof (N) zonder aftrek van stikstof die vervluchtigt in de vorm van ammoniak (NH3) inclusief de afvoer via spuiwater van luchtwassers, lachgas (N2O), stikstofoxide (NO) en stikstofgas (N2).;;Double;kg/ha;0;Impossible
+250;193;248;Topic;Fosfaatuitscheiding_192;Fosfaatuitscheiding;De uitgescheiden hoeveelheid fosfaat uitgedrukt in P2O5. In tegenstelling tot stikstof treden bij fosfaat geen gasvormige verliezen op.;;Double;kg/ha;0;Impossible
+251;194;248;Topic;KaliUitscheiding_193;Kali-uitscheiding;"In geproduceerde mest aanwezige hoeveelheid kali uitgedrukt in K2O. In tegenstelling tot stikstof treden bij kali geen gasvormige verliezen op.
+
+De cijfers van 2017 voor kali-uitscheiding blijven voorlopig. Daarna worden over kali-uitscheiding geen cijfers meer gepubliceerd omdat het vanuit milieuoogpunt minder relevant is en de cijfers onzeker zijn.";;Double;kg/ha;0;Impossible
+252;;225;TopicGroup;;Mestproductie;"Productie van dunne en vaste mest door bij de landbouwtelling getelde dieren, uitgezonderd overig pluimvee (legeenden, ganzen, parelhoenders en dergelijke)en pelsdieren anders dan nertsen en vossen 
+Het betreft de hoeveelheid mest die na enkele maanden bewaring aanwezig is in stalopslag en in opslag buiten de stal, inclusief schoonmaakwater en vermorst drinkwater. 
+Voor rundvee en schapen komt daar nog de hoeveelheid mest bij die deze dieren produceren wanneer ze in de wei lopen.";;;;;
+253;195;252;Topic;DunneMest_194;Dunne mest;Alle rundveemest (uitgezonderd de mestproductie in de stal van vleeskoeien), de weidemest van schapen, paarden en pony's, alle varkensmest en de mest van leghennen in een stalsysteem met dunne mest.;;Double;mln kg;0;Impossible
+254;196;252;Topic;VasteMest_195;Vaste mest;De stalmest van vleeskoeien, schapen, geiten, paarden en pony's, de pluimveemest in stalsystemen met vaste mest en de mest van konijnen en pelsdieren.;;Double;mln kg;0;Impossible
+255;;;TopicGroup;;Verkeer en vervoer;;;;;;
+256;;255;TopicGroup;;Motorvoertuigen;"Gemotoriseerde voertuigen voor het wegverkeer.
+Hieronder vallen personenauto's, bedrijfsmotorvoertuigen (bestelauto's, vrachtauto's, trekkers, speciale voertuigen, bussen), motorfietsen en voertuigen met een bromfietskenteken.
+Aanhangers, opleggers, op rails rijdende voertuigen, en fietsen met trapondersteuning vallen niet onder de motorvoertuigen.
+
+De gegevens zijn ontleend aan de Statistiek van de Motorvoertuigen. Deze gegevens zijn gebaseerd op de kentekenregistratie van RDW. Met behulp van deze registratie zijn tellingen gemaakt van alle voertuigen met actuele, houderschapsplichtige kentekens die op 1 januari in het kentekenbestand voorkomen.
+
+De uitkomsten zijn beschikbaar vanaf 2000, voertuigen met een bromfietskenteken vanaf 2007. ";;;;;
+257;197;256;Topic;PersonenautoS_196;Personenauto's;"Motorvoertuig voor personenvervoer over de weg, exclusief brom- en motorfietsen, met maximaal negen zitplaatsen (met inbegrip van de bestuurdersplaats).
+
+Hieronder vallen:
+a) personenauto's
+b) bestelwagens ontworpen voor en voornamelijk gebruikt voor het vervoer van reizigers
+c) taxi's
+d) huurauto's
+e) ziekenwagens
+f) campers.
+Lichte wegvoertuigen voor goederenvervoer over de weg, touringcars, autobussen en minibussen vallen hier niet onder.
+Het begrip personenauto omvat ook taxi's en huurauto's met minder dan tien zitplaatsen. Vanaf 1 mei 2009 worden campers gekentekend als personenauto of als bus afhankelijk van het aantal zitplaatsen. Vóór die datum zijn campers geregistreerd als speciale voertuigen.";;Double;aantal;0;Impossible
+258;198;256;Topic;PersonenautoSRelatief_197;Personenauto's, relatief;"Personenauto's per duizend inwoners.
+
+Personenauto:
+Motorvoertuig voor personenvervoer over de weg, exclusief brom- en motorfietsen, met maximaal negen zitplaatsen (met inbegrip van de bestuurdersplaats).
+
+Hieronder vallen:
+a) personenauto's
+b) bestelwagens ontworpen voor en voornamelijk gebruikt voor het vervoer van reizigers
+c) taxi's
+d) huurauto's
+e) ziekenwagens
+f) campers.
+Lichte wegvoertuigen voor goederenvervoer over de weg, touringcars, autobussen en minibussen vallen hier niet onder.
+Het begrip personenauto omvat ook taxi's en huurauto's met minder dan tien zitplaatsen. Vanaf 1 mei 2009 worden campers gekentekend als personenauto of als bus afhankelijk van het aantal zitplaatsen. Vóór die datum zijn campers geregistreerd als speciale voertuigen.";;Double;per 1 000 inwoners;0;Impossible
+259;199;256;Topic;PersonenautoSParticulieren_198;Personenauto's particulieren;"Personenauto's op naam van natuurlijke personen (particulieren). Eenmanszaken, rederijen en maatschappen vallen hier ook onder, aangezien voertuigen van deze organisaties altijd op de particuliere naam van de eigenaar staan. 
+Personenauto's op naam van rechtspersonen (bedrijven) zijn buiten beschouwing gelaten, om vertekening van de cijfers door grote verhuur- en leasebedrijven te voorkomen.
+
+Bij het bepalen van het aantal personenauto's per geografische eenheid wordt uitgegaan van de woon- of vestigingsplaats die is opgegeven bij de tenaamstelling van het kenteken.
+";;Double;aantal;0;Impossible
+260;200;256;Topic;PersonenautoSParticulierenRelatief_199;Personenauto's particulieren, relatief;"Personenauto's particulieren per duizend inwoners. 
+
+Personenauto's particulieren:
+Personenauto's op naam van natuurlijke personen (particulieren). Eenmanszaken, rederijen en maatschappen vallen hier ook onder, aangezien voertuigen van deze organisaties altijd op de particuliere naam van de eigenaar staan. 
+Personenauto's op naam van rechtspersonen (bedrijven) zijn buiten beschouwing gelaten, om vertekening van de cijfers door grote verhuur- en leasebedrijven te voorkomen.
+";;Double;per 1 000 inwoners;0;Impossible
+261;201;256;Topic;Bedrijfsmotorvoertuigen_200;Bedrijfsmotorvoertuigen;"Motorvoertuig ingericht voor het vervoer van goederen of personen, voor het uitvoeren van bijzondere doeleinden of voor het trekken van opleggers.
+
+Hieronder vallen bestelauto's, vrachtauto's, trekkers, speciale voertuigen en bussen.
+Aanhangwagens en opleggers vallen hier niet onder.";;Double;aantal;0;Impossible
+262;202;256;Topic;Motorfietsen_201;Motorfietsen;Voertuig voor het wegverkeer op twee, drie of vier wielen met een onbeladen gewicht van maximaal 400 kg. Dergelijke motorvoertuigen met een cilinderinhoud van meer dan 50 cm³ vallen hieronder, alsook motorvoertuigen met een cilinderinhoud van minder dan 50 cm³ die niet aan de definitie van bromfiets beantwoorden.;;Double;aantal;0;Impossible
+263;203;256;Topic;MotorfietsenRelatief_202;Motorfietsen, relatief;"Motorfietsen per duizend inwoners.
+
+Motorfiets:
+Voertuig voor het wegverkeer op twee, drie of vier wielen met een onbeladen gewicht van maximaal 400 kg. Dergelijke motorvoertuigen met een cilinderinhoud van meer dan 50 cm³ vallen hieronder, alsook motorvoertuigen met een cilinderinhoud van minder dan 50 cm³ die niet aan de definitie van bromfiets beantwoorden.";;Double;per 1 000 inwoners;0;Impossible
+264;204;256;Topic;VoertuigenMetBromfietskenteken_203;Voertuigen met bromfietskenteken;"Voertuig met een geldig Nederlands bromfietskenteken en toegelaten tot deelname aan het verkeer op de openbare weg.
+
+Het totaal van alle snorfietsen, bromfietsen, brommobielen en overige voertuigen met bromfietskenteken (zoals bromfiets-quads, bakbromfietsen en 3-wielige brommers). 
+Exclusief gehandicapten-voertuigen.";;Double;aantal;0;Impossible
+265;205;256;Topic;VoertuigenMetBromfietskenteken_204;Voertuigen met bromfietskenteken (%);"Voertuigen met bromfietskenteken per duizend inwoners.
+
+Voertuig met bromfietskenteken:
+Voertuig met een geldig Nederlands bromfietskenteken en toegelaten tot deelname aan het verkeer op de openbare weg.
+
+Het totaal van alle snorfietsen, bromfietsen, brommobielen en overige voertuigen met bromfietskenteken (zoals bromfiets-quads, bakbromfietsen en 3-wielige brommers). 
+Exclusief gehandicapten-voertuigen.";;Double;per 1 000 inwoners;0;Impossible
+266;;255;TopicGroup;;Lengte van wegen;"Als uitgangspunt voor de lengte van wegen is het Nationale Wegenbestand (een product van Adviesdienst Verkeer en Vervoer) gebruikt. Fiets- en voetpaden zijn uitgesloten. 
+Dit is mede gedaan met behulp van de meest recente kaartbladen van Top10Vector. 
+Voor het uitsluiten van de fiets- en voetpaden voor 2001, 2002 en 2003 zijn de meest recente Top10Vector bladen gebruikt die op 18 maart 2004 bij het CBS beschikbaar waren.";;;;;
+267;206;266;Topic;TotaleWeglengte_205;Totale weglengte;"Totale lengte van alle wegen die worden beheerd door wegbeheerders als het Rijk, provincies, gemeenten en waterschappen, voorzien van een straatnaam of nummer, waarop verkeer met motorvoertuigen op meer dan twee wielen is toegestaan.
+Dit gegeven is beschikbaar vanaf 2001.";;Double;kilometer;0;Impossible
+268;207;266;Topic;GemeentelijkeEnWaterschapswegen_206;Gemeentelijke en waterschapswegen;"Wegen beheerd door gemeente of waterschap. Waterschapswegen vormen een belangrijk deel van het wegennet buiten de bebouwde kom van de provincies Noord-Holland, Zuid-Holland en Zeeland. 
+Door de overgang van gemeente Vianen van Zuid-Holland naar Utrecht op 1 januari 2002 heeft vanaf deze datum ook provincie Utrecht waterschapswegen. 
+Dit gegeven is beschikbaar vanaf 2001.";;Double;kilometer;0;Impossible
+269;208;266;Topic;ProvincialeWegen_207;Provinciale wegen;Wegen beheerd door de provincie. Dit gegeven is beschikbaar vanaf 2001.;;Double;kilometer;0;Impossible
+270;209;266;Topic;Rijkswegen_208;Rijkswegen;Wegen beheerd door het Rijk. Dit gegeven is beschikbaar vanaf 2001.;;Double;kilometer;0;Impossible
+271;;;TopicGroup;;Nabijheid voorzieningen;"De afstand tot een voorziening is de gemiddelde afstand van alle
+inwoners in een gebied tot de dichtstbijzijnde voorziening, berekend over de weg.
+De afstand is berekend over verharde, door auto's te gebruiken wegen, dus niet over fiets- en voetpaden. Overtochten via veerboten zijn hierbij inbegrepen.
+Verbindingen via het buitenland worden echter niet meegenomen. Ook wordt geen rekening gehouden met éénrichtingsverkeer en overige inrijverboden, behalve bij rijks- en provinciale wegen.
+De verbindingen over de weg, gevormd door het netwerk van verharde (auto)wegen, zijn opgebouwd op basis van het Nationaal Wegen Bestand (Rijkswaterstaat).
+De gemiddelde afstand is opgenomen wanneer van 90 procent of meer van de inwoners in het gebied de exacte ligging (x,y-coördinaat) van het adres kon worden vastgesteld.
+Daarnaast geldt dat het gemiddelde alleen is vermeld bij minimaal 10
+inwoners per gebied.
+.
+Een voorziening is een locatie die bezocht kan worden door personen.
+De locatie sluit aan bij het gebruik in het dagelijks leven.
+Het aantal voorzieningen binnen een bepaalde afstand is het gemiddeld aantal voorzieningen binnen een bepaalde afstand van alle inwoners,
+berekend over de weg. De vaste afstanden zijn bepaald op 1, 3, 5, 10 of 20 kilometer.
+Afhankelijk van de dichtheid van de voorzieningen is een keuze gemaakt voor de meest relevante afstand.
+Het gemiddeld aantal voorzieningen binnen een bepaalde afstand is opgenomen wanneer van 90 procent of meer van de inwoners in het gebied de exacte ligging (x,y-coördinaat) van het adres kon worden vastgesteld.
+Daarnaast geldt dat het aantal voorzieningen alleen is vermeld bij minimaal 10 inwoners per gebied.
+De adresgegevens van voorzieningen komen van verschillende (externe) instellingen:
+- De DUO (Dienst Uitvoering Onderwijs, onderdeel van het Ministerie OCW) verstrekt de adressen van de schoolvestigingen.
+LOCATUS levert locaties van detailhandel, horeca, bioscopen,
+sportvoorzieningen (met uitzondering van kunstijsbanen) en recreatievoorzieningen.
+Het Nivel (Nederlands Instituut voor onderzoek van de gezondheidszorg) verstrekt de adressen van (apotheekhoudende) huisartsen.
+Het Onderzoeksbureau Regioplan Beleidsonderzoek heeft de adressen van de kinderopvang geïnventariseerd.
+Het RIVM (Rijksinstituut voor Volksgezondheid en Milieu) verstrekt de adressen van ziekenhuizen.
+De VHN (Vereniging Huisartsenposten Nederland) verstrekt de adressen van huisartsenposten.
+De VOB (Vereniging van Openbare Bibliotheken) publiceert de locaties van de bibliotheken en hun vestigingen.
+.
+Onder een inwoner wordt een persoon verstaan die behoort tot de bevolking van een bepaald gebied. In de bevolkingsaantallen zijn uitsluitend personen begrepen die zijn opgenomen in de gemeentelijke basisadministratie van een Nederlandse gemeente.
+In principe wordt iedereen die voor onbepaalde tijd in Nederland woont, opgenomen in het bevolkingsregister van de woongemeente.
+.";;;;;
+272;;271;TopicGroup;;Gezondheid;;;;;;
+273;210;272;Topic;AfstandTotHuisartsenpraktijk_209;Afstand tot huisartsenpraktijk;"De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot de dichtstbijzijnde huisartsenpraktijk.
+Een huisartsenpraktijk is een pand of ruimte waarin een of meer huisartsen (samen) werken.";;Double;km;1;Impossible
+274;211;272;Topic;AantalHuisartsenpraktijkenBinnen3Km_210;Aantal huisartsenpraktijken binnen 3 km;"Het gemiddeld aantal huisartsenpraktijken binnen 3 km over de weg voor alle inwoners van een gebied.
+Een huisartsenpraktijk is een pand of ruimte waarin een of meer huisartsen (samen) werken.";;Double;aantal;1;Impossible
+275;212;272;Topic;AfstandTotHuisartsenpost_211;Afstand tot huisartsenpost;"De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot de dichtstbijzijnde huisartsenpost.
+Een huisartsenpost is een plaats waar huisartsen uit de regio de avond-, nacht- en weekenddiensten verzorgen.
+Voor een aantal huisartsenposten geldt een wisseldienst.
+.
+De afstand van een woonadres tot een van de huisartsenposten in een cluster van wisseldiensten is het gemiddelde van de afstanden tot alle huisartsenposten binnen dat cluster.";;Double;km;1;Impossible
+276;213;272;Topic;AfstandTotZiekenhuis_212;Afstand tot ziekenhuis;"De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot het dichtstbijzijnde ziekenhuis.
+.
+Een ziekenhuis is een instelling voor onderzoek, behandeling en verpleging van zieken. Er kunnen patiënten voor meer dan 24 uur opgenomen worden en er kunnen grote operaties worden uitgevoerd.
+Buitenpoliklinieken blijven buiten beschouwing. Onder een buitenpolikliniek wordt een locatie van een ziekenhuis verstaan waar niet bedlegerige patiënten worden behandeld of gecontroleerd.
+Patiënten worden er niet voor meer dan 24 uur opgenomen en er worden geen grote operaties uitgevoerd.";;Double;km;1;Impossible
+277;214;272;Topic;AantalZiekenhuizenBinnen20Km_213;Aantal ziekenhuizen binnen 20 km;"Het gemiddeld aantal ziekenhuizen binnen 20 km over de weg voor alle inwoners van een gebied.
+.
+Een ziekenhuis is een instelling voor onderzoek, behandeling en verpleging van zieken. Er kunnen patiënten voor meer dan 24 uur opgenomen worden en er kunnen grote operaties worden uitgevoerd.
+Buitenpoliklinieken blijven buiten beschouwing. Onder een buitenpolikliniek wordt een locatie van een ziekenhuis verstaan waar niet bedlegerige patiënten worden behandeld of gecontroleerd.
+Patiënten worden er niet voor meer dan 24 uur opgenomen en er worden geen grote operaties uitgevoerd.";;Double;aantal;1;Impossible
+278;;271;TopicGroup;;Kinderopvang;;;;;;
+279;215;278;Topic;AfstandTotKinderdagverblijf_214;Afstand tot kinderdagverblijf;"De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot het dichtstbijzijnde kinderdagverblijf.
+.
+Een kinderdagverblijf is een plaats waar kinderen van 0 tot 4 jaar gedurende één of meer dagdelen per week het hele jaar door worden opgevangen.
+Er kan voor meer dan 5 uur per dag van het kinderdagverblijf gebruik gemaakt worden en voor maximaal 10 dagdelen per week.";;Double;km;1;Impossible
+280;216;278;Topic;AantalKinderdagverblijvenBinnen3Km_215;Aantal kinderdagverblijven binnen 3 km;Het gemiddeld aantal kinderdagverblijven binnen 3 km over de weg voor alle inwoners van een gebied.;;Double;aantal;1;Impossible
+281;;271;TopicGroup;;Onderwijs;;;;;;
+282;217;281;Topic;AfstandTotSchoolBasisonderwijs_216;Afstand tot school basisonderwijs;"De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot de dichtstbijzijnde school voor basisonderwijs.
+.
+Het basisonderwijs omvat naast de reguliere basisscholen ook de scholen voor kinderen van mensen zonder vaste woon- of verblijfplaats,
+de zogenaamde rijdende scholen en de ligplaatsscholen voor varende kleuters. Het speciaal basisonderwijs en de speciale scholen zijn niet meegenomen.";;Double;km;1;Impossible
+283;218;281;Topic;AantalBasisonderwijsscholenBinnen3Km_217;Aantal basisonderwijsscholen binnen 3 km;"Het gemiddeld aantal scholen (vestigingen) voor basisonderwijs binnen 3 km over de weg voor alle inwoners van een gebied.
+.
+Het basisonderwijs omvat naast de reguliere basisscholen ook de scholen voor kinderen van mensen zonder vaste woon- of verblijfplaats, de zogenaamde rijdende scholen en de ligplaatsscholen voor varende kleuters. 
+Het speciaal basisonderwijs en de speciale scholen zijn niet meegenomen";;Double;aantal;1;Impossible
+284;219;281;Topic;AfstandTotSchoolVmbo_218;Afstand tot school vmbo;De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot de dichtstbijzijnde school (vestiging) voor voorbereidend middelbaar beroepsonderwijs waar leerlingen door de overheid bekostigd voltijd onderwijs kunnen volgen.;;Double;km;1;Impossible
+285;220;281;Topic;AantalScholenVmboBinnen5Km_219;Aantal scholen vmbo binnen 5 km;"Het gemiddeld aantal scholen voor voorbereidend middelbaar beroepsonderwijs binnen 5 km over de weg voor alle inwoners van een gebied.
+.
+Het betreft het voorbereidend middelbaar beroepsonderwijs waar leerlingen door de overheid bekostigd voltijd onderwijs kunnen volgen.";;Double;aantal;1;Impossible
+286;221;281;Topic;AfstandTotSchoolHavoVwo_220;Afstand tot school havo/vwo;De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot de dichtstbijzijnde school voor hoger algemeen voortgezet onderwijs of voorbereidend wetenschappelijk onderwijs waar leerlingen door de overheid bekostigd onderwijs kunnen volgen.;;Double;km;1;Impossible
+287;222;281;Topic;AantalScholenHavoVwoBinnen5Km_221;Aantal scholen havo/vwo binnen 5 km;"Het gemiddeld aantal scholen voor hoger algemeen voortgezet onderwijs of voorbereidend wetenschappelijk onderwijs binnen 5 km over de weg voor alle inwoners van een gebied. 
+.
+Het betreft het hoger algemeen voortgezet onderwijs of voorbereidend wetenschappelijk onderwijs waar leerlingen door de overheid bekostigd onderwijs kunnen volgen.";;Double;aantal;1;Impossible
+288;;271;TopicGroup;;Detailhandel;;;;;;
+289;223;288;Topic;AfstandTotGroteSupermarkt_222;Afstand tot grote supermarkt;"De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot de dichtstbijzijnde grote supermarkt.
+.
+Een grote supermarkt is een winkel met verschillende soorten dagelijkse artikelen en met een minimale oppervlakte van 150 m2.";;Double;km;1;Impossible
+290;224;288;Topic;AantalGroteSupermarktenBinnen3Km_223;Aantal grote supermarkten binnen 3 km;"Het gemiddeld aantal grote supermarkten binnen 3 km over de weg voor alle inwoners van een gebied.
+.
+Een grote supermarkt is een winkel met verschillende soorten dagelijkse artikelen en met een minimale oppervlakte van 150 m2.";;Double;aantal;1;Impossible
+291;;271;TopicGroup;;Horeca;;;;;;
+292;225;291;Topic;AfstandTotRestaurant_224;Afstand tot restaurant;De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot het dichtstbijzijnde restaurant.;;Double;km;1;Impossible
+293;226;291;Topic;AantalRestaurantsBinnen3Km_225;Aantal restaurants binnen 3 km;Het gemiddeld aantal restaurants binnen 3 km over de weg voor alle inwoners van een gebied.;;Double;aantal;1;Impossible
+294;;271;TopicGroup;;Vrije tijd en cultuur;;;;;;
+295;227;294;Topic;AfstandTotBibliotheek_226;Afstand tot bibliotheek;"De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot de dichtstbijzijnde bibliotheek.
+.
+Het betreft bibliotheken en hun vestigingen zoals deze zijn opgenomen in de publicatie van de Vereniging van Openbare Bibliotheken. 
+Mobiele vestigingen zoals bibliobussen zijn buiten beschouwing gebleven.";;Double;km;1;Impossible
+296;228;294;Topic;AfstandTotBioscoop_227;Afstand tot bioscoop;De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot de dichtstbijzijnde bioscoop.;;Double;km;1;Impossible
+297;229;294;Topic;AantalBioscopenBinnen10Km_228;Aantal bioscopen binnen 10 km;Het gemiddeld aantal bioscopen binnen 10 km over de weg voor alle inwoners van een gebied.;;Double;aantal;1;Impossible
+298;230;294;Topic;AfstandTotZwembad_229;Afstand tot zwembad;De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot het dichtstbijzijnde zwembad.;;Double;km;1;Impossible
+299;231;294;Topic;AfstandTotSportterrein_230;Afstand tot sportterrein;"De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot het dichtstbijzijnde sportterrein.
+.
+Terrein in gebruik voor sportactiviteiten, zoals sportveld, sporthal, zwembad, kunstijsbaan, motorcrossbaan en bos in het sportterrein, inclusief bijbehorende parkeerplaatsen en tribunes. 
+Het terrein heeft een omvang van minimaal 0,5 hectare.";;Double;km;1;Impossible
+300;;271;TopicGroup;;Groenvoorzieningen;;;;;;
+301;232;300;Topic;AfstandTotOpenbaarGroen_231;Afstand tot openbaar groen;"De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot het dichtstbijzijnde openbaar groen.
+.
+Terrein in gebruik als park of plantsoen, voor dagrecreatie, natuur of als bos. Het terrein kan zowel privaat als publiek toegankelijk zijn en heeft een omvang van minimaal één hectare.";;Double;km;1;Impossible
+302;;271;TopicGroup;;Verkeer en vervoer;;;;;;
+303;233;302;Topic;AfstandTotOpritHoofdverkeersweg_232;Afstand tot oprit hoofdverkeersweg;"De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot de dichtstbijzijnde oprit van een rijks- of provinciale weg.
+.
+Als uitgangspunt voor een oprit als toegang tot een rijks- of provinciale weg is het Nationale Wegenbestand (een product van Rijkswaterstaat van het Ministerie van Verkeer en Waterstaat) gebruikt.";;Double;km;1;Impossible
+304;234;302;Topic;AfstandTotTreinstation_233;Afstand tot treinstation;De gemiddelde afstand berekend over de weg van alle inwoners in een gebied tot het dichtstbijzijnde treinstation.;;Double;km;1;Impossible
+305;;;TopicGroup;;Milieu en bodemgebruik;;;;;;
+306;;305;TopicGroup;;Afval van huishoudens;"Afval dat door of in opdracht van de gemeenten bij huishoudens is ingezameld. Daarnaast zijn ook de hoeveelheden textiel en oud papier en karton, die door scholen, verenigingen en liefdadigheidsorganisaties zijn ingezameld, in de cijfers inbegrepen. 
+Omdat het afval van kleine winkels en dergelijk vaak tegelijk met het afval van huishoudens wordt ingezameld, zal een (klein) deel niet afkomstig zijn van huishoudens.
+.
+Reinigingsdienstenafval blijft buiten beschouwing. Hieronder worden afvalstoffen verstaan die vrijkomen bij activiteiten van de gemeenten zelf, zoals veegafval en groenafval uit plantsoenen en parken.
+.
+Ook blijft buiten beschouwing het overig afval dat door of in opdracht van de gemeenten, via aparte inzamelroutes, ingezameld wordt bij bedrijven, winkels en dergelijke. Het betreft voornamelijk de inzameling van kantoor-, winkel- en dienstenafval.
+.
+Van een klein deel van de gemeenten zijn geen cijfers beschikbaar of ontbreken cijfers over één of meer soorten afval. Als de gegevens van een of meer afvalcomponenten ontbreken, is er voor gekozen om bijgeschatte gegevens te gebruiken bij het bepalen van de totale hoeveelheid afval.
+Dit is echter alleen gedaan wanneer de hoeveelheden van de soorten afval waarvan de gegevens ontbreken, relatief klein zijn.
+.
+Wanneer een aantal gemeenten een gezamenlijke milieustraat beheren of als gemeenten het afval laten inzamelen door een gemeenschappelijke regeling, zijn hierdoor niet altijd cijfers per individuele gemeente beschikbaar.
+In deze gevallen wordt de totale hoeveelheid ingezameld afval op basis van het aantal inwoners over de gemeenten verdeeld.
+Een gemeenschappelijke regeling is een samenwerkingsverband tussen meerdere gemeenten. Zij zamelt het huishoudelijk afval in van alle aan de regeling deelnemende gemeenten.
+.
+De cijfers van Nederland, de landsdelen en de provincies zijn afgerond.";;;;;
+307;235;306;Topic;TotaalHuishoudelijkAfval_234;Totaal huishoudelijk afval;;;Double;1 000 kg;0;Impossible
+308;236;306;Topic;HuishoudelijkRestafval_235;Huishoudelijk restafval;Niet gescheiden ingezameld huishoudelijk afval.;;Double;1 000 kg;0;Impossible
+309;237;306;Topic;GrofHuishoudelijkRestafval_236;Grof huishoudelijk restafval;Niet gescheiden ingezameld restafval dat te groot of te zwaar is om op dezelfde wijze als het huishoudelijk restafval te worden aangeboden.;;Double;1 000 kg;0;Impossible
+310;238;306;Topic;GftAfval_237;Gft-afval;Groente-, fruit- en tuinafval.;;Double;1 000 kg;0;Impossible
+311;239;306;Topic;OudPapierEnKarton_238;Oud papier en karton;Oud papier en karton, waaronder datgene wat is ingezameld door verenigingen, scholen en dergelijke.;;Double;1 000 kg;0;Impossible
+312;240;306;Topic;Verpakkingsglas_239;Verpakkingsglas;Eenmalig verpakkingsglas zoals flessen en potten.;;Double;1 000 kg;0;Impossible
+313;241;306;Topic;Textiel_240;Textiel;Gebruikte kleding en ander textiel, waaronder datgene wat is ingezameld door verenigingen, scholen en liefdadigheidsorganisaties.;;Double;1 000 kg;0;Impossible
+314;242;306;Topic;KleinChemischAfval_241;Klein chemisch afval;"Huishoudelijke afvalstoffen zoals opgenomen in de zogenaamde KCA-lijst.
+Daaronder ook afgewerkte olie en accu's.";;Double;1 000 kg;0;Impossible
+315;243;306;Topic;OverigHuishoudelijkAfval_242;Overig huishoudelijk afval;"- drankenkartons zoals melkpakken;
+- kunststof verpakkingen zoals kunststofflacons, PET-flessen, kunststoffolies en kunststof bakjes;
+- overige kunststoffen zoals tuinmeubels, speelgoed en PVC buizen;
+- vloerbedekking van textiel;
+- wit- en bruingoed zoals koel- en vriesapparatuur, televisies, audioapparatuur, computer- en communicatieapparatuur en kleine keukenapparaten;
+- grof tuinafval zoals boomstronken, grote takken en snoeihout;
+- vlakglas zoals ruiten en spiegels;
+- metalen inclusief metalen verpakkingen zoals conservenblikken;
+- houtafval zoals sloophout, houten meubels en ander resthout;
+- schoon puin in de vorm van steenachtig materiaal zoals baksteen en beton;
+- bruikbaar huisraad zoals meubilair dat voornamelijk wordt ingezameld door kringloopbedrijven;
+- verbouwingsrestafval in de vorm van niet gescheiden ingezameld bouw- en sloopafval dat vrijkomt bij bouwen, slopen en verbouwingen door particuliere huishoudens.;
+- asbest en asbesthoudend afval;
+- overige afvalcomponenten zoals luiers, ander incontinentiemateriaal, gips en kadavers.";;Double;1 000 kg;0;Impossible
+316;;305;TopicGroup;;Bodemgebruik;;;;;;
+317;;316;TopicGroup;;Oppervlakte;"De gegevens over de totale oppervlakte volgens de regionale indelingen op 1 januari zijn berekend uit digitale bestanden van de gemeentegrenzen.
+Met ingang van 2011 wordt het bestand Burgerlijke gemeentegrenzen van het Kadaster gebruikt als basis voor de gemeentegrenzen, in tegenstelling tot het bestand Topgrenzen, de gemeentegrenzen van de voormalige Topografische Dienst, wat in 2010 en voorgaande jaren is gebruikt.
+Vanwege kleine grensverschillen tussen beide gemeentegrenzen-bestanden zullen daarom kleine afwijkingen in oppervlakte voor bijna alle gemeenten gerapporteerd worden, ook voor gemeenten waarvan de gemeentegrenzen niet officieel gewijzigd zijn.
+
+De onderverdeling in land en water is berekend op grond van de meest recente gegevens afkomstig uit de statistiek van het Bodemgebruik (ook wel bodemstatistiek genoemd). Zo zijn de cijfers van: 
+- 2009 en 2010 gebaseerd op de bodemstatistiek 2006;
+- 2011 en 2012 op de bodemstatistiek 2008;
+- 2013 tot en met 2015 op de bodemstatistiek 2010;
+- 2016 en 2017 op de bodemstatistiek 2012;
+- vanaf 2018 op de bodemstatistiek 2015.
+
+Met de overgang naar de bodemstatistiek 2000 is een tweetal verbeteringen doorgevoerd:
+1) de brongegevens uit de bodemstatistiek zijn geharmoniseerd met de digitale topografische kaartbladen van de Topografische Dienst Kadaster, schaal 1:10.000;
+2) de categorie binnen- en buitenwater bevat alle in de topografische kaart, schaal 1:10.000, weergegeven watervlakken groter dan 1 ha. 
+Water in delfstofwinning en vloei- en slibvelden wordt nu apart waargenomen en water in jachthavens wordt, in tegenstelling tot andere peiljaren, ingedeeld onder water met een recreatieve functie.
+
+Naast oppervlaktecijfers van land en water volgens hier gehanteerde cijfers uit de statistiek van het Bodemgebruik worden ook in de publicatie 'Ruimtelijke maatstaven financiële verhoudingswet(Fvw)' cijfers over oppervlakten land en water gepubliceerd.
+Deze publicatie bevat ruimtelijke peilgegevens ten behoeve van uitkeringen uit het Gemeentefonds. De oppervlaktecijfers kunnen licht afwijken van de oppervlaktecijfers van de statistiek van het Bodemgebruik.
+Het verschil wordt veroorzaakt omdat bodemstatistiekcijfers een integrale beschrijving geven voor Nederland van een enkel peiljaar. Deze peiljaren volgen om de drie of vier jaar. Hierbij wordt het materiaal uit een ouder jaar ieder jaar herberekend naar de meest recente gemeentelijke indeling.
+Voor de Fvw-cijfers daarentegen, worden de meest recente topografische kaartbladen 1:10 000 van de Topografische Dienst Kadaster gehanteerd volgens de omschrijving van de desbetreffende hoofdgroepen van de statistiek van het bodemgebruik. Jaarlijks wordt ongeveer 25% van de oppervlakte van Nederland door de Topografische Dienst Kadaster geactualiseerd.
+Cijfers uit de publicatie 'Ruimtelijke maatstaven Fvw' kunnen daarom ieder jaar verschillen door de vernieuwing van een kwart van het oppervlak van Nederland.
+
+De onderverdeling van de categorie 'water totaal' in binnen- en buitenwater is beschikbaar vanaf het jaar 2000.";;;;;
+318;244;317;Topic;TotaleOppervlakte_243;Totale oppervlakte;Totale oppervlakte land en water.;;Double;km²;2;Impossible
+319;245;317;Topic;Land_244;Land;"Totale oppervlakte land.
+Binnenwater smaller dan 6 meter, kwelders, schorren, moerassen, rietlanden en dergelijke zijn tot land gerekend.";;Double;km²;2;Impossible
+320;;317;TopicGroup;;Water;"Totale oppervlakte binnen- en buitenwater.
+Binnenwater smaller dan 6 meter, kwelders, schorren, moerassen, rietlanden en dergelijke zijn tot land gerekend.";;;;;
+321;246;320;Topic;WaterTotaal_245;Water totaal;Totale oppervlakte binnen- en buitenwater.;;Double;km²;2;Impossible
+322;247;320;Topic;Binnenwater_246;Binnenwater;Totale oppervlakte van inlandig water in gebruik als vaarweg, recreatiewater, delfstofwinplaats, vloei- en/of slibveld, alsmede spaarbekkens.;;Double;km²;2;Impossible
+323;248;320;Topic;Buitenwater_247;Buitenwater;Totale oppervlakte van water onderhevig aan getijden.;;Double;km²;2;Impossible
+324;249;316;Topic;Omgevingsadressendichtheid_248;Omgevingsadressendichtheid;"De omgevingsadressendichtheid (OAD) van een gebied wordt bepaald door eerst voor ieder verblijfsobject het aantal verblijfsobjecten vast te stellen binnen een cirkel met een straal van één kilometer rondom een verblijfsobject, gedeeld door de oppervlakte van de cirkel. 
+Daarna is het gemiddelde berekend van de OAD van alle afzonderlijke verblijfsobjecten binnen het beschouwde gebied (bijvoorbeeld een gemeente of provincie). De OAD wordt uitgedrukt in verblijfsobjecten per km² en beoogt de mate van concentratie van menselijke activiteiten (zoals wonen, werken, schoolgaan, winkelen en uitgaan) weer te geven.
+
+De cijfers van de OAD in deze publicatie komen vanaf 2018 overeen met de definitieve OAD in de publicatie Maatstaven ruimtelijke gegevens Financiële verhoudingswet (Fvw).
+Tot en met 2017 werd de OAD berekend zonder gegevens over de nieuwe adressen van het betreffende kalenderjaar en wijkt daarom tot en met 2017 af van de Maatstaven-tabel.
+
+Vanaf 2015 is gebruik gemaakt van de Basisregistraties Adressen en Gebouwen (BAG) als bron voor de OAD. Hiervoor werd het Geografisch Basisregister (GBR) als bron gebruikt. Deze bronwijziging veroorzaakt een trendbreuk in de cijfers ten opzichte van 2014. De veranderingen die te maken hebben met deze bronwijziging betreffen onder andere:
+- De objecten zijn nu grondslag en niet de adressen. De BAG bevat vaak meer objecten dan er voorheen adressen waren;
+- Van alle objecten is nu direct al de exacte geografische locatie bekend. Voorheen was die van een groot aantal nieuwe adressen nog niet bekend;
+- Veel gemeenten voeren nu alle recreatiewoningen op. Wanneer deze dicht bij de kern liggen verhogen ze de OAD.
+
+Er is geen bovengemeentelijke OAD voor de jaren 1995, 1996, 1997 en 1999.
+";;Double;per km²;0;Impossible
+325;;316;TopicGroup;;Naar functie;"Gebruik van de beschikbare ruimte van Nederland en de veranderingen die zich daarin voordoen.
+Luchtfoto's zijn vanaf 1989 de primaire bron bij de inventarisatie van het bodemgebruik. Waar nodig worden stadsplattegronden en andere (digitale) informatiebronnen geraadpleegd.
+
+Tot 2000 is de werkwijze als volgt.
+De diverse vormen van bodemgebruik worden vastgelegd op een topografische ondergrond, schaal 1 : 10 000, en vervolgens met behulp van een Geografisch Informatie Systeem (GIS) opgeslagen (gedigitaliseerd). 
+Uiteindelijk worden per gemeente de oppervlakten van de bodemgebruiks- categorieën berekend. Bij volgende inventarisaties kan veelal worden volstaan met het overnemen van de wijzigingen in de toestand van het bodemgebruik. 
+Alleen waar de topografische ondergrond ingrijpend is gewijzigd vindt vernieuwing daarvan plaats. Vanaf 1996 is voor het eerst gebruik gemaakt van digitale luchtfoto's. Deze digitale luchtfoto's worden op het beeldscherm afgebeeld. 
+Daar wordt de bodemgebruikskaart van de vorige inventarisatie op geprojecteerd. Vervolgens worden de wijzigingen in het bodemgebruik opgezocht en direct met behulp van de software aangebracht.
+
+Met ingang van het jaar 2000 is de methodiek nogmaals ingrijpend gewijzigd.
+Voor dat peiljaar is voor het eerst gebruik gemaakt van de basisgeometrie uit de digitale topografische kaart 1: 10 000, de zogenaamde TOP10Vector, van de Topografische Dienst. 
+Andere geografische bestanden (buiten de bestanden van het CBS) sluiten ook vaak aan bij de Top10Vector.
+Dat maakt de uitwisseling van het Bestand BodemGebruik (BBG) met geografische informatie uit andere bronnen eenvoudiger. De nieuwste topografische gegevens worden ook geautomatiseerd in het BBG verwerkt.
+De 37 verschillende vormen van bodemgebruik zijn ondergebracht in zes hoofdgroepen. De totale oppervlakte van deze zes hoofdgroepen kan afwijken van de gepubliceerde totale oppervlakte land omdat dat cijfer namelijk jaren eerder is afgeleid uit een vorig bestand Bodemgebruik.
+
+Het bodemgebruik (BBG) wordt doorgaans vastgesteld over een verslagjaar wat drie tot vier jaar vóór het lopende jaar ligt. Dat komt door de lange productietijd van het BBG. Voor actuele cijfers van het bodemgebruik per gemeente, wordt dan het BBG van een eerder verslagjaar gecombineerd met meer recente gemeentegrenzen.
+Bij het gebruik van het BBG van een eerder verslagjaar dan het jaar van de gebruikte gemeentegrenzen, kunnen er verschillen ontstaan in de totalen per regio ten opzichte van de gemeentelijke cijfers van het BBG-jaar zelf. Dit wordt veroorzaakt doordat het CBS met ingang van 1 januari 2011 is overgegaan op het burgerlijke gemeentegrenzenbestand, wat kleine wijzigingen heeft in de gemeentelijke oppervlakte ten opzichte van eerdere jaren.
+De verschillen in oppervlakte per gemeente komen voornamelijk voor in gemeenten met landsgrenzen. Hierdoor kan bijvoorbeeld een stukje buitenland worden toegevoegd aan de gemeente, maar ook een stukje van die gemeente als buitenland worden aangemerkt. Bij de combinatie van deze nieuwe gemeentegrenzen met een eerder jaar van het BBG worden daardoor beide stukjes niet meer geteld in het totaal van de gemeente, omdat het BBG het ene stuk als buitenland aangeeft en het andere stuk als niet liggend binnen de gemeentegrens. Dit kan ook gevolgen hebben voor de totalen van bovenliggende regio's zoals COROP, provincies of landsdelen.
+
+
+VERKEERSTERREIN
+Terrein in gebruik voor spoor-, weg- en luchtverkeer.
+
+Spoorterrein
+Terrein in gebruik voor vervoer en transport per rail.
+Tot spoorterrein wordt gerekend:
+- spoorweg, tot de voet van de spoordijk, bij een ingesneden baan inclusief de taluds;
+- doodlopend zijspoor naar bedrijfsterrein;
+- rangeerterrein;
+- spoorwegemplacement inclusief stationsgebouwen en bijbehorende parkeerterreinen.
+Niet tot spoorterrein wordt gerekend:
+- smalspoor, dit wordt gerekend tot de aangrenzende vorm van grondgebruik.
+
+Wegverkeersterrein
+Terrein in gebruik voor vervoer en transport over het hoofdwegennetwerk.
+Tot wegverkeersterrein wordt gerekend:
+- wegen die volgens de TOP10vector specificatie de functie van vervoers-ader hebben (aaneensluitingen van de TOP10Vectorcodes: 200, 208,210, 220, 230, 234, 240, 244, 250, 280, 287, 290, 300, 310, 314, 320,324, 330, 334);
+- groen in aansluitingen van wegen en binnen klaverbladen;
+- parkeerplaats;
+- busstation;
+- benzinestation;
+- opslagplaats van onder andere Rijks- en Provinciale Waterstaat voor onderhoud.
+Niet tot wegverkeersterrein wordt gerekend:
+- ingesloten groen groter dan 1 ha in gebruik als landbouwgrond of bos;
+- ingesloten water groter dan 1 ha;
+- hoofdweg in aanbouw.
+Ondergrens: Geen, moet echter wel deel uitmaken van het wegennetwerk.
+
+Vliegveld
+Terrein in gebruik voor vervoer en transport door de lucht.
+Tot vliegveld wordt gerekend:
+- Verharde en onverharde start- en rolbanen;
+- bijbehorende gebouwen en parkeerterreinen.
+Niet tot vliegveld wordt gerekend:
+- onverharde grond binnen de omheining van het vliegveld (geen start- of rolbaan);
+- bij het vliegveld gelegen terrein(en) met dienstverlenende bedrijven.
+
+
+BEBOUWD TERREIN
+Terrein in gebruik voor wonen, werken, winkelen, uitgaan, cultuur en openbare voorzieningen.
+
+Woonterrein
+Terrein dat voornamelijk voor het wonen bestemd is, inclusief primaire woonvoorzieningen. Tot woonterrein worden gerekend:
+- terrein met bestemming wonen;
+- primaire voorzieningen als (buurt)winkels, scholen voor kleuter- en basisonderwijs;
+- bijkantoren van onder andere banken;
+- groenvoorziening kleiner dan 1 hectare;
+- straten en parkeerplaatsen;
+- erven, tuinen;
+- trapveldjes en speelplaatsen;
+- woonwagenkamp (exclusief wrakkenopslagplaatsen > 0,1 ha).
+Wanneer woonwijken in bos zijn gelegen, wordt het gehele terrein als woonterrein aangemerkt indien er van een stratenpatroon sprake is.
+
+Terrein voor detailhandel en horeca
+Terrein in gebruik voor geconcentreerde detailhandel en horeca- activiteiten. Tot terrein voor detailhandel en horeca wordt gerekend:
+- winkelcentrum, veelal gelegen in en/of aan voetgangersgebied (ook al wordt daarboven gewoond);
+- goederenmarkt;
+- terrein met bedrijven in de horecasector;
+- bijbehorende parkeerterreinen.
+Door nieuwe en betere bronnen zijn de cijfers voor deze categorie per 2003 drastisch verbeterd. Dit heeft wel gevolgen voor de vergelijkbaarheid door de tijd.
+
+Terrein voor openbare voorzieningen
+Terrein in gebruik voor het algemene nut, zoals gemeentehuizen,
+politiebureaus en nutsbedrijven.
+Tot terrein voor openbare voorziening wordt gerekend:
+- ministerie;
+- gemeentehuis (stadskantoor), kantoor openbare werken enzovoort;
+- grenskantoor (douane enzovoort);
+- provinciehuis;
+- politiebureau, brandweerkazerne, rechtbank, gevangenis;
+- nutsbedrijf (gas, water, elektriciteit, stadsverwarming en centrale antenne-inrichtingen) incl. het daarbij behorende terrein;
+- waterzuiveringsinstallatie en vuilverbrandingsinstallatie, evenals de opslagplaatsen;
+- opslagterrein ten behoeve van Rijk, Provincie en Gemeente, met
+uitzondering van opslagterrein voor het onderhoud van wegen;
+- militair object, zoals munitiedepot, kazerne, mobilisatiecomplex, radarpost en schietbaan;
+- fort (voormalig);
+- bijbehorende parkeerterreinen en bos- of heesterstroken.
+Openbare voorzieningen worden in de topografische kaart in de regel met een afrastering afgebakend. Als begrenzing van een object wordt dan de afrastering aangehouden.
+
+Terrein voor sociaal-culturele voorzieningen
+Terrein in gebruik voor sociale en culturele voorzieningen zoals ziekenhuizen, universiteiten en musea.
+Tot terrein voor sociaal-culturele voorziening wordt gerekend:
+- onderwijsinstelling voor het voortgezet en hoger onderwijs;
+- internaat;
+- conferentieoord;
+- ziekenhuis, sanatorium, verpleeghuis, psychiatrisch ziekenhuis, inrichting voor zwakzinnigen en dergelijke;
+- kerk, klooster, museum (ook voor het publiek toegankelijke kastelen), exclusief openluchtmuseum;
+- schouwburg, bioscoop, concert- en congresgebouw;
+- cultureel centrum;
+- wijkgebouw, verenigingsgebouw, jeugdsociëteit;
+- sociale werkplaats;
+- bijbehorende parkeerplaatsen, tuinen en bos- of heesterstroken.
+Sociaal-culturele voorzieningen worden in de topografische kaart soms met een afrastering afgebakend. Als begrenzing van een object wordt de afrastering aangehouden.
+
+Bedrijventerrein
+Terrein in gebruik voor nijverheid, handel en zakelijke dienstverlening.
+Tot bedrijventerrein wordt gerekend:
+- fabrieksterrein;
+- haventerrein;
+- veilingterrein;
+- tentoonstellingsterrein;
+- veemarkt (al dan niet overdekt);
+- groothandelscomplex;
+- terrein met banken en verzekeringsmaatschappijen en dergelijke;
+- bijbehorend opslagterrein en parkeergelegenheid;
+- garage (incl. parkeergarage);
+- garage van busmaatschappij;
+- kantoorgebouw;
+- bijbehorende parkeerterreinen.
+Niet tot deze categorie behoren ingesloten braak-, en/of niet bouwrijpe bedrijventerreinen. Deze worden tot bouwterrein gerekend.
+
+
+SEMI-BEBOUWD TERREIN
+Terrein met een zekere mate van verharding dat niet in gebruik is als verkeersterrein of bebouwd terrein.
+
+Stortplaats
+Terrein voor opslag van afval.
+Tot stortplaats wordt gerekend:
+- Stortplaats;
+- Bijbehorende gebouwen, parkeerterreinen en bos- of heesterstroken.
+
+Wrakkenopslagplaats
+Terrein voor de opslag en/of sloop van autowrakken.
+Tot wrakkenopslagplaats wordt gerekend:
+- terrein voor opslag van autowrakken;
+- sloperij;
+- bijbehorende gebouwen, parkeerterreinen en bos- of heesterstroken.
+Niet tot wrakkenopslagplaats wordt gerekend:
+- terrein in gebruik voor de schrootverwerkende industrie.
+Ondergrens 0,1 hectare.
+
+Begraafplaats
+Terrein in gebruik voor begraven en cremeren.
+Tot begraafplaats wordt gerekend:
+- terrein voor het begraven van mensen of dieren;
+- crematorium;
+- bijbehorende gebouwen, parken, tuinen, parkeerterreinen en bos- of heesterstroken.
+Ondergrens 0,1 hectare.
+
+Delfstofwinplaats
+Terrein voor het winnen van grondstoffen uit de bodem.
+Tot delfstofwinplaats wordt gerekend:
+- Terrein voor diepte- en oppervlakwinning van grondstoffen;
+- de tot dat terrein behorende gebouwen, parkeergelegenheden, opslagplaatsen van winningsproducten en afvalstoffen;
+- bijbehorende parkeerterreinen.
+Tot grondstoffen worden gerekend:
+- aardgas;
+- aardolie;
+- gesteente;
+- grind;
+- klei;
+- leem;
+- mergel;
+- veen;
+- zand;
+- zout.
+Winplaatsen van aardgas en aardolie zijn op de topografische kaart in de regel met een afrastering afgebakend. Als begrenzing van een object wordt dan de afrastering aangehouden.
+Ondergrens 0,5 hectare.
+
+Bouwterrein
+Terrein in gebruik als bouwlocatie.
+Tot bouwterrein wordt gerekend:
+- terrein waarop wordt gebouwd of voorbereidende bouwsporen voorkomen;
+- braakliggende grond in bedrijfsterrein.
+
+Semi-verhard overig terrein
+Overig semi-bebouwd terrein met een zekere mate van verharding.
+Tot semi-verhard overig terrein wordt gerekend:
+- niet met gras begroeide dijk;
+- in zee lopende pier;
+- braakliggend terrein voor zover dit niet als bouwterrein kan worden beschouwd;
+- niet meer in gebruik zijnde spoorbaan.
+Voor aan land vastzittende, in water gelegen pieren en strekdammen geldt een ondergrens van 0,1 hectare.
+
+
+RECREATIETERREIN
+Terrein bestemd voor recreatief gebruik.
+
+Park en plantsoen
+Terrein met groenvoorziening in gebruik voor ontspanning.
+Tot park en plantsoen wordt gerekend:
+- terrein voor het publiek opengesteld bestaande uit gazons, speel- en ligweiden, paden, bosschages, bloemperken, heesterbeplanting en waterpartijen;
+- groenstroken.
+Delen van het park die zijn te typeren als bos (ook indien groter dan 1 hectare) worden als park of plantsoen geclassificeerd.
+Bij de inventarisatie van 2003 is extra nadruk gelegd bij het in kaart brengen van parken en plantsoenen. Dit heeft geresulteerd in kwalitatief betere cijfers.
+
+Sportterrein
+Terrein in gebruik voor sportactiviteiten
+Tot sportterrein wordt gerekend:
+- terrein voor veldsport inclusief draf- en rensport, golfterrein;
+- zwembad, (kunst)ijsbaan;
+- sporthal en manege;
+- permanente motorcrossbaan (ook provisorisch ingericht);
+- bijbehorende tribunes, parkeerterreinen en bos- of heester- stroken;
+- bos voor zover gelegen in het sportterrein.
+Ondergrens 0,5 hectare.
+
+Volkstuin
+Terrein voor niet-commerciële sier- en groenteteelt.
+Tot volkstuin wordt gerekend:
+- in complexen gelegen volkstuinen;
+- veelal langgerekte complexen pal langs de spoorwegen;
+- schooltuinen;
+- bijbehorende parkeerterreinen en bos- of heesterstroken.
+Ondergrens 0,1 hectare.
+
+Dagrecreatief terrein
+Terrein in gebruik voor dagrecreatie zoals dierentuinen, openluchtmusea en pretparken. Tot dagrecreatief terrein wordt gerekend:
+- dagcamping;
+- dierentuin en safaripark;
+- sprookjestuin;
+- pretpark;
+- openluchtmuseum;
+- jachthavens exclusief het water, maar inclusief terrein voor aanverwante bedrijvigheid, met een minimale oppervlakte van 0,1 ha;
+- bijbehorende parkeerterreinen en bos- of heesterstroken.
+De volgende terreinen worden eveneens tot deze categorie gerekend als ze geen deel uitmaken van park en plantsoen:
+- speeltuinen;
+- picknickplaatsen;
+- hertenkampen;
+- kinderboerderijen;
+- midgetgolfterreinen;
+- speelweiden.
+Ondergrens voor jachthavens is 0,1 hectare voor het landgedeelte.
+
+Verblijfsrecreatief terrein
+Terrein in gebruik voor een meerdaags recreatief verblijf, zoals camping, bungalowparken en jeugdherbergen.
+Tot verblijfsrecreatief terrein wordt gerekend:
+- kampeer- en caravanterrein, kampeerboerderij;
+- camping;
+- terrein met tweede woningen;
+- bungalowpark en vakantiehuizen;
+- jeugdherberg;
+- bijbehorende parkeerterreinen en bos- of heesterstroken.
+Verblijfsrecreatieve terreinen worden in de topografische kaart soms met een afrastering afgebakend. Als begrenzing van een object wordt dan de afrastering aangehouden.
+
+
+AGRARISCH TERREIN
+Terrein in gebruik voor glastuinbouw, of als grasland, tuinland, bouwland of boomgaard. ·
+.
+Terrein voor glastuinbouw
+Terrein in gebruik voor agrarische bedrijfsvoering onder staand glas.
+Tot terrein voor glastuinbouw wordt gerekend:
+- terrein in gebruik voor de teelt van gewassen onder staand glas;
+- in- en aanliggende waterbassins.
+
+Overig agrarisch terrein
+Agrarisch terrein niet in gebruik voor glastuinbouw, zoals grasland, tuinland, bouwland of boomgaard.
+Tot overig agrarisch terrein wordt gerekend:
+- grasland (hooi- en weiland) inclusief de met gras begroeide dijken en uiterwaarden;
+- terrein bestemd voor veehouderij;
+- hoogstam- zowel als laagstamboomgaard, inclusief onderteelt, verzorgingspaden en windsingels;
+- terrein beteeld met akkerbouw- en tuinbouwgewassen;
+- terrein in gebruik voor de teelt van kleinfruit;
+- verspreide bebouwing met bijbehorende erven en tuinen, voor zover die te midden van of langs een terrein voor landbouwactiviteiten liggen;
+- natuurlijk grasland.
+
+
+BOS EN OPEN NATUURLIJK TERREIN
+Terrein in gebruik als bos, als droog of als nat open natuurlijk terrein.
+
+Bos
+Terrein begroeid met bomen bestemd voor houtproductie en/of natuurbeheer,
+Tot bos wordt gerekend:
+- terrein zodanig begroeid met bomen, dat de kruinen een min of meer gesloten geheel vormen dan wel zullen gaan vormen;
+- kapvlakte;
+- brandgang;
+- bospad;
+- boomkwekerij;
+- houtopslagplaats;
+- verspreide bebouwing, voor zover die in het bos ligt;
+- populierenweide.
+Niet tot bos worden gerekend:
+- beboste delen van parken;
+- niet in het bos gelegen boomkwekerijen;
+- woongebieden (met stratenpatroon) en terreinen voor verblijfsrecreatie die in bos gelegen zijn;
+- in het bos gelegen campings.
+
+Open droog natuurlijk terrein
+Open terrein met een droge ondergrond, met als belangrijkste functie natuur. Tot open droog natuurlijk terrein wordt gerekend:
+- droog heideterrein;
+- met grasachtig gewas begroeid natuurlijk terrein (niet voor agrarisch gebruik);
+- duin;
+- zandverstuiving;
+- zandplaat;
+- strand.
+
+Open nat natuurlijk terrein
+Open terrein met een natte ondergrond met als belangrijkste functie
+natuur. Tot open nat natuurlijk terrein wordt gerekend:
+- nat heideterrein;
+- riet en biezen (ook indien in cultuur);
+- kwelder, schor of gors (bij gemiddeld hoogwater niet onderlopend);
+- drooggevallen grond, mits onbegroeid;
+- blauwgrasland.
+Niet tot open nat natuurlijk terrein wordt gerekend:
+- griend;
+- nat bos.
+";;;;;
+326;;325;TopicGroup;;Oppervlakte;;;;;;
+327;250;326;Topic;Verkeersterrein_249;Verkeersterrein;;;Double;ha;0;Impossible
+328;251;326;Topic;BebouwdTerrein_250;Bebouwd terrein;;;Double;ha;0;Impossible
+329;252;326;Topic;SemiBebouwdTerrein_251;Semi-bebouwd terrein;;;Double;ha;0;Impossible
+330;253;326;Topic;Recreatieterrein_252;Recreatieterrein;;;Double;ha;0;Impossible
+331;254;326;Topic;AgrarischTerrein_253;Agrarisch terrein;;;Double;ha;0;Impossible
+332;255;326;Topic;BosEnOpenNatuurlijkTerrein_254;Bos en open natuurlijk terrein;;;Double;ha;0;Impossible
+333;;325;TopicGroup;;Percentages;;;;;;
+334;256;333;Topic;Verkeersterrein_255;Verkeersterrein;;;Double;in % oppervlakte land;1;Impossible
+335;257;333;Topic;BebouwdTerrein_256;Bebouwd terrein;;;Double;in % oppervlakte land;1;Impossible
+336;258;333;Topic;SemiBebouwdTerrein_257;Semi-bebouwd terrein;;;Double;in % oppervlakte land;1;Impossible
+337;259;333;Topic;Recreatieterrein_258;Recreatieterrein;;;Double;in % oppervlakte land;1;Impossible
+338;260;333;Topic;AgrarischTerrein_259;Agrarisch terrein;;;Double;in % oppervlakte land;1;Impossible
+339;261;333;Topic;BosEnOpenNatuurlijkTerrein_260;Bos en open natuurlijk terrein;;;Double;in % oppervlakte land;1;Impossible
+340;;325;TopicGroup;;Per inwoner;;;;;;
+341;262;340;Topic;Verkeersterrein_261;Verkeersterrein;;;Double;ha / 1 000 inwoners;0;Impossible
+342;263;340;Topic;BebouwdTerrein_262;Bebouwd terrein;;;Double;ha / 1 000 inwoners;0;Impossible
+343;264;340;Topic;SemiBebouwdTerrein_263;Semi-bebouwd terrein;;;Double;ha / 1 000 inwoners;0;Impossible
+344;265;340;Topic;Recreatieterrein_264;Recreatieterrein;;;Double;ha / 1 000 inwoners;0;Impossible
+345;266;340;Topic;AgrarischTerrein_265;Agrarisch terrein;;;Double;ha / 1 000 inwoners;0;Impossible
+346;267;340;Topic;BosEnOpenNatuurlijkTerrein_266;Bos en open natuurlijk terrein;;;Double;ha / 1 000 inwoners;0;Impossible
+347;;;TopicGroup;;Lokalisering;"De rubriek 'Lokalisering' bevat de namen en coderingen van een aantal door het CBS onderhouden gebiedsindelingen. Deze indelingen zijn ook opgenomen in de StatLinepublicaties Gebieden in Nederland.
+
+Hiermee kan een gebruiker zelf overzichten maken. Zo kunnen door het samentellen van gemeentelijke cijfers over het aantal personenauto's of eenpersoonshuishoudens uitkomsten worden verkregen voor veiligheidsregio's.
+Ook kan zo bijvoorbeeld het aantal banen per arbeidsmarktregio worden berekend.
+
+Optellen van gemeentelijke cijfers tot totalen voor een bepaald gebied is echter niet altijd mogelijk. Voor sommige onderwerpen ontbreken bij een aantal gemeenten cijfers om redenen van statistische betrouwbaarheid, geheimhouding of niet aanwezig zijn van gegevens in het basismateriaal (non-respons).";;;;;
+348;;347;TopicGroup;;Lokaliseringen van gemeenten;Dit onderdeel bevat informatie over de relatie tussen de gemeentelijke indeling (het laagste bestuurlijk niveau) en diverse onderverdelingen van het Nederlandse grondgebied op bovengemeentelijk niveau.;;;;;
+349;;348;TopicGroup;;Arbeidsmarktregio's;"AM = Arbeidsmarktregio
+Een indeling in regio's van waaruit gemeenten en het Uitvoeringsinstituut Werknemersverzekeringen (UWV) de dienstverlening aan werkgevers en werkzoekenden vormgeven. Het is een regionaal niveau tussen gemeenten en provincies in. Deze indeling is van onderop, door gemeenten zelf, tot stand gekomen. Nederland telt 35 arbeidsmarktregio's.
+
+Met ingang van 1-1-2021 is de gemeente Vijfheerenlanden in zijn geheel toebedeeld aan de Arbeidsmarktregio 'Gorinchem', code AM35. In de jaren hiervoor was de gemeente over meerdere Arbeidsmarktregio's verdeeld en staat daarom voor die jaren in deze tabel als 'Niet in te delen', code AM99.";;;;;
+350;268;349;Topic;Code_267;Code;Codes van de arbeidsmarktregio's.;;String;code;0;Impossible
+351;269;349;Topic;Naam_268;Naam;Namen van de arbeidsmarktregio's.;;String;naam;0;Impossible
+352;;348;TopicGroup;;Arrondissementen (rechtsgebieden);"AR = Arrondissement (rechtsgebied)
+Lokalisering van gemeenten per arrondissement. Een arrondissement is het rechtsgebied van een van de 11 rechtbanken in Nederland. De indeling in 11 arrondissementen betreft een onderverdeling van de ressorten, dat zijn de rechtsgebieden van de gerechtshoven.";;;;;
+353;270;352;Topic;Code_269;Code;"Codes van de rechtsgebieden van de arrondissementen.
+";;String;code;0;Impossible
+354;271;352;Topic;Naam_270;Naam;"Namen van de rechtsgebieden van de arrondissementen.
+";;String;naam;0;Impossible
+355;;348;TopicGroup;;COROP-gebieden;"CR = COROP-gebied
+Lokalisering van gemeenten per COROP-gebied. De indeling in COROP-gebieden vormt een regionaal niveau tussen gemeenten en provincies in. Omstreeks 1970 ontworpen door de Coördinatie Commissie Regionaal Onderzoeksprogramma, waaraan de indeling haar naam dankt. Nederland telt 40 COROP-gebieden.
+";;;;;
+356;272;355;Topic;Code_271;Code;Codes van de COROP-gebieden.;;String;code;0;Impossible
+357;273;355;Topic;Naam_272;Naam;Namen van de COROP-gebieden.;;String;naam;0;Impossible
+358;;348;TopicGroup;;COROP-plusgebieden;"CP = COROP-plusgebied
+Lokalisering van gemeenten naar COROP-plusgebieden. Een onderverdeling van de COROP-(sub)gebieden, waarbij de volgende gebieden zijn opgesplitst: Utrecht, Overig Groot-Amsterdam, Agglomeratie 's-Gravenhage, Zuidoost-Zuid-Holland en Flevoland. Nederland telt 52 COROP-plusgebieden.
+
+De indeling is beschikbaar vanaf 1 januari 2005.";;;;;
+359;274;358;Topic;Code_273;Code;Codes van de COROP-plusgebieden.;;String;code;0;Impossible
+360;275;358;Topic;Naam_274;Naam;Namen van de COROP-plusgebieden.;;String;naam;0;Impossible
+361;;348;TopicGroup;;COROP-subgebieden;"CS = COROP-subgebied
+Lokalisering van gemeenten naar COROP-subgebieden. Een onderverdeling van de 40 COROP-gebieden, waarbij de volgende gebieden zijn opgesplitst: Groot-Amsterdam, Groot-Rijnmond en Noordoost-Noord-Brabant. Nederland telt 43 COROP-subgebieden.
+";;;;;
+362;276;361;Topic;Code_275;Code;Codes van de COROP-subgebieden.;;String;code;0;Impossible
+363;277;361;Topic;Naam_276;Naam;Namen van de COROP-subgebieden.;;String;naam;0;Impossible
+364;;348;TopicGroup;;GGD-regio's;"GG = GGD-regio
+Een in 1990 door het toenmalig Ministerie van Welzijn, Volksgezondheid en Cultuur vastgestelde indeling in samenwerkingsgebieden voor de gemeentelijke gezondheidsdiensten (GGD). Deze indeling is in de loop der jaren verschillende keren gewijzigd. De indeling is voor het laatst herzien op 1 januari 2014 en telt vanaf die datum 25 gebieden. Deze indeling in GGD-regio's werd tot 2008 vermeld onder GGD-gebieden. De codering is toen ook uitgebreid van een tweecijferige naar een viercijferige code.
+";;;;;
+365;278;364;Topic;Code_277;Code;Codes van de samenwerkingsgebieden voor gemeentelijke gezondheidsdiensten (GGD).;;String;code;0;Impossible
+366;279;364;Topic;Naam_278;Naam;Namen van de samenwerkingsgebieden voor gemeentelijke gezondheidsdiensten (GGD).;;String;naam;0;Impossible
+367;;348;TopicGroup;;Jeugdzorgregio's;"JZ = Jeugdregio 
+Een door gemeenten vastgestelde indeling in samenwerkingsgebieden voor uitvoering van de Jeugdwet (2014). In CBS-publicaties van eerdere jaren kan de term jeugdzorgregio's voorkomen, maar met ingang van 2019 wordt gesproken van jeugdregio's. Nederland telt 42 jeugdregio's.
+";;;;;
+368;280;367;Topic;Code_279;Code;Codes van de jeugdzorgregio's.;;String;code;0;Impossible
+369;281;367;Topic;Naam_280;Naam;Namen van de jeugdzorgregio's.;;String;naam;0;Impossible
+370;;348;TopicGroup;;Kamer van Koophandel;"KK = Kamer van Koophandel
+De indeling in werkgebieden van de Kamer van Koophandel regio's (KvK). De indeling wordt gehanteerd met ingang van 2008 en telde toen 12 KvK regio's. Per 1 januari 2014 is de indeling volledig herzien. Nederland telt vanaf die datum 5 KvK-regio's.
+";;;;;
+371;282;370;Topic;Code_281;Code;Codes van de Kamer van Koophandel regio's (KvK).;;String;code;0;Impossible
+372;283;370;Topic;Naam_282;Naam;Namen van de Kamer van Koophandel regio's (KvK).;;String;naam;0;Impossible
+373;;348;TopicGroup;;Landbouwgebieden;"LB = Landbouwgebied
+Lokalisering van gemeenten per landbouwgebied. Groepering van gemeenten met (zoveel mogelijk) gelijksoortige typen van landbouwbedrijven. De indeling in landbouwgebieden is in 1991 door de Adviescommissie Landbouwstatistieken vastgesteld en valt binnen de provinciegrenzen. Nederland telt 65 landbouwgebieden.";;;;;
+374;284;373;Topic;Code_283;Code;Codes van de landbouwgebieden.;;String;code;0;Impossible
+375;285;373;Topic;Naam_284;Naam;Namen van de landbouwgebieden.;;String;naam;0;Impossible
+376;;348;TopicGroup;;Landbouwgebieden (groepen);"LG = Groep van landbouwgebieden
+Lokalisering van gemeenten per groep van landbouwgebieden. Een samenvoeging van de 65 landbouwgebieden tot 14 groepen van landbouwgebieden. Deze indeling is in 1991 tezamen met de indeling in 65 landbouwgebieden vastgesteld door de Adviescommissie Landbouwstatistieken.
+";;;;;
+377;286;376;Topic;Code_285;Code;Codes van de groepen van landbouwgebieden.;;String;code;0;Impossible
+378;287;376;Topic;Naam_286;Naam;Namen van de groepen van landbouwgebieden.;;String;naam;0;Impossible
+379;;348;TopicGroup;;Landsdelen;"LD = Landsdeel
+Lokalisering van gemeenten per landsdeel. Nederland telt 4 landsdelen:
+Noord-Nederland: Groningen, Fryslân, Drenthe
+Oost-Nederland: Overijssel, Flevoland, Gelderland
+West-Nederland: Utrecht, Noord-Holland, Zuid-Holland, Zeeland
+Zuid-Nederland: Noord-Brabant, Limburg";;;;;
+380;288;379;Topic;Code_287;Code;Codes van de landsdelen.;;String;code;0;Impossible
+381;289;379;Topic;Naam_288;Naam;Namen van de landsdelen.;;String;naam;0;Impossible
+382;;348;TopicGroup;;Provincies;"PV = Provincie
+Lokalisering van gemeenten per provincie. Bestuurlijke onderverdeling van het Nederlands grondgebied. Sinds het instellen van de provincie Flevoland per 1 januari 1986 telt Nederland 12 provincies.
+";;;;;
+383;290;382;Topic;Code_289;Code;Codes van de provincies. De codering houdt rekening met de wijziging in volgorde van provincies vanwege de instelling van de provincie Flevoland per 1 januari 1986.;;String;code;0;Impossible
+384;291;382;Topic;Naam_290;Naam;Namen van de provincies.;;String;naam;0;Impossible
+385;;348;TopicGroup;;Regionale eenheden;"RE = Regionale eenheid
+De indeling in regionale eenheden is ingevoerd per 1 januari 2013 en berust op de Politiewet 2012. Tot 2013 was de politie verdeeld in 25 regiokorpsen (politieregio's) en het Korps Landelijke Politiediensten (KLPD). Vanaf 2013 telt Nederland 10 regionale eenheden en één landelijke eenheid. De 10 regionale eenheden zijn onderverdeeld in onder andere 43 politiedistricten en 167 basisteams.
+";;;;;
+386;292;385;Topic;Code_291;Code;Codes van de regionale eenheden.;;String;code;0;Impossible
+387;293;385;Topic;Naam_292;Naam;Namen van de politie regionale eenheden.;;String;naam;0;Impossible
+388;;348;TopicGroup;;RegioPlus-arbeidsmarktregio's;"RA = RegioPlus-arbeidsmarktregio
+Een indeling in regio's van waaruit regionale werkgeversorganisaties, verenigd in het samenwerkingsverband RegioPlus, zich inzetten voor het behouden en aantrekken van voldoende en goed gekwalificeerd personeel in zorg en welzijn. Deze indeling is tot stand gekomen vanuit dit samenwerkingsverband. Nederland telt 28 RegioPlus-arbeidsmarktregio's.";;;;;
+389;294;388;Topic;Code_293;Code;Codes van de RegioPlus-arbeidsmarktregio's.;;String;code;0;Missing
+390;295;388;Topic;Naam_294;Naam;Namen van de RegioPlus-arbeidsmarktregio's.;;String;naam;0;Missing
+391;;348;TopicGroup;;Ressorten (rechtsgebieden);"RT = Ressort (rechtsgebied)
+Lokalisering van gemeenten per ressort. Een ressort is het rechtsgebied van een van de gerechtshoven in Nederland. Elk ressort beslaat een aantal arrondissementen, dat zijn de rechtsgebieden van de rechtbanken.
+";;;;;
+392;296;391;Topic;Code_295;Code;Codes van de ressorten (gerechtshoven).;;String;code;0;Impossible
+393;297;391;Topic;Naam_296;Naam;Namen van de ressorten (gerechtshoven).;;String;naam;0;Impossible
+394;;348;TopicGroup;;Toeristengebieden;"TR = Toeristengebied
+Lokalisering van gemeenten per toeristengebied. De indeling in toeristengebieden is ontworpen in 1972 voor statistieken op het terrein van de toeristische dienstverlening en vrijetijdsbesteding. Nederland telt 17 toeristengebieden. De gebieden zijn niet noodzakelijkerwijs aaneensluitend.
+
+Van de gemeente 's-Gravenhage horen de onderdelen 'Kijkduin' en 'Scheveningen' en van de gemeente Rotterdam het onderdeel 'Hoek van Holland' niet tot het toeristengebied '4 grote steden excl. Noordzeebadplaatsen' (code TR16) maar tot het toeristengebied 'Noordzeebadplaatsen' (code TR02). Deze uitzonderingen zijn afgebakend als clusters van postcodegebieden:
+
+- Kijkduin (postcode 2554 en 2555).
+- Scheveningen (postcode 2583, 2584, 2586 en 2587).
+- Hoek van Holland (postcode 3150 en 3151).";;;;;
+395;298;394;Topic;Code_297;Code;Codes van de toeristengebieden.;;String;code;0;Impossible
+396;299;394;Topic;Naam_298;Naam;Namen van de toeristengebieden. Een aantal namen is vanwege hun lengte afgekort.;;String;naam;0;Impossible
+397;;348;TopicGroup;;Veiligheidsregio's;"VR = Veiligheidsregio
+Een veiligheidsregio is een gebied waarin de brandweer, de Geneeskundige Hulpverlening bij Ongevallen en Rampen (GHOR), de politie en gemeenten samenwerken voor een effectieve voorbereiding op en bestrijding van crises en rampen.
+
+Veiligheidsregio's zijn in deze tabel opgenomen vanaf 2011.";;;;;
+398;300;397;Topic;Code_299;Code;Codes van de veiligheidsregio's.;;String;code;0;Impossible
+399;301;397;Topic;Naam_300;Naam;Namen van de veiligheidsregio's.;;String;naam;0;Impossible
+400;;348;TopicGroup;;Zorgkantoorregio's;"ZK = Zorgkantoorregio
+Groepering van gemeenten die samenhangt met de uitvoering van de Algemene Wet Bijzondere Ziektekosten (AWBZ) (tot 2015) of Wet langdurige zorg (vanaf 2017). Een zorgkantoor, nauw gelieerd aan een van de AWBZ/Wlz-verzekeraars, voert de AWBZ/Wlz uit namens alle AWBZ/Wlz-verzekeraars voor alle verzekerden in zijn regio, dus ook voor verzekerden die bij andere AWBZ/Wlz-verzekeraars staan ingeschreven. De indeling is voor het laatst herzien op 1 januari 2016 en telt vanaf die datum 31 gebieden.
+
+Zorgkantoorregio's zijn in deze tabel opgenomen vanaf 2013.";;;;;
+401;302;400;Topic;Code_301;Code;Codes van de zorgkantoorregio's.;;String;code;0;Impossible
+402;303;400;Topic;Naam_302;Naam;Namen van de zorgkantoorregio's.;;String;naam;0;Impossible
+403;304;347;Topic;Gemeenten_303;Gemeenten;"Aantal gemeenten per gekozen regio.
+Geeft een overzicht van de dynamiek als gevolg van gemeentelijke herindelingen. Bijvoorbeeld de provincie Zuid-Holland bestaat in 1995 uit 95 en in 2005 uit 86 gemeenten.";;Double;aantal;0;Impossible
+404;305;347;Topic;Wijken_304;Wijken;"Aantal wijken per gekozen regio.
+Een wijk is een onderdeel van een gemeente waarin een bepaalde vorm van bodemgebruik of bebouwing overheerst. Bijvoorbeeld: industriegebied, woongebied met hoogbouw of laagbouw. Een wijk bestaat uit een of meer buurten. De gemeente bepaalt zelf de indeling in wijken en buurten. Het CBS coördineert landelijk deze indeling.";;Double;aantal;0;Impossible
+405;306;347;Topic;Buurten_305;Buurten;"Aantal buurten per gekozen regio.
+Een buurt is een onderdeel van een gemeente, dat afgebakend is vanuit bebouwingsoogpunt of sociaal-economische structuur. Wijken zijn optellingen van een of meer buurten. De gemeente bepaalt zelf de indeling in wijken en buurten. Het CBS coördineert landelijk deze indeling.";;Double;aantal;0;Impossible
+406;307;347;Topic;KoppelvariabeleRegioCode_306;Koppelvariabele regio (code);Vergemakkelijkt het koppelen met andere tabellen.;;String;code;0;Impossible
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
