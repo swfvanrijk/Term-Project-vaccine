@@ -120,6 +120,7 @@ sfull <- round(sd(vaccine_neigh$Coverage_primary_completed, na.rm=TRUE),digits=2
 
 # histogram of vaccination status
 
+
 vaccine_neigh %>% ggplot() +
     # partly vaccinated
     geom_histogram(aes(x = Coverage_primary_partly), fill = 'red', alpha = 0.5, bins=75, na.rm = TRUE) + 
@@ -132,12 +133,15 @@ vaccine_neigh %>% ggplot() +
     geom_vline(aes(xintercept=mean(Coverage_primary_completed, na.rm=TRUE),col='blue'), linetype="dashed", size=1) +
     geom_vline(aes(xintercept=mean(Coverage_primary_partly, na.rm=TRUE),col='red'), linetype="dashed", size=1) +
     # formatting
-    labs(title='Vaccination against SARS-CoV-2 coverage on 14-3-2022') +
+    #labs(title='Vaccination against SARS-CoV-2 coverage on 14-3-2022') +
     ylab('Number of neighbourhoods') +
     xlab('Percentage') + 
     # legend
-    scale_colour_manual(name="Coverage type", values=c("blue", "red"), labels=c(paste(mfull,'% (',sfull,'%)'), paste(mpart,'% (',spart,'%)')))
+    scale_colour_manual(name="Coverage type", values=c("blue", "red"), labels=c(paste0('Fully ',mfull,'% (',sfull,'%)'), paste0('Partly ',mpart,'% (',spart,'%)'))) +
+  theme(legend.position = c(0.25, 0.85),
+        legend.background = element_rect(fill = "white", color = "black"))
 
+ggsave(file=paste0(getwd(),'/coverage_plot.png'))
 ```
 
 

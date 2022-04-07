@@ -215,7 +215,7 @@ munic_map
 lm_eq <-  `Vaccination_completely_18` ~ 
     #TotaleBevolking_1 +
   # gender
-    Mannen_2 +
+    #Mannen_2 +
     #Vrouwen_3 +
   # age groups
     #JongerDan5Jaar_13 +
@@ -237,10 +237,10 @@ lm_eq <-  `Vaccination_completely_18` ~
     #TotaalMetMigratieachtergrond_44 +
     WesterseMigratieachtergrond_45 +
     #TotaalNietWesterseMigratieachtergrond_46 +
-    Marokko_47 +
+    #Marokko_47 +
     VoormaligeNederlandseAntillenAruba_48 +
-    Suriname_49 +
-    Turkije_50 +
+    #Suriname_49 +
+    #Turkije_50 +
     #OverigNietWesterseMigratieachtergrond_51 + 
   # 
     #Bevolkingsdichtheid_57 +
@@ -248,12 +248,12 @@ lm_eq <-  `Vaccination_completely_18` ~
     #SterfteRelatief_61 +
     #GeboorteoverschotRelatief_63 +
   # Diseases and death causes
-    ZiektenVanHartEnVaatstelsel_65 + 
-    ZiektenVanAdemhalingsstelsel_66 +
+    #ZiektenVanHartEnVaatstelsel_65 + 
+    #ZiektenVanAdemhalingsstelsel_66 +
     #UitwendigeDoodsoorzaken_67 +
     #OverigeDoodsoorzaken_68 +
   #
-    BevolkingsgroeiRelatief_80 +
+    #BevolkingsgroeiRelatief_80 +
   # Social benefits
     #Werkloosheid_155 +
     #WAOUitkering_160 +
@@ -268,22 +268,25 @@ lm_eq <-  `Vaccination_completely_18` ~
     #AantalZiekenhuizenBinnen20Km_213 +
   # Education
     LowEducation +
-    MiddleEducation +
+    #MiddleEducation +
     HighEducation +
   # Religion
-    KerkbezoekMeerDan1KeerPerMaand +
-    GeenKerkelijkeGezindte +
+    #KerkbezoekMeerDan1KeerPerMaand +
+    #GeenKerkelijkeGezindte +
     #WelKerkelijkeGezindte +
-    RoomsKatholiek +
-    Protestants +
-    NederlandsHervormd +
+    #RoomsKatholiek +
+    #Protestants +
+    #NederlandsHervormd +
     GereformeerdeKerken +
     #ProtestantseKerkNederland +
     Islam +
-    Joods +
-    Hindoe +
-    Boeddhist +
-    anders
+    #Joods +
+    #Hindoe +
+    #Boeddhist +
+    anders 
+  # check for confounding distance to GP
+    #WeinigStedelijk_55
+    
 
 
 
@@ -416,8 +419,10 @@ fb_gwr
 #Extract the modeled relations for gwr object
 fb_gwr_out <- as.data.frame(fb_gwr$SDF)
 
-#see the data frame, there is 1673 regressions, each row is a regression result
-view(fb_gwr_out)
+
+require(reshape2)
+ggplot(data = melt(fb_gwr_out[,2:13]), aes(x=variable, y=value)) + geom_boxplot() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
 
 
 #join that with our main polygon data frame for the R2
@@ -485,29 +490,29 @@ mapview::mapview(data_compl, zcol = "amb_localR2", col.regions=brewer.pal(11, "R
 
 #For fixed model
 #estimate the t-value for green space availability variable for fixed kernel model
-data_compl$ft_AfstandTotHuisartsenpraktijk_209 = fb_gwr_out$AfstandTotHuisartsenpraktijk_209 / fb_gwr_out$AfstandTotHuisartsenpraktijk_209_se
+data_compl$ft_ZiektenVanAdemhalingsstelsel_66 = fb_gwr_out$ZiektenVanAdemhalingsstelsel_66 / fb_gwr_out$ZiektenVanAdemhalingsstelsel_66_se
 
 #categorize the t-value to statistical significance
-data_compl$ft_AfstandTotHuisartsenpraktijk_209_cat <- cut(data_compl$ft_AfstandTotHuisartsenpraktijk_209,
-                             breaks=c(min(data_compl$ft_AfstandTotHuisartsenpraktijk_209), -1.96, 1.96, max(data_compl$ft_AfstandTotHuisartsenpraktijk_209)),
+data_compl$ft_ZiektenVanAdemhalingsstelsel_66_cat <- cut(data_compl$ft_ZiektenVanAdemhalingsstelsel_66,
+                             breaks=c(min(data_compl$ft_ZiektenVanAdemhalingsstelsel_66), -1.96, 1.96, max(data_compl$ft_ZiektenVanAdemhalingsstelsel_66)),
                              labels=c("sig","nonsig", "sig"))
 
 #plot the significance for fixed kernel model
-sig_fb <- mapview::mapview (data_compl, zcol = "ft_AfstandTotHuisartsenpraktijk_209_cat")
+sig_fb <- mapview::mapview (data_compl, zcol = "ft_ZiektenVanAdemhalingsstelsel_66_cat")
 
 
 
 #For Adaptive model
 #estimate the t-value for green space availability variable for fixed kernel model
-data_compl$at_AfstandTotHuisartsenpraktijk_209 = ab_gwr_out$AfstandTotHuisartsenpraktijk_209 / ab_gwr_out$AfstandTotHuisartsenpraktijk_209_se
+data_compl$at_ZiektenVanAdemhalingsstelsel_66 = ab_gwr_out$ZiektenVanAdemhalingsstelsel_66 / ab_gwr_out$ZiektenVanAdemhalingsstelsel_66_se
 
 #categorize the t-value to statistical significance
-data_compl$at_AfstandTotHuisartsenpraktijk_209_cat <- cut(data_compl$at_AfstandTotHuisartsenpraktijk_209,
-                             breaks=c(min(data_compl$at_AfstandTotHuisartsenpraktijk_209), -1.96, 1.96, max(data_compl$at_AfstandTotHuisartsenpraktijk_209)),
+data_compl$at_ZiektenVanAdemhalingsstelsel_66_cat <- cut(data_compl$at_ZiektenVanAdemhalingsstelsel_66,
+                             breaks=c(min(data_compl$at_ZiektenVanAdemhalingsstelsel_66), -1.96, 1.96, max(data_compl$at_ZiektenVanAdemhalingsstelsel_66)),
                              labels=c("sig","nonsig", "sig"))
 
 #plot the significance for adaptive kernel model
-sig_ab <- mapview::mapview(data_compl, zcol = "at_AfstandTotHuisartsenpraktijk_209_cat")
+sig_ab <- mapview::mapview(data_compl, zcol = "at_ZiektenVanAdemhalingsstelsel_66_cat")
 
 sig_fb
 
