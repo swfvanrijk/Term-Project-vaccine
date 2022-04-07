@@ -41,6 +41,10 @@ easypackages::packages ("sf", "sp", "spdep", "spatialreg", "spgwr", "tmap", "map
 library(mice)
 library(corrplot)
 library(caret)
+library(data.table)
+require(reshape2)
+
+
 #clean your environment
 rm(list=ls())
 ```
@@ -55,7 +59,7 @@ rm(list=ls())
 munic_vac_data <- read_delim("data/Municipalities data/COVID-19_vaccinatiegraad_per_gemeente_per_week_leeftijd.csv", delim=";")
 
 
-# MUNICAPALITY MERGING DATA
+# MUNICAPALITY FUSIONS DATA
 # to do !!!
 
 
@@ -64,12 +68,21 @@ munic_vac_data <- read_delim("data/Municipalities data/COVID-19_vaccinatiegraad_
 munic_data <- read_delim("data/Municipalities data/Kerncijfers Gemeenten 2020.csv", delim=";")
 munic_demo_meta <- read_delim("data/Municipalities data/Kerncijfers Gemeente Variabelen.csv", delim=";")
 
+# correlation with gp distance
+a = cor(munic_data %>% select_if(is.numeric), munic_data$`AfstandTotHuisartsenpraktijk_209`,use="complete.obs")
+
+
+# rename variables
+setnames(munic_data, old = munic_demo_meta$`Variable name`, new = munic_demo_meta$Meaning)
+
+
+
 # filter to vars to keep
 munic_data <- munic_data[,
                          # filter meta to variables to include
                          munic_demo_meta %>% subset(`Include in model`==1) %>%
-                           .$`Variable name`] %>%
-                         subset(!is.na(TotaleBevolking_1))
+                           .$`Meaning`] %>%
+                         subset(!is.na(TotaleBevolking))
 
 
 # merge EDUCATION DATA
@@ -106,49 +119,42 @@ munic_data <- merge(x = munic_data,
                     by.y = 'GM_CODE')
 
 
-
-
-
-
-
-# check summary
 summary(munic_data)
 
-# check missing data pattern
-md.pattern(munic_data,rotate.names = TRUE)
+
+
+
+
 
 
 ```
 
 ```{r normalising}
 
-munic_data <- munic_data %>% mutate(Mannen_2 = Mannen_2 / TotaleBevolking_1 * 100, 
-                                    Vrouwen_3 = Vrouwen_3 / TotaleBevolking_1 * 100,
+munic_data <- munic_data %>% mutate(#Mannen = Mannen/ TotaleBevolking * 100, 
+                                    #Vrouwen = Vrouwen / TotaleBevolking * 100,
                                     
-                                    Ongehuwd_25 = Ongehuwd_25 / TotaleBevolking_1 * 100,
-                                    Gehuwd_26 = Gehuwd_26 / TotaleBevolking_1 * 100,
-                                    Gescheiden_27 = Gescheiden_27 / TotaleBevolking_1 * 100,
-                                    Verweduwd_28 = Verweduwd_28 / TotaleBevolking_1 * 100,
+                                    #Ongehuwd = Ongehuwd / TotaleBevolking * 100,
+                                    #Gehuwd_ = Gehuwd / TotaleBevolking * 100,
+                                    #Gescheiden = Gescheiden / TotaleBevolking * 100,
+                                    #Verweduwd = Verweduwd / TotaleBevolking * 100,
                                     
-                                    ZiektenVanHartEnVaatstelsel_65 = ZiektenVanHartEnVaatstelsel_65 / TotaleBevolking_1 * 100,
-                                    ZiektenVanAdemhalingsstelsel_66 = ZiektenVanAdemhalingsstelsel_66 / TotaleBevolking_1 * 100,
-                                    UitwendigeDoodsoorzaken_67 = UitwendigeDoodsoorzaken_67 / TotaleBevolking_1 * 100,
-                                    OverigeDoodsoorzaken_68 = OverigeDoodsoorzaken_68 / TotaleBevolking_1 * 100,
+                                    ZiektenVanHartEnVaatstelsel = ZiektenVanHartEnVaatstelsel / TotaleBevolking * 100,
+                                    ZiektenVanAdemhalingsstelsel = ZiektenVanAdemhalingsstelsel / TotaleBevolking * 100,
+                                    #UitwendigeDoodsoorzaken = UitwendigeDoodsoorzaken / TotaleBevolking * 100,
+                                    #OverigeDoodsoorzaken = OverigeDoodsoorzaken / TotaleBevolking * 100,
                                     
-                                    WAOUitkering_160 = WAOUitkering_160 / TotaleBevolking_1 * 100,
-                                    WIAUitkeringWGARegeling_161 = WIAUitkeringWGARegeling_161 / TotaleBevolking_1 * 100,
-                                    WajongUitkering_162 = WajongUitkering_162 / TotaleBevolking_1 * 100,
-                                    AOW_163 = AOW_163 / TotaleBevolking_1 * 100,
+                                    #WAOUitkering = WAOUitkering / TotaleBevolking * 100,
+                                    #WIAUitkeringWGARegeling = WIAUitkeringWGARegeling / TotaleBevolking * 100,
+                                    #WajongUitkering = WajongUitkering / TotaleBevolking * 100,
+                                    #AOW = AOW / TotaleBevolking * 100,
                                     
-                                    LowEducation = LowEducation / TotaleBevolking_1 * 100,
-                                    MiddleEducation = MiddleEducation / TotaleBevolking_1 * 100,
-                                    HighEducation = HighEducation / TotaleBevolking_1 * 100)
+                                    LowEducation = LowEducation / TotaleBevolking * 100,
+                                    MiddleEducation = MiddleEducation / TotaleBevolking * 100,
+                                    HighEducation = HighEducation / TotaleBevolking * 100)
 
 
 ```
-
-
-
 
 
 
@@ -158,7 +164,31 @@ munic_data <- munic_data %>% mutate(Mannen_2 = Mannen_2 / TotaleBevolking_1 * 10
 
 ```{r}
 
-test_var <- munic_data %>% select_if(is.numeric) %>% names()
+#test_var <- munic_data %>% select_if(is.numeric) %>% names()
+
+
+test_var  <- c('Vaccination_completely_18',
+    'TotaalMetMigratieachtergrond',
+    'WesterseMigratieachtergrond',
+    'TotaalNietWesterseMigratieachtergrond',
+    #'TotaalNietWesterseMigratieachtergrond',
+  # household
+   'HuishoudensZonderKinderen',
+    #'AfstandTotKinderdagverblijf',
+  # Availability of healthcare
+    'AfstandTotHuisartsenpraktijk',
+  # Education
+    'LowEducation',
+    #MiddleEducation +
+    'HighEducation',
+  # Religion
+    'KerkbezoekMeerDan1KeerPerMaand', 
+    'GereformeerdeKerken',
+    'Islam',
+    'anders' 
+  )
+
+
 
 # normalise to [0,1]
 munic_data[,test_var] <- munic_data[,test_var] / 100
@@ -166,13 +196,25 @@ munic_data[,test_var] <- munic_data[,test_var] / 100
 corr <- cor(munic_data[,test_var],use="complete.obs")
 
 
+c <- {corrplot(corr, order = "hclust",method="color", tl.cex=0.5,tl.col = 'black');  recordPlot()}
 
-corrplot(corr, order = "hclust",method="color", tl.cex=0.5,tl.col = 'black')
+ggsave("correlation-munic.png", plot = replayPlot(c))
 
 
 # correlation with outcome
 cor(munic_data[,test_var],munic_data$`Vaccination_completely_18+`,use="complete.obs")
 
+
+summary(munic_data[,test_var])
+
+ggplot(data = melt(munic_data[,test_var[2:10]]), aes(x=variable, y=value)) + 
+  geom_boxplot() + 
+  xlab('Variable name') +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
+# check missing data pattern
+md.pattern(munic_data[,test_var],rotate.names = TRUE)
 
 ```
 ## Adding spatial data
@@ -182,29 +224,33 @@ cor(munic_data[,test_var],munic_data$`Vaccination_completely_18+`,use="complete.
 # complete cases
 data_compl  <- munic_data[munic_data %>% complete.cases(),] 
 
+z_data_compl <- data_compl %>% mutate_if(is.numeric, scale)
 
 # merge SPATIAL DATA
 data_compl <- sp::merge(x = st_read("data/gemeente_onshore.gpkg", layer = "gemeente_onshore") %>% mutate(code=paste0('GM',code)),
                         y = data_compl,
                         by.x = 'code',
                         by.y = 'RegioS',
-                        all.x = FALSE)
+                        all = FALSE)
+
+z_data_compl <- sp::merge(x = st_read("data/gemeente_onshore.gpkg", layer = "gemeente_onshore") %>% mutate(code=paste0('GM',code)),
+                        y = z_data_compl,
+                        by.x = 'code',
+                        by.y = 'RegioS',
+                        all = FALSE)
+
+summary(z_data_compl)
+
+```
+```{r maps}
+
+mapview::mapview(z_data_compl, zcol = "AfstandTotHuisartsenpraktijk")
+
+mapview::mapview(z_data_compl, zcol = "Vaccination_completely_18", col.regions=brewer.pal(11, "RdYlGn"))
 
 ```
 
 
-
-## mapping
-
-```{r}
-munic_map <- mapview::mapview(data_compl,
-                              zcol = 'LowEducation',
-                              col.regions=rev(brewer.pal(11, "RdYlGn")),
-                              layer.name = 'LowEducation'
-                              )
-munic_map
-
-```
 
 
 ## Linear model and Morran's I
@@ -213,65 +259,20 @@ munic_map
 
 # basic equation
 lm_eq <-  `Vaccination_completely_18` ~ 
-    #TotaleBevolking_1 +
-  # gender
-    #Mannen_2 +
-    #Vrouwen_3 +
-  # age groups
-    #JongerDan5Jaar_13 +
-    #k_5Tot10Jaar_14 +
-    #k_10Tot15Jaar_15 +
-    #k_15Tot20Jaar_16 +
-    #k_20Tot25Jaar_17 +
-    #k_25Tot45Jaar_18 +
-    #k_45Tot65Jaar_19 +
-    #k_65Tot80Jaar_20 +
-    #k_80JaarOfOuder_21 +
-  # Marriage
-    #Ongehuwd_25 +
-    #Gehuwd_26 +
-    #Gescheiden_27 +
-    #Verweduwd_28 +
-  # Ethnicity
-    #NederlandseAchtergrond_43 +
-    #TotaalMetMigratieachtergrond_44 +
-    WesterseMigratieachtergrond_45 +
-    #TotaalNietWesterseMigratieachtergrond_46 +
-    #Marokko_47 +
-    VoormaligeNederlandseAntillenAruba_48 +
-    #Suriname_49 +
-    #Turkije_50 +
-    #OverigNietWesterseMigratieachtergrond_51 + 
-  # 
-    #Bevolkingsdichtheid_57 +
-    #GeboorteRelatief_59 +
-    #SterfteRelatief_61 +
-    #GeboorteoverschotRelatief_63 +
-  # Diseases and death causes
-    #ZiektenVanHartEnVaatstelsel_65 + 
-    #ZiektenVanAdemhalingsstelsel_66 +
-    #UitwendigeDoodsoorzaken_67 +
-    #OverigeDoodsoorzaken_68 +
-  #
-    #BevolkingsgroeiRelatief_80 +
-  # Social benefits
-    #Werkloosheid_155 +
-    #WAOUitkering_160 +
-    #WIAUitkeringWGARegeling_161 +
-    #WajongUitkering_162 +
-    #AOW_163 +
+    #TotaalMetMigratieachtergrond +
+    WesterseMigratieachtergrond +
+    TotaalNietWesterseMigratieachtergrond +
+    #TotaalNietWesterseMigratieachtergrond  +
   # Availability of healthcare
-    AfstandTotHuisartsenpraktijk_209 +
-    #AantalHuisartsenpraktijkenBinnen3Km_210 +
-    AfstandTotHuisartsenpost_211 +
-    AfstandTotZiekenhuis_212 +
-    #AantalZiekenhuizenBinnen20Km_213 +
+    AfstandTotHuisartsenpraktijk +
+  # household
+    HuishoudensZonderKinderen +
   # Education
     LowEducation +
     #MiddleEducation +
     HighEducation +
   # Religion
-    #KerkbezoekMeerDan1KeerPerMaand +
+    KerkbezoekMeerDan1KeerPerMaand +
     #GeenKerkelijkeGezindte +
     #WelKerkelijkeGezindte +
     #RoomsKatholiek +
@@ -284,44 +285,18 @@ lm_eq <-  `Vaccination_completely_18` ~
     #Hindoe +
     #Boeddhist +
     anders 
-  # check for confounding distance to GP
-    #WeinigStedelijk_55
-    
 
-
-
-#run the model
-linearMod <- lm (lm_eq, data = data_compl,na.action=na.exclude)
-
-#get summary
-summary(linearMod)
-
-
-
-test_data <- sample_n(as.data.frame(data_compl),10)
-
-
-pred <- predict.lm(linearMod, newdata = test_data)
-
-RMSE(pred, test_data$`Vaccination_completely_18`)
-R2(pred, test_data$`Vaccination_completely_18`)
+vif(lm(lm_eq,data = z_data_compl))
 
 ```
 
-```{r}
-
-vif(linearMod)
-
-# high multicollinearity between the variables.
-
-```
 
 ```{r}
 #creating adjacency matrix
 data_nbq <- poly2nb(data_compl, queen=TRUE) #Queen’s Contiguity neighborhood
 summary(data_nbq)
 
-data_nbq_w <- nb2listw(data_nbq, style="W", zero.policy = TRUE) #Queen’s neighborhood wights
+data_nbq_w <- nb2listw(data_nbq, style="W", zero.policy = TRUE) #Queen’s neighborhood weights
 summary(data_nbq_w, zero.policy = TRUE)
 
 #for plotting
@@ -333,45 +308,33 @@ plot(data_nbq, st_geometry(coordsW), col="red")
 
 ```
 
-```{r}
-#Usually we use the moran.test function to get the Moran’s I, but that method is sensitive to irregularly distributed polygons. So we would use Monte Carlo method to bootstrap different polygon distribution. Here moran.mc() funtion does the job
 
-mc_global <- moran.mc(linearMod$residuals, data_nbq_w, 20, alternative="greater", zero.policy = TRUE,  adjust.n = TRUE)
 
-#plot the  Moran’s I
-plot(mc_global)
 
-mc_global
-```
-
-```{r}
-
-#Now plot the residual on the polygon
-data_compl$res_lm <- residuals(linearMod)
-lmres <- qtm(data_compl, "res_lm")
-lmres
-
-```
-
-## Spatial lag & error
+## Spatial lag linear model
 
 ```{r spatial lag}
 
 #running spatial lag model with same weight matrix created previously
-spa_lagmodel = lagsarlm (lm_eq, data = data_compl, listw= data_nbq_w, zero.policy = TRUE)
-
+spa_lagmodel = lagsarlm (lm_eq, data = z_data_compl, listw= data_nbq_w, zero.policy = TRUE)
 summary(spa_lagmodel, Nagelkerke=T)
 
 ```
+
+
+
+
 ```{r residual error}
 
 #check residual autocorrelation
-mc2_global <-moran.mc(spa_lagmodel$residuals, data_nbq_w, 2999, alternative="greater", zero.policy = TRUE)
+mc_global <-moran.mc(spa_lagmodel$residuals, data_nbq_w, 2999, alternative="greater", zero.policy = TRUE)
 
-plot(mc2_global)
-mc2_global
+plot(mc_global)
+mc_global
 
 ```
+
+
 ```{r}
 
 #add the residual to polygon and plot
@@ -380,8 +343,8 @@ data_compl$res_slm <- residuals(spa_lagmodel)
 #plot using t-map
 slmres <-qtm(data_compl, "res_slm")
 
-#compare with OLS residual
-tmap_arrange(lmres, slmres, asp = 1, ncol = 2)
+slmres
+
 
 ```
 
@@ -390,7 +353,7 @@ tmap_arrange(lmres, slmres, asp = 1, ncol = 2)
 
 ```{r}
 
-data_sp <- as_Spatial(data_compl)
+data_sp <- as_Spatial(z_data_compl)
 #find the optimum bandwidth distance for fixed kernel using the gwr.sel() function from spgwr package
 fbw <- gwr.sel(lm_eq, 
                data = data_sp,
@@ -419,9 +382,11 @@ fb_gwr
 #Extract the modeled relations for gwr object
 fb_gwr_out <- as.data.frame(fb_gwr$SDF)
 
-
-require(reshape2)
-ggplot(data = melt(fb_gwr_out[,2:13]), aes(x=variable, y=value)) + geom_boxplot() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+ggplot(data = melt(fb_gwr_out[,2:11]), aes(x=variable, y=value)) + 
+  geom_boxplot() + 
+  xlab('Variable coefficient') + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
+  geom_hline(yintercept = 0)
 
 
 
@@ -432,55 +397,13 @@ mapview::mapview(data_compl, zcol = "fmb_localR2", col.regions=brewer.pal(11, "R
 
 
 #join that with our main polygon data frame for Green space availability
-data_compl$fcoef_ZiektenVanAdemhalingsstelsel_66 = fb_gwr_out$ZiektenVanAdemhalingsstelsel_66
+data_compl$fcoef_AfstandTotHuisartsenpraktijk = fb_gwr_out$AfstandTotHuisartsenpraktijk
 
 coef_map <- mapview::mapview(data_compl, 
-                             zcol = "fcoef_ZiektenVanAdemhalingsstelsel_66", 
+                             zcol = "fcoef_AfstandTotHuisartsenpraktijk", 
                              col.regions=brewer.pal(11, "RdYlGn"))
 
 coef_map
-
-```
-
-
-
-## Adaptive model
-
-```{r}
-
-#adaptive kernel
-abw <- gwr.sel (lm_eq, 
-              data = data_sp,
-              adapt = TRUE, 
-              gweight = gwr.Gauss)
-
-abw
-
-```
-
-
-```{r}
-#Fitting the adaptive Kernel GWR
-ab_gwr <- gwr(lm_eq, 
-              data = data_sp,
-              longlat = TRUE,
-              adapt = abw, 
-              gweight = gwr.Gauss,
-              hatmatrix=TRUE, 
-              se.fit=TRUE)
-ab_gwr
-```
-
-
-```{r}
-
-#adaptive GWR results in data frame
-ab_gwr_out <- as.data.frame(ab_gwr$SDF)
-
-#join the local R2 for each model to each neighborhood
-data_compl$amb_localR2 <- ab_gwr_out$localR2
-
-mapview::mapview(data_compl, zcol = "amb_localR2", col.regions=brewer.pal(11, "RdYlGn"))
 
 ```
 
@@ -490,33 +413,18 @@ mapview::mapview(data_compl, zcol = "amb_localR2", col.regions=brewer.pal(11, "R
 
 #For fixed model
 #estimate the t-value for green space availability variable for fixed kernel model
-data_compl$ft_ZiektenVanAdemhalingsstelsel_66 = fb_gwr_out$ZiektenVanAdemhalingsstelsel_66 / fb_gwr_out$ZiektenVanAdemhalingsstelsel_66_se
+data_compl$ft_AfstandTotHuisartsenpraktijk = fb_gwr_out$AfstandTotHuisartsenpraktijk / fb_gwr_out$AfstandTotHuisartsenpraktijk_se
 
 #categorize the t-value to statistical significance
-data_compl$ft_ZiektenVanAdemhalingsstelsel_66_cat <- cut(data_compl$ft_ZiektenVanAdemhalingsstelsel_66,
-                             breaks=c(min(data_compl$ft_ZiektenVanAdemhalingsstelsel_66), -1.96, 1.96, max(data_compl$ft_ZiektenVanAdemhalingsstelsel_66)),
+data_compl$ft_AfstandTotHuisartsenpraktijk_cat <- cut(data_compl$ft_AfstandTotHuisartsenpraktijk,
+                             breaks=c(min(data_compl$ft_AfstandTotHuisartsenpraktijk), -1.96, 1.96, max(data_compl$ft_AfstandTotHuisartsenpraktijk)),
                              labels=c("sig","nonsig", "sig"))
 
 #plot the significance for fixed kernel model
-sig_fb <- mapview::mapview (data_compl, zcol = "ft_ZiektenVanAdemhalingsstelsel_66_cat")
+sig_fb <- mapview::mapview (data_compl, zcol = "ft_AfstandTotHuisartsenpraktijk_cat")
 
-
-
-#For Adaptive model
-#estimate the t-value for green space availability variable for fixed kernel model
-data_compl$at_ZiektenVanAdemhalingsstelsel_66 = ab_gwr_out$ZiektenVanAdemhalingsstelsel_66 / ab_gwr_out$ZiektenVanAdemhalingsstelsel_66_se
-
-#categorize the t-value to statistical significance
-data_compl$at_ZiektenVanAdemhalingsstelsel_66_cat <- cut(data_compl$at_ZiektenVanAdemhalingsstelsel_66,
-                             breaks=c(min(data_compl$at_ZiektenVanAdemhalingsstelsel_66), -1.96, 1.96, max(data_compl$at_ZiektenVanAdemhalingsstelsel_66)),
-                             labels=c("sig","nonsig", "sig"))
-
-#plot the significance for adaptive kernel model
-sig_ab <- mapview::mapview(data_compl, zcol = "at_ZiektenVanAdemhalingsstelsel_66_cat")
 
 sig_fb
-
-sig_ab
 
 ```
 
