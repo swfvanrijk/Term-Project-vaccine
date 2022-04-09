@@ -62,7 +62,7 @@ neigh_map <- mapview::mapview(neigh,
                               col.regions=rev(brewer.pal(11, "RdYlGn")),
                               layer.name = 'Neighborhoods'
                               )
-neigh_map
+#neigh_map
 
 ```
 
@@ -154,6 +154,43 @@ neigh_data_filt <- neigh_data %>% filter(a_inw != 0)
 # maybe remove all neigh lower than 50 people?
 # neigh_data_filt <- neigh_data %>% filter(a_inw >= 50)
 
+# select only the vars used in the model, to remove as little observations as possible with complete cases
+
+neigh_data_filt <- neigh_data_filt %>% select(
+    gwb_code,
+    a_inw,
+  # gender
+    a_man,
+    a_vrouw,
+  # age groups
+    a_00_14,
+    a_15_24,
+    a_25_44,
+    a_45_64,
+    a_65_oo,
+  # ethnic groups
+    a_w_all,
+    a_nw_all,
+    a_marok,
+    a_antaru,
+    a_suri,
+    a_tur,
+    a_ov_nw,
+  # household
+    p_geb,
+    p_ste,
+    a_hh,
+    a_1p_hh,
+    a_hh_z_k,
+    a_hh_m_k,
+    g_hhgro,
+    bev_dich,
+    p_1gezw,
+    p_mgezw,
+  # education
+    a_opl_lg,
+    a_opl_md,
+    a_opl_hg)
 
 ```
 
@@ -165,6 +202,7 @@ neigh_data_filt <- neigh_data %>% filter(a_inw != 0)
 
 # FULL OUTER JOINS 
 # take into accounts for models, some columns have NA !
+
 
 data_compl <- sp::merge(x = vaccine_neigh, 
                         y = neigh_data_filt,
@@ -189,7 +227,7 @@ vaccine_map <- mapview::mapview(data_compl,
                                 col.regions=brewer.pal(11, "RdYlGn"),
                                 layer.name = 'Vaccination coverage'
                                 )
-vaccine_map
+#vaccine_map
 
 vaccine_norm_map <- mapview::mapview(data_compl,
                                 zcol = 'coverage_completed_norm',
@@ -213,6 +251,7 @@ md.pattern(data_compl)
 
 test_var <- data_compl %>% select_if(is.numeric) %>% names()
 test_var <- test_var[-length(test_var)]
+test_var <- test_var[6:length(test_var)]
 
 corr <- cor(as.data.frame(data_compl)[,test_var],use="complete.obs")
 
@@ -234,16 +273,16 @@ corrplot(corr, order = "hclust",method="color", tl.cex=0.5,tl.col = 'black')
 lm_eq1 <- coverage_partly_norm ~ 
     #a_inw +
   # gender
-    #a_man + 
+    a_man + 
     #a_vrouw + 
   # age groups
-    a_00_14 +
-    #a_15_24 +
-    a_25_44 +
-    a_45_64 +
+    #a_00_14 +
+    a_15_24 +
+    #a_25_44 +
+    #a_45_64 +
     a_65_oo +
   # ethnic groups
-    #a_w_all  +
+    a_w_all  +
     #a_nw_all +
     a_marok +
     a_antaru +
@@ -254,16 +293,16 @@ lm_eq1 <- coverage_partly_norm ~
     p_geb +
     #p_ste +
     a_hh +
-    a_1p_hh +
-    a_hh_z_k +
-    a_hh_m_k +
+    #a_1p_hh +
+    #a_hh_z_k +
+    #a_hh_m_k +
     g_hhgro +
     #bev_dich +
     #p_1gezw +
     #p_mgezw +
   # education
     a_opl_lg +
-    a_opl_md +
+    #a_opl_md +
     a_opl_hg
 
 
@@ -283,13 +322,42 @@ vif(linearMod)
 
 ```
 
-```{r}
+```{r, equal spatial weights}
 
-#creating adjacency matrix
+#creating adjacency matrix, this uses equal distributed weights for only direct neighbours
+
 data_nbq <- poly2nb(data_compl, queen=TRUE) #Queen’s Contiguity neighborhood
 summary(data_nbq)
 
-data_nbq_w <- nb2listw(data_nbq, style="W", zero.policy = TRUE) #Queen’s neighborhood wights
+data_nbq_w <- nb2listw(data_nbq, style="W", zero.policy = TRUE) #Queen’s neighborhood weights
+summary(data_nbq_w, zero.policy = TRUE)
+
+#for plotting
+coordsW <- data_compl%>%
+  st_centroid()%>%
+  st_geometry()
+
+plot(data_nbq, st_geometry(coordsW), col="red")
+
+```
+
+```{r, inverse distance weights, eval=F, echo=F}
+          # knitr DISABLED!           ^       ^
+
+#creating inverse distance matrix (euclidean)
+
+coords = st_centroid(data_compl)
+
+nb_knn = knn2nb(knearneigh(coords, k = 20)) # picked k=20 because there are 2 neigh that have 20 neigh in queen's cont.
+#nb_knn = dnearneigh(coords, 0, 5000) # picked d=5000 since this is the ~mean dist of the adjacency matrix
+dist <- nbdists(nb_knn, coords, longlat = TRUE) #distance weights matrix
+
+alpha = 1 #using alpha = 1 because expecting the weight importance to fall off not so fast
+#ids <- lapply(dist, function(x) 1/(alpha * x)) # inverse distance calculation
+meandist = mean(unlist(dist)) # # dividing all x by mean distance, to prevent exp to become too small to calculate
+ids <- lapply(dist, function(x) exp(-alpha * x/meandist))
+
+data_nbq_w <- nb2listw(nb_knn, glist=ids, style="W", zero.policy = TRUE) #row normalize weights
 summary(data_nbq_w, zero.policy = TRUE)
 
 #for plotting
@@ -333,8 +401,6 @@ summary(spa_lagmodel, Nagelkerke=T)
 mc2_global <-moran.mc(spa_lagmodel$residuals, data_nbq_w, 2999, alternative="greater", zero.policy = TRUE,  adjust.n = TRUE)
 
 plot(mc2_global)
-
-mc2_global
 ```
 
 ```{r, plot}
@@ -359,7 +425,7 @@ fbw <- gwr.sel(lm_eq1,
                data = data_sp,
                longlat = TRUE,
                adapt=FALSE, 
-               gweight = gwr.Gauss, 
+               gweight = gwr.bisquare, 
                verbose = T)
 ```
 
@@ -368,7 +434,7 @@ fb_gwr <- gwr(lm_eq1,
               data = data_sp,
               longlat = TRUE,
               bandwidth = fbw, 
-              gweight = gwr.Gauss,
+              gweight = gwr.bisquare,
               hatmatrix=TRUE, 
               se.fit=TRUE)
 
@@ -391,15 +457,15 @@ mapview::mapview(data_compl, zcol = "fmb_localR2", col.regions=brewer.pal(11, "R
 ```
 
 ```{r, plotting}
-#join that with our main polygon data frame for Green space availability
-data_compl$a_opl_hg = fb_gwr_out$a_opl_hg
+#join that with our main polygon data frame for high education
+data_compl$fcoef_a_opl_hg = fb_gwr_out$a_opl_hg
 
-coef_fb_gav <- mapview::mapview(data_compl, zcol = "a_opl_hg")
+coef_fb_gav <- mapview::mapview(data_compl, zcol = "fcoef_a_opl_hg")
 
 coef_fb_gav
 ```
 
-```{r, adaptive kernal}
+```{r, adaptive kernal, eval = FALSE, echo = FALSE}
 #adaptive kernel
 abw <- gwr.sel (lm_eq1, 
               data = data_sp,
@@ -422,7 +488,7 @@ ab_gwr
 ```
 
 
-```{r, gwr->DF}
+```{r, gwr->DF, eval = FALSE, echo = FALSE}
 #adaptive GWR results in data frame
 ab_gwr_out <- as.data.frame(ab_gwr$SDF)
 
@@ -432,16 +498,16 @@ data_compl$amb_localR2 <- ab_gwr_out$localR2
 mapview::mapview(data_compl, zcol = "amb_localR2", col.regions=brewer.pal(11, "RdYlGn")) 
 ```
 
-```{r,variability}
+```{r,variability, eval = FALSE, echo = FALSE}
 #join that with our main polygon data frame for coverage availability
-data_compl$a_opl_hg = ab_gwr_out$a_opl_hg
+data_compl$fcoef_a_opl_hg = ab_gwr_out$a_opl_hg
 
-coef_ab_gav <- mapview::mapview(data_compl, zcol = "a_opl_hg")
+coef_ab_gav <- mapview::mapview(data_compl, zcol = "fcoef_a_opl_hg")
 
 coef_ab_gav
 ```
 
-```{r}
+```{r,significance fb}
 #For fixed model
 #estimate the t-value for high education variable for fixed kernel model
 data_compl$ft_a_opl_hg = fb_gwr_out$a_opl_hg / fb_gwr_out$a_opl_hg_se
@@ -454,8 +520,13 @@ data_compl$ft_a_opl_hg_cat <- cut(data_compl$ft_a_opl_hg,
 #plot the significance for fixed kernel model
 opl_hg_sig_fb <- mapview::mapview (data_compl, zcol = "ft_a_opl_hg_cat")
 
+opl_hg_sig_fb
 
 
+```
+
+
+```{r,significance ab, eval = FALSE, echo = FALSE}
 #For Adaptive model
 #estimate the t-value for opl_hg_ space availability variable for fixed kernel model
 data_compl$at_a_opl_hg = ab_gwr_out$a_opl_hg / ab_gwr_out$a_opl_hg_se
@@ -472,126 +543,5 @@ opl_hg_sig_ab <- mapview::mapview(data_compl, zcol = "at_a_opl_hg_cat")
 #compare the maps
 #opl_hg_sig_ab | opl_hg_sig_fb # doesn't seem to work so plot separately
 opl_hg_sig_ab
-opl_hg_sig_fb
-
-
 ```
-
-
-
-
-## investigate religion per municipality
-#load libraries
-```{r,}
-easypackages::packages ("sf", "sp", "spdep", "spatialreg", "spgwr", "tmap", "mapview", "car", "RColorBrewer", "tidyverse", 
-                        "cowplot", "leafsync", "leaflet.extras2", "mapview")
-library(readxl)
-library(sqldf)
-library(ISOweek)
-library(sf)
-#clean your environment
-rm(list=ls())
-```
-
-## Reading polygons
-```{r}
-
-neigh <- st_read("data/wijken_onshore.gpkg", layer = "wijken_onshore")
-
-
-names(neigh)
-
-neigh <- neigh[,c("WK_CODE","WK_NAAM","GM_CODE","GM_NAAM","Shape_Area","geom")]
-
-# Map
-neigh_map <- mapview::mapview(neigh,
-                              col.regions=rev(brewer.pal(11, "RdYlGn")),
-                              layer.name = 'Neighborhoods'
-                              )
-neigh_map
-
-```
-
-## Read data
-
-```{r}
-
-# neighborhood demographic data
-neigh_data <- read_excel("data/kwb-2020.xls", sheet = "KWB2020")
-# metadata
-neigh_meta <- read_excel("data/kwb-variables.xlsx", sheet="kwb-variables")
-
-# filtering
-neigh_data <- neigh_data %>% subset(recs=='Gemeente') # filter to only 'wijk' regions
-neigh_data[,7:119] <- lapply(neigh_data[,7:119], gsub, pattern = ",", replacement = ".") # comma separators to dots
-neigh_data[,7:119] <- neigh_data[,7:119] %>% mutate_if(is.character,as.numeric) # set variables to numeric
-
-var_to_keep <- (neigh_meta %>% subset(Include==1))$Variabelenaam # subset to variables to keep
-neigh_data <- neigh_data %>% select(var_to_keep) # filter data to variables to keep
-
-# normalizing
-var_to_norm <- neigh_meta %>% subset(`Need to normalise`==1 & Include==1) %>% select(c('Variabelenaam','Normalisatie'))
-
-neigh_data[1,'a_inw']
-
-for(row in 1:nrow(var_to_norm)){
-  var <- var_to_norm[row,'Variabelenaam'][[1]]
-  norm <- var_to_norm[row,'Normalisatie'][[1]]
-  neigh_data[,var] <- neigh_data[,var]/neigh_data[,norm]
-}
-
-
-# municipality vaccination data
-vaccine_mun <- read_delim("data/COVID-19_vaccinatiegraad_per_gemeente_per_week_leeftijd.csv", delim=";")
-vaccine_mun[,8:9] <- lapply(vaccine_mun[,8:9], gsub, pattern = ">=", replacement = "") # remove bigger than signs
-vaccine_mun[,8:9] <- vaccine_mun[,8:9] %>% mutate_if(is.character,as.numeric) # set variables to numeric
-
-vaccine_mun[vaccine_mun == 9999] <- NA # make hidden missing values no longer hidden
-
-vaccine_mun <- vaccine_mun %>% 
-  subset(Date_of_statistics=='2022-03-14') %>% 
-  mutate(coverage_partly_norm = ((Vaccination_coverage_partly) - mean(Vaccination_coverage_partly,na.rm=TRUE)) / sd(Vaccination_coverage_partly,na.rm=TRUE),
-         coverage_completed_norm= ((Vaccination_coverage_completed) - mean(Vaccination_coverage_completed, na.rm=TRUE))/sd(Vaccination_coverage_completed, na.rm = TRUE))
-
-mean(vaccine_mun$Vaccination_coverage_partly, na.rm=TRUE)
-sd(vaccine_mun$Vaccination_coverage_partly, na.rm=TRUE)
-
-mean(vaccine_mun$Vaccination_coverage_partly, na.rm=TRUE)
-sd(vaccine_mun$Vaccination_coverage_partly, na.rm=TRUE)
-
-
-# info on religions per municipality
-religion_data <- read_excel("data/edit for R - Religie en kerkbezoek naar gemeente 2010-2014.xls", sheet = "Tabel_R")
-# convert municipality code to correct format
-religion_data$Gemcode <- as.character(religion_data$Gemcode) %>%
-  lapply(str_pad, width = 4, side = "left", pad = "0")
-religion_data$Gemcode <- paste("GM", religion_data$Gemcode, sep = "")
-```
-
-## Delete outlier neighborhoods?
-```{r}
-# Delete where a_inw == 0, causes NaNs and Inf numbers through divide by zero
-# not applicable for municipalities, lowest is 947
-neigh_data_filt <- neigh_data %>% filter(a_inw != 0)
-
-  # maybe remove all neigh lower than 50 people?
-  # ... %>% filter(a_inw >= 50)
-
-
-```
-
-
-## Join datasets
-```{r}
-
-data_compl <- sp::merge(x = vaccine_mun, 
-                        y = neigh_data_filt,
-                        by.x = 'Region_code',
-                        by.y = 'gwb_code')
-
-data_compl <- left_join(x = data_compl, y = religion_data, by = c("Region_code" = "Gemcode"))
-
-
-```
-
 
