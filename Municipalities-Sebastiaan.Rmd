@@ -168,13 +168,14 @@ munic_data <- munic_data %>% mutate(#Mannen = Mannen/ TotaleBevolking * 100,
 
 
 test_var  <- c('Vaccination_completely_18',
-    'TotaalMetMigratieachtergrond',
+    #'TotaalMetMigratieachtergrond',
     'WesterseMigratieachtergrond',
     'TotaalNietWesterseMigratieachtergrond',
     #'TotaalNietWesterseMigratieachtergrond',
   # household
    'HuishoudensZonderKinderen',
     #'AfstandTotKinderdagverblijf',
+    'Bevolkingsdichtheid',
   # Availability of healthcare
     'AfstandTotHuisartsenpraktijk',
   # Education
@@ -242,13 +243,6 @@ z_data_compl <- sp::merge(x = st_read("data/gemeente_onshore.gpkg", layer = "gem
 summary(z_data_compl)
 
 ```
-```{r maps}
-
-mapview::mapview(z_data_compl, zcol = "AfstandTotHuisartsenpraktijk")
-
-mapview::mapview(z_data_compl, zcol = "Vaccination_completely_18", col.regions=brewer.pal(11, "RdYlGn"))
-
-```
 
 
 
@@ -265,6 +259,7 @@ lm_eq <-  `Vaccination_completely_18` ~
     #TotaalNietWesterseMigratieachtergrond  +
   # Availability of healthcare
     AfstandTotHuisartsenpraktijk +
+  #Bevolkingsdichtheid +
   # household
     HuishoudensZonderKinderen +
   # Education
@@ -341,10 +336,11 @@ mc_global
 data_compl$res_slm <- residuals(spa_lagmodel)
 
 #plot using t-map
-slmres <-qtm(data_compl, "res_slm")
+qtm(data_compl, "res_slm",  fill.palette = brewer.pal(11, "RdYlGn"))
+tmap_save(filename=paste0(getwd(),"/figures/res_lag_mun.png"))
 
-slmres
-
+qtm(data_compl, "AfstandTotHuisartsenpraktijk",  fill.palette = brewer.pal(11, "RdYlGn"))
+tmap_save(filename=paste0(getwd(),"/figures/dis_GP_map.png"))
 
 ```
 
@@ -374,6 +370,9 @@ fb_gwr <- gwr(lm_eq,
 
 #summary of the model
 fb_gwr
+
+
+?gwr
 ```
 
 
@@ -385,16 +384,19 @@ fb_gwr_out <- as.data.frame(fb_gwr$SDF)
 ggplot(data = melt(fb_gwr_out[,2:11]), aes(x=variable, y=value)) + 
   geom_boxplot() + 
   xlab('Variable coefficient') + 
+  ylab('Estimate') +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
-  geom_hline(yintercept = 0)
-
+  geom_hline(yintercept = 0) + theme(axis.text = element_text(size=16),axis.title = element_text(size=16))
+ggsave(file=paste0(getwd(),"/figures/gwr_var_mun.png"),width = 7, height = 10)
 
 
 #join that with our main polygon data frame for the R2
 data_compl$fmb_localR2 <- fb_gwr_out$localR2
 
-mapview::mapview(data_compl, zcol = "fmb_localR2", col.regions=brewer.pal(11, "RdYlGn"))
 
+
+qtm(data_compl, "fmb_localR2", fill.palette = brewer.pal(11, "RdYlGn"))
+tmap_save(filename=paste0(getwd(),"/figures/gwr_mun_locR2.png"))
 
 #join that with our main polygon data frame for Green space availability
 data_compl$fcoef_AfstandTotHuisartsenpraktijk = fb_gwr_out$AfstandTotHuisartsenpraktijk
@@ -409,29 +411,87 @@ coef_map
 
 
 
+
+
+
 ```{r}
 
-#For fixed model
-#estimate the t-value for green space availability variable for fixed kernel model
-data_compl$ft_AfstandTotHuisartsenpraktijk = fb_gwr_out$AfstandTotHuisartsenpraktijk / fb_gwr_out$AfstandTotHuisartsenpraktijk_se
-
-#categorize the t-value to statistical significance
-data_compl$ft_AfstandTotHuisartsenpraktijk_cat <- cut(data_compl$ft_AfstandTotHuisartsenpraktijk,
-                             breaks=c(min(data_compl$ft_AfstandTotHuisartsenpraktijk), -1.96, 1.96, max(data_compl$ft_AfstandTotHuisartsenpraktijk)),
-                             labels=c("sig","nonsig", "sig"))
-
-#plot the significance for fixed kernel model
-sig_fb <- mapview::mapview (data_compl, zcol = "ft_AfstandTotHuisartsenpraktijk_cat")
+#adaptive kernel
+abw <- gwr.sel (lm_eq, 
+              data = data_sp,
+              adapt = TRUE, 
+              gweight = gwr.Gauss)
 
 
-sig_fb
+
+```
+
+```{r}
+#Fitting the adaptive Kernel GWR
+ab_gwr <- gwr(lm_eq, 
+              data = data_sp,
+              longlat = TRUE,
+              adapt = abw, 
+              gweight = gwr.Gauss,
+              hatmatrix=TRUE, 
+              se.fit=TRUE)
+
+#summary of the model
+ab_gwr
+
+```
+
+```{r}
+
+#adaptive GWR results in data frame
+ab_gwr_out <- as.data.frame(ab_gwr$SDF)
+
+#join the local R2 for each model to each neighborhood
+data_compl$amb_localR2 <- ab_gwr_out$localR2
 
 ```
 
 
 
+```{r}
 
 
+sigPlot <- function(var,gwr_out){
+  #estimate the t-value for green space availability variable for fixed kernel model
+  t = gwr_out[,var] / gwr_out[,paste0(var,'_se')]
+
+  #categorize the t-value to statistical significance
+  data_compl[,paste0(var,'_cat')] <- cut(t,
+                             breaks=c(min(t), -1.96, 1.96, max(t)),
+                             labels=c("sig","nonsig", "sig"))
+  
+  p <- qtm(data_compl, paste0(var,'_cat'))
+  tmap_save(p, filename=paste0(getwd(),"/figures/sig_dis_",var,'.png'))
+  return(p)
+  
+}
+
+coeffPlot <- function(var,gwr_out){
+  p <- qtm(data_compl, var)
+  tmap_save(p, filename=paste0(getwd(),"/figures/coeff",var,'.png'))
+  return(p)
+  
+}
+
+
+for(var in test_var[2:11]){
+  print(var)
+  sigPlot(var,ab_gwr_out)
+  
+}
+
+for(var in test_var[2:11]){
+  print(var)
+  coeffPlot(var,ab_gwr_out)
+  
+}
+
+```
 
 
 
