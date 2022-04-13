@@ -1,4 +1,4 @@
-# Covid_sewage_project
-Forecasting COVID-19 positive test result rates using SARS-CoV-2 RNA sewage concentration in The Netherlands
+# Exploring socio-demographic factors on vaccination uptake in the Netherlands: 
+A Geographically Weighted Regression model
 
 Collaborative term project for SSML 
