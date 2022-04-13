@@ -143,7 +143,11 @@ vaccine_neigh %>% ggplot() +
 
 ggsave(file=paste0(getwd(),'/coverage_plot.png'))
 ```
+```{r}
 
+
+
+```
 
 ## Delete outlier neighborhoods?
 
@@ -168,7 +172,7 @@ neigh_data_filt <- neigh_data %>% filter(a_inw != 0)
 # take into accounts for models, some columns have NA !
 
 data_compl <- sp::merge(x = vaccine_neigh, 
-                        y = neigh_data_filt,
+                        y = neigh_data,
                         by.x = 'Region_code',
                         by.y = 'gwb_code',
                         all = FALSE)
@@ -191,6 +195,14 @@ vaccine_map <- mapview::mapview(data_compl,
                                 layer.name = 'Vaccination coverage'
                                 )
 vaccine_map
+
+data_compl$Coverage_primary_completed[which(data_compl$WK_CODE == 'WK036310')] <- NA
+
+qtm(data_compl,'Coverage_primary_completed', fill.palette = brewer.pal(11, "RdYlGn"),borders=NULL, fill.style="fixed", fill.breaks=seq(0,100,10))
+
+tmap_save(filename=paste0(getwd(),"/figures/vac_map.png"))
+
+
 
 vaccine_norm_map <- mapview::mapview(data_compl,
                                 zcol = 'coverage_completed_norm',

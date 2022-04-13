@@ -336,7 +336,7 @@ mc_global
 data_compl$res_slm <- residuals(spa_lagmodel)
 
 #plot using t-map
-qtm(data_compl, "res_slm",  fill.palette = brewer.pal(11, "RdYlGn"))
+qtm(data_compl, "res_slm",  fill.palette = brewer.pal(11, "RdYlGn"),borders=NULL, fill.style="fixed", fill.breaks=c(-6:3))
 tmap_save(filename=paste0(getwd(),"/figures/res_lag_mun.png"))
 
 qtm(data_compl, "AfstandTotHuisartsenpraktijk",  fill.palette = brewer.pal(11, "RdYlGn"))
@@ -387,7 +387,7 @@ ggplot(data = melt(fb_gwr_out[,2:11]), aes(x=variable, y=value)) +
   ylab('Estimate') +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
   geom_hline(yintercept = 0) + theme(axis.text = element_text(size=16),axis.title = element_text(size=16))
-ggsave(file=paste0(getwd(),"/figures/gwr_var_mun.png"),width = 7, height = 10)
+ggsave(file=paste0(getwd(),"/figures/gwr_var_mun.png"),width = 7, height = 6)
 
 
 #join that with our main polygon data frame for the R2
