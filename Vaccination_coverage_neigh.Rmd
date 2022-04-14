@@ -36,6 +36,7 @@ if (!require("car")) install.packages("car") #some base regression functions
 if (!require("cowplot")) install.packages("cowplot") #some base regression functions
 if (!require("leafsync")) install.packages("leafsync") #using with mapview
 if (!require("leaflet.extras2")) install.packages("leaflet.extras2") #using with mapview
+if (!require("reshape2")) install.packages("reshape2") #using with mapview
 
 #load libraries
 
@@ -180,9 +181,9 @@ neigh_data_filt <- neigh_data_filt %>% select(
     p_geb,
     p_ste,
     a_hh,
-    a_1p_hh,
+    #a_1p_hh,
     a_hh_z_k,
-    a_hh_m_k,
+    #a_hh_m_k,
     g_hhgro,
     bev_dich,
     p_1gezw,
@@ -190,7 +191,8 @@ neigh_data_filt <- neigh_data_filt %>% select(
   # education
     a_opl_lg,
     a_opl_md,
-    a_opl_hg)
+    a_opl_hg) %>% 
+  mutate_at(vars(-("gwb_code")), ~(scale(.) %>% as.vector)) # z-normalization
 
 ```
 
@@ -273,7 +275,7 @@ corrplot(corr, order = "hclust",method="color", tl.cex=0.5,tl.col = 'black')
 lm_eq1 <- coverage_partly_norm ~ 
     #a_inw +
   # gender
-    a_man + 
+    #a_man + 
     #a_vrouw + 
   # age groups
     #a_00_14 +
@@ -283,11 +285,11 @@ lm_eq1 <- coverage_partly_norm ~
     a_65_oo +
   # ethnic groups
     a_w_all  +
-    #a_nw_all +
-    a_marok +
-    a_antaru +
-    a_suri +
-    a_tur +
+    a_nw_all +
+    #a_marok +
+    #a_antaru +
+    #a_suri +
+    #a_tur +
     #a_ov_nw +
   # household
     p_geb +
@@ -296,7 +298,7 @@ lm_eq1 <- coverage_partly_norm ~
     #a_1p_hh +
     #a_hh_z_k +
     #a_hh_m_k +
-    g_hhgro +
+    #g_hhgro +
     #bev_dich +
     #p_1gezw +
     #p_mgezw +
@@ -380,14 +382,14 @@ plot(mc_global)
 
 #Now plot the residual on the polygon
 data_compl$res_lm <- residuals(linearMod)
-lmres <- qtm(data_compl, "res_lm")
+lmres <- qtm(data_compl, "res_lm", fill.style="fixed", fill.breaks=c(-6:3), borders = NULL)
 lmres
 
 
 ```
 
 ## GWR model on neighborhoods
-```{r, GWR}
+```{r, GWR, eval=FALSE, echo=FALSE}
 
 #1 - Testing spatial lag model
 spa_lagmodel = lagsarlm (lm_eq1, data = data_compl, listw= data_nbq_w, zero.policy = TRUE)
@@ -395,7 +397,7 @@ spa_lagmodel = lagsarlm (lm_eq1, data = data_compl, listw= data_nbq_w, zero.poli
 summary(spa_lagmodel, Nagelkerke=T)
 ```
 
-```{r, residual}
+```{r, residual, eval=FALSE, echo=FALSE}
 #check residual autocorrelation
 
 mc2_global <-moran.mc(spa_lagmodel$residuals, data_nbq_w, 2999, alternative="greater", zero.policy = TRUE,  adjust.n = TRUE)
@@ -403,33 +405,40 @@ mc2_global <-moran.mc(spa_lagmodel$residuals, data_nbq_w, 2999, alternative="gre
 plot(mc2_global)
 ```
 
-```{r, plot}
+```{r, plot, eval=FALSE, echo=FALSE}
 #add the residual to polygon and plot
 data_compl$res_slm <- residuals(spa_lagmodel)
 
 #plot using t-map
-slmres <-qtm(data_compl, "res_slm")
+slmres <-qtm(data_compl, "res_slm", fill.style="fixed", fill.breaks=c(-6:4), borders = NULL)
 
 #compare with OLS residual
 tmap_arrange(lmres, slmres, asp = 1, ncol = 2)
 ```
 
-```{r, gwr, fixed}
+```{r}
 #Before we do any analysis for GWR we need to convert our importanted sf object into a sp spatial object. As the spgwr package usually works on sp objects
 #converting the sf polygon into sp object
 
 data_sp <- as_Spatial(data_compl)
-
-#find the optimum bandwidth distance for fixed kernel using the gwr.sel() function from spgwr package
-fbw <- gwr.sel(lm_eq1, 
-               data = data_sp,
-               longlat = TRUE,
-               adapt=FALSE, 
-               gweight = gwr.bisquare, 
-               verbose = T)
 ```
 
-```{r,}
+
+```{r, gwr, eval = FALSE, echo = FALSE}
+#find the optimum bandwidth distance for fixed kernel using the gwr.sel() function from spgwr package
+# fbw <- gwr.sel(lm_eq1,
+#               data = data_sp,
+#               longlat = TRUE,
+#               adapt=FALSE,
+#               gweight = gwr.bisquare,
+#               verbose = T)
+
+fbw = 5414.076 # found with function above
+
+
+```
+
+```{r, eval = FALSE, echo = FALSE}
 fb_gwr <- gwr(lm_eq1, 
               data = data_sp,
               longlat = TRUE,
@@ -442,12 +451,12 @@ fb_gwr <- gwr(lm_eq1,
 fb_gwr
 ```
 
-```{r}
+```{r, eval = FALSE, echo = FALSE}
 #Extract the modeled relations for gwr object
 fb_gwr_out <- as.data.frame(fb_gwr$SDF)
 
 #see the data frame, there is 1673 regressions, each row is a regression result
-view(fb_gwr_out)
+#view(fb_gwr_out)
 
 
 #join that with our main polygon data frame for the R2
@@ -455,8 +464,18 @@ data_compl$fmb_localR2 <- fb_gwr_out$localR2
 
 mapview::mapview(data_compl, zcol = "fmb_localR2", col.regions=brewer.pal(11, "RdYlGn"))
 ```
+```{r}
+ggplot(data = melt(fb_gwr_out[,2:10]), aes(x=variable, y=value)) + 
+  geom_boxplot() + 
+  xlab('Variable coefficient') + 
+  ylab('Estimate') +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
+  geom_hline(yintercept = 0) + theme(axis.text = element_text(size=16),axis.title = element_text(size=16))
 
-```{r, plotting}
+#ggsave(file=paste0(getwd(),"/figures/gwr_var_nei.png"),width = 7, height = 10)
+```
+
+```{r, plotting, eval = FALSE, echo = FALSE}
 #join that with our main polygon data frame for high education
 data_compl$fcoef_a_opl_hg = fb_gwr_out$a_opl_hg
 
@@ -465,21 +484,21 @@ coef_fb_gav <- mapview::mapview(data_compl, zcol = "fcoef_a_opl_hg")
 coef_fb_gav
 ```
 
-```{r, adaptive kernal, eval = FALSE, echo = FALSE}
+```{r, adaptive kernal}
 #adaptive kernel
-abw <- gwr.sel (lm_eq1, 
-              data = data_sp,
-              adapt = TRUE, 
-              gweight = gwr.Gauss)
+#abw <- gwr.sel (lm_eq1, 
+#              data = data_sp,
+#              adapt = TRUE, 
+#              gweight = gwr.bisquare)
 
-abw
+abw = 0.07149476 # precalculated by above function
 
 #Fitting the adaptive Kernel GWR
 ab_gwr <- gwr(lm_eq1, 
               data = data_sp,
               longlat = TRUE,
               adapt = abw, 
-              gweight = gwr.Gauss,
+              gweight = gwr.bisquare,
               hatmatrix=TRUE, 
               se.fit=TRUE)
 
@@ -488,7 +507,7 @@ ab_gwr
 ```
 
 
-```{r, gwr->DF, eval = FALSE, echo = FALSE}
+```{r, gwr->DF}
 #adaptive GWR results in data frame
 ab_gwr_out <- as.data.frame(ab_gwr$SDF)
 
@@ -496,9 +515,11 @@ ab_gwr_out <- as.data.frame(ab_gwr$SDF)
 data_compl$amb_localR2 <- ab_gwr_out$localR2
 
 mapview::mapview(data_compl, zcol = "amb_localR2", col.regions=brewer.pal(11, "RdYlGn")) 
+
+
 ```
 
-```{r,variability, eval = FALSE, echo = FALSE}
+```{r,variability}
 #join that with our main polygon data frame for coverage availability
 data_compl$fcoef_a_opl_hg = ab_gwr_out$a_opl_hg
 
@@ -507,7 +528,10 @@ coef_ab_gav <- mapview::mapview(data_compl, zcol = "fcoef_a_opl_hg")
 coef_ab_gav
 ```
 
-```{r,significance fb}
+```{r,significance fb, eval = FALSE, echo = FALSE}
+
+
+
 #For fixed model
 #estimate the t-value for high education variable for fixed kernel model
 data_compl$ft_a_opl_hg = fb_gwr_out$a_opl_hg / fb_gwr_out$a_opl_hg_se
@@ -526,7 +550,7 @@ opl_hg_sig_fb
 ```
 
 
-```{r,significance ab, eval = FALSE, echo = FALSE}
+```{r,significance ab}
 #For Adaptive model
 #estimate the t-value for opl_hg_ space availability variable for fixed kernel model
 data_compl$at_a_opl_hg = ab_gwr_out$a_opl_hg / ab_gwr_out$a_opl_hg_se
@@ -543,5 +567,40 @@ opl_hg_sig_ab <- mapview::mapview(data_compl, zcol = "at_a_opl_hg_cat")
 #compare the maps
 #opl_hg_sig_ab | opl_hg_sig_fb # doesn't seem to work so plot separately
 opl_hg_sig_ab
+
+```
+
+```{r}
+sigPlot <- function(var,gwr_out){
+  #estimate the t-value for green space availability variable for fixed kernel model
+  t = gwr_out[,var] / gwr_out[,paste0(var,'_se')]
+
+  #categorize the t-value to statistical significance
+  data_compl[,paste0(var,'_cat')] <- cut(t,
+                             breaks=c(min(t), -1.96, 1.96, max(t)),
+                             labels=c("sig","nonsig", "sig"))
+  
+  qtm(data_compl, paste0(var,'_cat'), border = NULL)
+  
+}
+
+
+sigPlot('a_hh',ab_gwr_out)
+sigPlot('a_w_all',ab_gwr_out)
+#sigPlot('a_opl_hg',ab_gwr_out)
+#sigPlot('a_hh',ab_gwr_out)
+#sigPlot('a_nw_all',fb_gwr_out)
+```
+
+
+```{r}
+ggplot(data = melt(ab_gwr_out[,2:10]), aes(x=variable, y=value)) + 
+  geom_boxplot() + 
+  xlab('Variable coefficient') + 
+  ylab('Estimate') +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) + 
+  geom_hline(yintercept = 0) + theme(axis.text = element_text(size=16),axis.title = element_text(size=16))
+
+#ggsave(file=paste0(getwd(),"/figures/gwr_var_mun.png"),width = 7, height = 10)
 ```
 
